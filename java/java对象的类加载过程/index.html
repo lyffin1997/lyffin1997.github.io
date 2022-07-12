@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="  定义：jvm虚拟机把.class文件中类信息加载进内存，并进行解析生成对应的class对象的过程
+  过程：加载、链接、初始化
+  链接：验证、准备、解析
+  完整过程：加载=&amp;gt;验证=&amp;gt;准备=&amp;gt;解析=&amp;gt;初始化
+  加载：把class字节码文件从各个来源通过类加载器装载入内存中。
+  字节码来源：本地路径下编译生成的.class文件，从jar包中的.class文件，从远程网络、以及动态代理实时编译。
+  类加载器：一般包括启动类加载器、扩展类加载器、应用类加载器以及用户自定义加载器。
+  验证：保证加载进来的字节流符合虚拟机规范，不会造成安全错误。
+  对元数据对验证
+  对字节码的验证
+  对文件格式的验证
+  对符号引用对验证
+  准备：为类变量（静态变量）分配内存，并赋予初值。
+  解析：将常量池中的符号引用替换为直接引用的过程。
+  符号引用：字符串，具有唯一识别性，用于识别方法、变量、类信息
+  直接引用：内存地址或偏移量
+   （例如方法hello()，方法的地址为1234567，hello就是符号引用，1234567是直接引用）
+  初始化：主要对类变量进行初始化，并执行类构造器对过程。  " />
+<meta name="keywords" content=", java, JVM" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://lyffin1997.github.io/java/java%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/" />
+
+
+    <title>
+        
+            Java对象的类加载过程 :: 小黎的技术指北 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.fcdabe1b7dd6b4453b6efda4f04d8b2127bbed1e9f9e44255a144895e5b14ea1.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="Java对象的类加载过程">
+<meta itemprop="description" content="  定义：jvm虚拟机把.class文件中类信息加载进内存，并进行解析生成对应的class对象的过程
+  过程：加载、链接、初始化
+  链接：验证、准备、解析
+  完整过程：加载=&gt;验证=&gt;准备=&gt;解析=&gt;初始化
+  加载：把class字节码文件从各个来源通过类加载器装载入内存中。
+  字节码来源：本地路径下编译生成的.class文件，从jar包中的.class文件，从远程网络、以及动态代理实时编译。
+  类加载器：一般包括启动类加载器、扩展类加载器、应用类加载器以及用户自定义加载器。
+  验证：保证加载进来的字节流符合虚拟机规范，不会造成安全错误。
+  对元数据对验证
+  对字节码的验证
+  对文件格式的验证
+  对符号引用对验证
+  准备：为类变量（静态变量）分配内存，并赋予初值。
+  解析：将常量池中的符号引用替换为直接引用的过程。
+  符号引用：字符串，具有唯一识别性，用于识别方法、变量、类信息
+  直接引用：内存地址或偏移量
+   （例如方法hello()，方法的地址为1234567，hello就是符号引用，1234567是直接引用）
+  初始化：主要对类变量进行初始化，并执行类构造器对过程。  "><meta itemprop="datePublished" content="2022-07-12T11:31:44&#43;08:00" />
+<meta itemprop="dateModified" content="2022-07-12T11:31:44&#43;08:00" />
+<meta itemprop="wordCount" content="18"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
+<meta itemprop="keywords" content="java,JVM," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://lyffin1997.github.io/"/>
+
+<meta name="twitter:title" content="Java对象的类加载过程"/>
+<meta name="twitter:description" content="  定义：jvm虚拟机把.class文件中类信息加载进内存，并进行解析生成对应的class对象的过程
+  过程：加载、链接、初始化
+  链接：验证、准备、解析
+  完整过程：加载=&gt;验证=&gt;准备=&gt;解析=&gt;初始化
+  加载：把class字节码文件从各个来源通过类加载器装载入内存中。
+  字节码来源：本地路径下编译生成的.class文件，从jar包中的.class文件，从远程网络、以及动态代理实时编译。
+  类加载器：一般包括启动类加载器、扩展类加载器、应用类加载器以及用户自定义加载器。
+  验证：保证加载进来的字节流符合虚拟机规范，不会造成安全错误。
+  对元数据对验证
+  对字节码的验证
+  对文件格式的验证
+  对符号引用对验证
+  准备：为类变量（静态变量）分配内存，并赋予初值。
+  解析：将常量池中的符号引用替换为直接引用的过程。
+  符号引用：字符串，具有唯一识别性，用于识别方法、变量、类信息
+  直接引用：内存地址或偏移量
+   （例如方法hello()，方法的地址为1234567，hello就是符号引用，1234567是直接引用）
+  初始化：主要对类变量进行初始化，并执行类构造器对过程。  "/>
+
+
+
+    <meta property="og:title" content="Java对象的类加载过程" />
+<meta property="og:description" content="  定义：jvm虚拟机把.class文件中类信息加载进内存，并进行解析生成对应的class对象的过程
+  过程：加载、链接、初始化
+  链接：验证、准备、解析
+  完整过程：加载=&gt;验证=&gt;准备=&gt;解析=&gt;初始化
+  加载：把class字节码文件从各个来源通过类加载器装载入内存中。
+  字节码来源：本地路径下编译生成的.class文件，从jar包中的.class文件，从远程网络、以及动态代理实时编译。
+  类加载器：一般包括启动类加载器、扩展类加载器、应用类加载器以及用户自定义加载器。
+  验证：保证加载进来的字节流符合虚拟机规范，不会造成安全错误。
+  对元数据对验证
+  对字节码的验证
+  对文件格式的验证
+  对符号引用对验证
+  准备：为类变量（静态变量）分配内存，并赋予初值。
+  解析：将常量池中的符号引用替换为直接引用的过程。
+  符号引用：字符串，具有唯一识别性，用于识别方法、变量、类信息
+  直接引用：内存地址或偏移量
+   （例如方法hello()，方法的地址为1234567，hello就是符号引用，1234567是直接引用）
+  初始化：主要对类变量进行初始化，并执行类构造器对过程。  " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lyffin1997.github.io/java/java%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/" /><meta property="og:image" content="https://lyffin1997.github.io/"/><meta property="article:section" content="java" />
+<meta property="article:published_time" content="2022-07-12T11:31:44&#43;08:00" />
+<meta property="article:modified_time" content="2022-07-12T11:31:44&#43;08:00" /><meta property="og:site_name" content="小黎的技术指北" />
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2022-07-12 11:31:44 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">lyffin</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/java">java</a></li><li><a href="/modbus">modbus</a></li><li><a href="/prometheus">prometheus</a></li><li><a href="/spring">spring</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://lyffin1997.github.io/java/java%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/">Java对象的类加载过程</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <ol>
+<li>
+<p>定义：jvm虚拟机把.class文件中类信息加载进内存，并进行解析生成对应的class对象的过程</p>
+</li>
+<li>
+<p>过程：加载、链接、初始化</p>
+</li>
+<li>
+<p>链接：验证、准备、解析</p>
+</li>
+</ol>
+<p><strong>完整过程：加载=&gt;验证=&gt;准备=&gt;解析=&gt;初始化</strong></p>
+<ul>
+<li>
+<p>加载：把class字节码文件从各个来源通过类加载器装载入内存中。</p>
+</li>
+<li>
+<p>字节码来源：本地路径下编译生成的.class文件，从jar包中的.class文件，从远程网络、以及动态代理实时编译。</p>
+</li>
+<li>
+<p>类加载器：一般包括启动类加载器、扩展类加载器、应用类加载器以及用户自定义加载器。</p>
+</li>
+<li>
+<p>验证：保证加载进来的字节流符合虚拟机规范，不会造成安全错误。</p>
+</li>
+<li>
+<p>对元数据对验证</p>
+</li>
+<li>
+<p>对字节码的验证</p>
+</li>
+<li>
+<p>对文件格式的验证</p>
+</li>
+<li>
+<p>对符号引用对验证</p>
+</li>
+<li>
+<p>准备：为类变量（静态变量）分配内存，并赋予初值。</p>
+</li>
+<li>
+<p>解析：将常量池中的符号引用替换为直接引用的过程。</p>
+</li>
+<li>
+<p>符号引用：字符串，具有唯一识别性，用于识别方法、变量、类信息</p>
+</li>
+<li>
+<p>直接引用：内存地址或偏移量</p>
+</li>
+</ul>
+<blockquote>
+<p>（例如方法hello()，方法的地址为1234567，hello就是符号引用，1234567是直接引用）</p>
+</blockquote>
+<ul>
+<li>初始化：主要对类变量进行初始化，并执行类构造器对过程。</li>
+</ul>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/java/">java</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/jvm/">JVM</a></span>
+        
+    </p>
+
+            
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>

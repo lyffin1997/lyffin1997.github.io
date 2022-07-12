@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="1. 字符串相加方式的区别  String   String str = &amp;ldquo;a&amp;rdquo; &#43; &amp;ldquo;b&amp;rdquo;; //最快
+  String str = &amp;quot;&amp;quot; &#43; &amp;ldquo;word&amp;rdquo;;
+  StringBuilder   StringBuilder s = new StringBuilder(&amp;ldquo;word&amp;rdquo;).append(&amp;ldquo;a&amp;rdquo;).apend(&amp;ldquo;b&amp;rdquo;);
+  StringBuffer   同StringBuilder。
+ 2. 字符串相加结果的区别  String   String是final修饰的不可变类,即一旦创建对象，字符序列不可变
+  如: String s = &amp;quot;a&amp;quot;;
+  s = &amp;quot;b&amp;quot;;
+  System.out.println(s);
+  打印结果是b，但此时“b”在内存中的位置已不是原来“a”的位置，而是新创建了一个实例对象指向“b”，并且s指向新对象，原对象仍然存在，如果没有再被引用将被回收。
+  StringBuilder   通过append()、insert()等方法可改变字符串序列，内存地址不变。一般得到最终字符串后转换成String。
+  StringBuffer   同上。" />
+<meta name="keywords" content=", java" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://lyffin1997.github.io/java/java%E5%9F%BA%E7%A1%80/" />
+
+
+    <title>
+        
+            String、StringBuilder、StringBuffer :: 小黎的技术指北 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.fcdabe1b7dd6b4453b6efda4f04d8b2127bbed1e9f9e44255a144895e5b14ea1.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="String、StringBuilder、StringBuffer">
+<meta itemprop="description" content="1. 字符串相加方式的区别  String   String str = &ldquo;a&rdquo; &#43; &ldquo;b&rdquo;; //最快
+  String str = &quot;&quot; &#43; &ldquo;word&rdquo;;
+  StringBuilder   StringBuilder s = new StringBuilder(&ldquo;word&rdquo;).append(&ldquo;a&rdquo;).apend(&ldquo;b&rdquo;);
+  StringBuffer   同StringBuilder。
+ 2. 字符串相加结果的区别  String   String是final修饰的不可变类,即一旦创建对象，字符序列不可变
+  如: String s = &quot;a&quot;;
+  s = &quot;b&quot;;
+  System.out.println(s);
+  打印结果是b，但此时“b”在内存中的位置已不是原来“a”的位置，而是新创建了一个实例对象指向“b”，并且s指向新对象，原对象仍然存在，如果没有再被引用将被回收。
+  StringBuilder   通过append()、insert()等方法可改变字符串序列，内存地址不变。一般得到最终字符串后转换成String。
+  StringBuffer   同上。"><meta itemprop="datePublished" content="2022-07-12T00:50:39&#43;08:00" />
+<meta itemprop="dateModified" content="2022-07-12T00:50:39&#43;08:00" />
+<meta itemprop="wordCount" content="74"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
+<meta itemprop="keywords" content="java," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://lyffin1997.github.io/"/>
+
+<meta name="twitter:title" content="String、StringBuilder、StringBuffer"/>
+<meta name="twitter:description" content="1. 字符串相加方式的区别  String   String str = &ldquo;a&rdquo; &#43; &ldquo;b&rdquo;; //最快
+  String str = &quot;&quot; &#43; &ldquo;word&rdquo;;
+  StringBuilder   StringBuilder s = new StringBuilder(&ldquo;word&rdquo;).append(&ldquo;a&rdquo;).apend(&ldquo;b&rdquo;);
+  StringBuffer   同StringBuilder。
+ 2. 字符串相加结果的区别  String   String是final修饰的不可变类,即一旦创建对象，字符序列不可变
+  如: String s = &quot;a&quot;;
+  s = &quot;b&quot;;
+  System.out.println(s);
+  打印结果是b，但此时“b”在内存中的位置已不是原来“a”的位置，而是新创建了一个实例对象指向“b”，并且s指向新对象，原对象仍然存在，如果没有再被引用将被回收。
+  StringBuilder   通过append()、insert()等方法可改变字符串序列，内存地址不变。一般得到最终字符串后转换成String。
+  StringBuffer   同上。"/>
+
+
+
+    <meta property="og:title" content="String、StringBuilder、StringBuffer" />
+<meta property="og:description" content="1. 字符串相加方式的区别  String   String str = &ldquo;a&rdquo; &#43; &ldquo;b&rdquo;; //最快
+  String str = &quot;&quot; &#43; &ldquo;word&rdquo;;
+  StringBuilder   StringBuilder s = new StringBuilder(&ldquo;word&rdquo;).append(&ldquo;a&rdquo;).apend(&ldquo;b&rdquo;);
+  StringBuffer   同StringBuilder。
+ 2. 字符串相加结果的区别  String   String是final修饰的不可变类,即一旦创建对象，字符序列不可变
+  如: String s = &quot;a&quot;;
+  s = &quot;b&quot;;
+  System.out.println(s);
+  打印结果是b，但此时“b”在内存中的位置已不是原来“a”的位置，而是新创建了一个实例对象指向“b”，并且s指向新对象，原对象仍然存在，如果没有再被引用将被回收。
+  StringBuilder   通过append()、insert()等方法可改变字符串序列，内存地址不变。一般得到最终字符串后转换成String。
+  StringBuffer   同上。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lyffin1997.github.io/java/java%E5%9F%BA%E7%A1%80/" /><meta property="og:image" content="https://lyffin1997.github.io/"/><meta property="article:section" content="java" />
+<meta property="article:published_time" content="2022-07-12T00:50:39&#43;08:00" />
+<meta property="article:modified_time" content="2022-07-12T00:50:39&#43;08:00" /><meta property="og:site_name" content="小黎的技术指北" />
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2022-07-12 00:50:39 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">lyffin</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/java">java</a></li><li><a href="/modbus">modbus</a></li><li><a href="/prometheus">prometheus</a></li><li><a href="/spring">spring</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://lyffin1997.github.io/java/java%E5%9F%BA%E7%A1%80/">String、StringBuilder、StringBuffer</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <h3 id="1-字符串相加方式的区别"><strong>1. 字符串相加方式的区别</strong></h3>
+<ul>
+<li><strong>String</strong></li>
+</ul>
+<blockquote>
+<p>String str = &ldquo;a&rdquo; + &ldquo;b&rdquo;;                 //最快</p>
+</blockquote>
+<blockquote>
+<p>String str = &quot;&quot; + &ldquo;word&rdquo;;</p>
+</blockquote>
+<ul>
+<li><strong>StringBuilder</strong></li>
+</ul>
+<blockquote>
+<p>StringBuilder s = new StringBuilder(&ldquo;word&rdquo;).append(&ldquo;a&rdquo;).apend(&ldquo;b&rdquo;);</p>
+</blockquote>
+<ul>
+<li><strong>StringBuffer</strong></li>
+</ul>
+<blockquote>
+<p>同StringBuilder。</p>
+</blockquote>
+<h3 id="2-字符串相加结果的区别"><strong>2. 字符串相加结果的区别</strong></h3>
+<ul>
+<li><strong>String</strong></li>
+</ul>
+<blockquote>
+<p>String是final修饰的不可变类,即一旦创建对象，字符序列不可变</p>
+</blockquote>
+<blockquote>
+<p>如:<code> String s = &quot;a&quot;</code>;</p>
+</blockquote>
+<blockquote>
+<p><code>s = &quot;b&quot;</code>;</p>
+</blockquote>
+<blockquote>
+<p><code>System.out.println(s)</code>;</p>
+</blockquote>
+<blockquote>
+<p>打印结果是b，但此时“b”在内存中的位置已不是原来“a”的位置，而是新创建了一个实例对象指向“b”，并且s指向新对象，原对象仍然存在，如果没有再被引用将被回收。</p>
+</blockquote>
+<ul>
+<li><strong>StringBuilder</strong></li>
+</ul>
+<blockquote>
+<p>通过<code>append()</code>、<code>insert()</code>等方法可改变字符串序列，内存地址不变。一般得到最终字符串后转换成<code>String</code>。</p>
+</blockquote>
+<ul>
+<li><strong>StringBuffer</strong></li>
+</ul>
+<blockquote>
+<p>同上。</p>
+</blockquote>
+<h3 id="3-线程安全问题的区别"><strong>3. 线程安全问题的区别</strong></h3>
+<p>StringBuffer和StringBuilder都继承自抽象类AbstractStringBuilder</p>
+<ul>
+<li><strong>StringBuilder</strong></li>
+</ul>
+<blockquote>
+<p>线程不安全</p>
+</blockquote>
+<ul>
+<li><strong>StringBuffer</strong></li>
+</ul>
+<blockquote>
+<p>synchronized、线程锁，得到结论：StringBuffer具备线程安全性。</p>
+</blockquote>
+<blockquote>
+<p>如果一个StringBuffer对象在字符串缓冲区被多个线程使用时，StringBuffer中很多方法可以带有synchronized关键字，所以可以保证线程是安全的，但StringBuilder的方法则没有该关键字，所以不能保证线程安全，有可能会出现一些错误的操作。所以如果要进行的操作是多线程的，那么就要使用StringBuffer，但是在单线程的情况下，还是建议使用速度比较快的StringBuilder。</p>
+</blockquote>
+<blockquote>
+<p>（一个线程访问一个对象中的<a href="https://www.cnblogs.com/weibanggang/p/9470718.html">synchronized</a>(this)同步代码块时，其他试图访问该对象的线程将被阻塞）</p>
+</blockquote>
+<h3 id="4-运行速度"><strong>4. 运行速度</strong></h3>
+<p><strong>StringBuilder &gt; StringBuffer &gt; String</strong></p>
+<ul>
+<li><strong>String</strong></li>
+</ul>
+<blockquote>
+<p>String最慢的原因：String为字符串常量，而StringBuilder和StringBuffer均为字符串变量，即String对象一旦创建之后该对象是不可更改的，但后两者的对象是变量，是可以更改的。</p>
+</blockquote>
+<ul>
+<li><strong>StringBuffer、StringBuilder</strong></li>
+</ul>
+<blockquote>
+<p>StringBuilder和StringBuffer的对象是变量，对变量进行操作就是直接对该对象进行更改，而不进行创建和回收的操作，所以速度要比String快很多。</p>
+</blockquote>
+<ul>
+<li><strong>最快</strong></li>
+</ul>
+<blockquote>
+<p>直接字符串想加：String s = &ldquo;abc&rdquo; +  &ldquo;d&rdquo;;</p>
+</blockquote>
+<h3 id="5--总结"><strong>5.  总结</strong></h3>
+<blockquote>
+<p><strong>String：适用于少量的字符串操作的情况</strong></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><strong>StringBuilder：适用于单线程下在字符缓冲区进行大量操作的情况</strong></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><strong>StringBuffer：适用多线程下在字符缓冲区进行大量操作的情况</strong></p>
+</blockquote>
+</blockquote>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/java/">java</a></span>
+        
+    </p>
+
+            
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>

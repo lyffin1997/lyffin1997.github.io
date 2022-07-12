@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>小黎的技术指北</title>
+    <link>https://lyffin1997.github.io/</link>
+    <description>Recent content on 小黎的技术指北</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 12 Jul 2022 11:53:54 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>@RequestMapping、@getMapping的区别</title>
+      <link>https://lyffin1997.github.io/java/requestmappinggetmapping%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Tue, 12 Jul 2022 11:53:54 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/requestmappinggetmapping%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>@RequestParam、@requestBody的区别</title>
+      <link>https://lyffin1997.github.io/java/requestparamrequestbody%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Tue, 12 Jul 2022 11:53:42 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/requestparamrequestbody%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java抽象类</title>
+      <link>https://lyffin1997.github.io/java/java%E6%8A%BD%E8%B1%A1%E7%B1%BB/</link>
+      <pubDate>Tue, 12 Jul 2022 11:52:23 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/java%E6%8A%BD%E8%B1%A1%E7%B1%BB/</guid>
+      <description>  抽象类中可以有抽象方法和非抽象方法
+  抽象类可以没有抽象方法，但有抽象方法的一定是抽象类
+   一个类只能继承一个类 一个类可以实现多个接口 一个接口可以继承多个接口    抽象类中的子类必须重写抽象类中所有的抽象方法
+   或者子类也是抽象类、抽象方法    抽象类不能被实例化
+  </description>
+    </item>
+    
+    <item>
+      <title>什么是AOP</title>
+      <link>https://lyffin1997.github.io/spring/%E4%BB%80%E4%B9%88%E6%98%AFaop/</link>
+      <pubDate>Tue, 12 Jul 2022 11:48:09 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/%E4%BB%80%E4%B9%88%E6%98%AFaop/</guid>
+      <description>定义：Aspect Oriented Programming 面向切面编程
+   也叫动态代理 通过预编译方式和运行期间动态代理实现程序功能的统一维护的一种技术 是一种概念，没有具体语言实现 将逻辑重复代码独立于业务代码之外 参考： https://my.oschina.net/guangshan/blog/1797461    目的：例如java中要想实现代码的重用，一般可以用继承或者组合的方式。但是当你修改最底层的方法时，其他的子类以及调用的方法都要修改，增加了代码开发量和出错率。（父子关系的纵向重用）
+   由此AOP思想随之诞生（横向切面）    解释：例如这样一个需求：有三个访问类和一个数据类，三个访问类并发访问数据类，且一个类在访问数据时其他类不能访问，当前类访问结束其它类才能访问
+    传统方法：
+    创建一个抽象类   访问类继承该抽象类
+  限制：
+   java只能单继承，访问类无法再继承其他类 访问类因包含“锁”状态，只能被重用在有“锁”的场景，重用受限      AOP思想：
+   访问类主要功能是访问数据，而不是锁 因此将“锁”抽取出来作为一个切面       实例：
+    例如想要实现某个网址增加授权认证：</description>
+    </item>
+    
+    <item>
+      <title>ArrayList、ArrayDeque、LinkedList区别</title>
+      <link>https://lyffin1997.github.io/java/arraylistarraydequelinkedlist%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Tue, 12 Jul 2022 11:44:56 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/arraylistarraydequelinkedlist%E5%8C%BA%E5%88%AB/</guid>
+      <description> 随机访问元素性能   ArrayList、ArrayDeque &amp;gt; LinkedList
+  （索引数据结构，直接返回索引位置元素，但是linkedList需要移动指针去找）
+   存储形式
+   ArrayList、ArraryDeque：数组 LinkedList：链表（双链）     (因此linkedList内存消耗更多，因为它每个节点需要存储实际数据和前后节点的位置)
+  插入、删除元素性能   ArrayList、ArrayDeque &amp;lt; LinkedList
+  （因为插入数据后需要移动插入位置后所有元素并且修改它们的索引，数组满了时还要建立新数组）
+   删除尾部元素
+    ArrayList删除尾部元素时，若size - index - 1 &amp;gt; 0，需要copy数组，较耗时
+   size:list大小 index:remove时输入的索引      ​    ArrayDeque调用pollLast()方法，该方法保留了tail属性，较快    ​ </description>
+    </item>
+    
+    <item>
+      <title>Springboot扫描路径问题</title>
+      <link>https://lyffin1997.github.io/spring/springboot%E6%89%AB%E6%8F%8F%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Tue, 12 Jul 2022 11:40:21 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springboot%E6%89%AB%E6%8F%8F%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</guid>
+      <description>  默认扫描路径
+   如下图所示，springboot启动时，会默认扫描启动类所在包及其子包中所有的配置类 启动类所在包及其子包：如图springbootweb路径下所有的文件（引入的jar包注解除外） 配置类：扫描@Component、@Configuration、@Controller、@Service等注解标记的所有类，并注入到容器中    ​   @SpringBootApplication注解的scanBasePackages属性
+   若想扫描默认路径之外的路径可使用scanBasePackages指定路径，重新指定后原默认扫描路径不会再生效    ​   @ComponentScan注解
+   如果注解只指定了一个路径并且该路径与默认启动路径相同，那么@ComponentScan注解不生效 如果指定了正确的路径，则@ComponentScan注解生效，默认路径失效    ​   优先级：@ComponentScan &amp;gt; scanBasePackages &amp;gt; 默认路径
+  jar包扫描问题
+   若第三方jar包在默认路径中，且jar包中的目录也是com.lyffin.springbootweb，那么jar包中的注解能被扫描到，其他目录的jar包无法被扫描，可通过scanBasePackages重新指定扫描路径 若第三方jar包不在默认路径中，则需要@ComponentScan注解或者scanBasePackages属性重新指定扫描路径    现实代码中重新指定的路径必须包含默认扫描路径，否则工程中的注解就扫描不到了
+  </description>
+    </item>
+    
+    <item>
+      <title>Java对象的类加载过程</title>
+      <link>https://lyffin1997.github.io/java/java%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Tue, 12 Jul 2022 11:31:44 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/java%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/</guid>
+      <description>  定义：jvm虚拟机把.class文件中类信息加载进内存，并进行解析生成对应的class对象的过程
+  过程：加载、链接、初始化
+  链接：验证、准备、解析
+  完整过程：加载=&amp;gt;验证=&amp;gt;准备=&amp;gt;解析=&amp;gt;初始化
+  加载：把class字节码文件从各个来源通过类加载器装载入内存中。
+  字节码来源：本地路径下编译生成的.class文件，从jar包中的.class文件，从远程网络、以及动态代理实时编译。
+  类加载器：一般包括启动类加载器、扩展类加载器、应用类加载器以及用户自定义加载器。
+  验证：保证加载进来的字节流符合虚拟机规范，不会造成安全错误。
+  对元数据对验证
+  对字节码的验证
+  对文件格式的验证
+  对符号引用对验证
+  准备：为类变量（静态变量）分配内存，并赋予初值。
+  解析：将常量池中的符号引用替换为直接引用的过程。
+  符号引用：字符串，具有唯一识别性，用于识别方法、变量、类信息
+  直接引用：内存地址或偏移量
+   （例如方法hello()，方法的地址为1234567，hello就是符号引用，1234567是直接引用）
+  初始化：主要对类变量进行初始化，并执行类构造器对过程。  </description>
+    </item>
+    
+    <item>
+      <title>Java对象的创建过程</title>
+      <link>https://lyffin1997.github.io/java/java%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Tue, 12 Jul 2022 11:30:43 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/java%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B/</guid>
+      <description> 检查类是否已经被加载  （根据new的参数在常量池中定位一个类的符号引用，如果没有找到这个符号引用，说明类没有被加载，则进行类的加载、解析、初始化）
+ 为对象分配内存空间（堆中） 为分配的内存空间初始化零值（为对象字段设置零值） 对对象进行其他设置（设置对象头） 调用对象的init方法   （执行对象内部生产的init方法，初始化成员变量值，同时执行搜集到的{}代码块逻辑，这里只初始化用static修饰的部分，最后执行对象的构造方法）
+ </description>
+    </item>
+    
+    <item>
+      <title>@Autowired和@Resource区别</title>
+      <link>https://lyffin1997.github.io/java/autowired%E5%92%8Cresource%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Tue, 12 Jul 2022 11:25:46 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/autowired%E5%92%8Cresource%E5%8C%BA%E5%88%AB/</guid>
+      <description> 功能上它们两个的作用是相同的，都是自动注入一个spring容器中的实例 但是它们的注入方式不同 @Resource(J2EE注解)有type和name两个属性，默认按照byName的方式装配，若没有声明name和type，如果标记的字段则以字段名称作为name去匹配，如果标记的是方法，找不到name匹配的bean就会按type去匹配。  那么是如何准确的从容器中找到对应的bean的呢？如下是装配规则
+​ @Resource private Person person; @Resource(name=&amp;#34;xxx&amp;#34;) @Resource(type=&amp;#34;xxx&amp;#34;)   @Autowire（spring注解）按照byType的方式去匹配bean。
+   默认要求必须对象存在，若要允许null值存在，需要声明    @Autowire(required=false)    若要按name匹配需要声明    @Autowired () @Qualifier ( &amp;#34;baseDao&amp;#34; ) </description>
+    </item>
+    
+    <item>
+      <title>@PostConstruct的用法</title>
+      <link>https://lyffin1997.github.io/java/postconstruct%E7%9A%84%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Tue, 12 Jul 2022 11:16:11 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/postconstruct%E7%9A%84%E7%94%A8%E6%B3%95/</guid>
+      <description> 项目启动时，会自动执行用@PostConstruct标记的方法 只能修饰非静态的void方法  @PostConstruct public void init() {}  需要和@Component一起使用，否则会报错 优先级：Constructor &amp;raquo; @Autowired &amp;raquo; @PostConstruct   比如一个用@Component标记的类要在项目启动时创建bean注入到容器中，它的过程应该是这样的：
+   先调用类的Constructor（构造方法）创建一个对象，该对象是空对象，因为它还没有初始化。    自动注入@Autowire标记的变量，此时自动注入的变量才会有值    最后再调用@PostConstruct标记的方法，在想对该对象进行一些初始化操作时，可以使用该注解。    初始化完成后将该对象的实例注入spring容器中   问题：构造方法里也能进行初始化操作，为什么还要@PostConstruct注解？
+ 这就涉及到上面说的优先级了，如下图所示，假如构造方法中进行的初始化操作需要用到@Autowire标记的变量，但是@Autowire的优先级在Constructor后面，也就是说在构造方法结束之前，mqttClient的值是null的，所以此时无法完成想要进行的初始化
+ ​ 解决方法：
+ 将初始化操作放在@PostConstruct标记的方法中，这样@Autowire标记的变量就有值了
+ </description>
+    </item>
+    
+    <item>
+      <title>@Component和@service的区别</title>
+      <link>https://lyffin1997.github.io/java/component%E5%92%8Cservice%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Tue, 12 Jul 2022 10:46:38 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/component%E5%92%8Cservice%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description>   @Controller，@Service，@Repository都包含了@Component子注解，即它们都有@Component的功能
+   ​    @Controller用于表现层（就是那些XXXController的文件，表现层可以理解为与前端交互数据的层面），@Service用于服务层（服务层可以理解为处理业务逻辑的层面），@Repository用于持久层（持久层即为与数据库交互的层面，一般的DAO文件就是该层）
+    @Component：spring基本注解，可以自动检测和使用类路径（@Component标记的当前类的路径）扫描并自动配置bean，每个类即一个bean（即类的实例），并添加到容器中。
+    简单意思就是可以把@Component标记的类自动创建一个它的实例注入到容器中（在项目启动时完成spring注入）
+ </description>
+    </item>
+    
+    <item>
+      <title>重载和重写的区别</title>
+      <link>https://lyffin1997.github.io/java/%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Tue, 12 Jul 2022 10:44:54 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/%E9%87%8D%E8%BD%BD%E5%92%8C%E9%87%8D%E5%86%99%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description>1. 重载  函数名相同 参数个数不同或者参数类型不同 函数重载和返回值类型无关 可以有不同的访问修饰符； 可以抛出不同的异常；  2. 重写  参数列表必须完全与被重写的方法相同，否则不能称其为重写而是重载。 返回的类型必须一直与被重写的方法的返回类型相同，否则不能称其为重写而是重载。 访问修饰符的限制一定要大于被重写方法的访问修饰符（public&amp;gt;protected&amp;gt;default&amp;gt;private） 重写方法一定不能抛出新的检查异常或者比被重写方法申明更加宽泛的检查型异常。例如：父类的一个方法申明了一个检查异常IOException，在重写这个方法是就不能抛出Exception,只能抛出IOException的子类异常，可以抛出非检查异常。  </description>
+    </item>
+    
+    <item>
+      <title>如何重写comparator比较器</title>
+      <link>https://lyffin1997.github.io/java/%E5%A6%82%E4%BD%95%E9%87%8D%E5%86%99comparator%E6%AF%94%E8%BE%83%E5%99%A8/</link>
+      <pubDate>Tue, 12 Jul 2022 10:40:29 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/%E5%A6%82%E4%BD%95%E9%87%8D%E5%86%99comparator%E6%AF%94%E8%BE%83%E5%99%A8/</guid>
+      <description>方法一：  //Arrays.sort(T[] a, Comparator&amp;lt;? super T&amp;gt; c) //T[] a：需要比较的数组 //Comparator&amp;lt;? super T&amp;gt; c：比较器 Car[] arr = new Car[3]; Arrays.sort(arr, new Comparator&amp;lt;Car&amp;gt;() { @Override public int compare(Car o1, Car o2) { return o1.position - o2.position; } });  方法二：  Car[] arr = new Car[3]; Arrays.sort(arr, (a, b) -&amp;gt; { //返回值&amp;gt;0交换  return b.position-a.position; });  方法三：  Car[] arr = new Car[3]; Arrays.sort(cars, (a, b) -&amp;gt; Integer.compare(a.position, b.position));  方法四：  Car[] arr = new Car[3]; Arrays.</description>
+    </item>
+    
+    <item>
+      <title>Java实现modbusTCP</title>
+      <link>https://lyffin1997.github.io/modbus/java%E5%AE%9E%E7%8E%B0modbustcp/</link>
+      <pubDate>Tue, 12 Jul 2022 00:54:11 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/modbus/java%E5%AE%9E%E7%8E%B0modbustcp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>String、StringBuilder、StringBuffer</title>
+      <link>https://lyffin1997.github.io/java/java%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Tue, 12 Jul 2022 00:50:39 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/java%E5%9F%BA%E7%A1%80/</guid>
+      <description>1. 字符串相加方式的区别  String   String str = &amp;ldquo;a&amp;rdquo; + &amp;ldquo;b&amp;rdquo;; //最快
+  String str = &amp;quot;&amp;quot; + &amp;ldquo;word&amp;rdquo;;
+  StringBuilder   StringBuilder s = new StringBuilder(&amp;ldquo;word&amp;rdquo;).append(&amp;ldquo;a&amp;rdquo;).apend(&amp;ldquo;b&amp;rdquo;);
+  StringBuffer   同StringBuilder。
+ 2. 字符串相加结果的区别  String   String是final修饰的不可变类,即一旦创建对象，字符序列不可变
+  如: String s = &amp;quot;a&amp;quot;;
+  s = &amp;quot;b&amp;quot;;
+  System.out.println(s);
+  打印结果是b，但此时“b”在内存中的位置已不是原来“a”的位置，而是新创建了一个实例对象指向“b”，并且s指向新对象，原对象仍然存在，如果没有再被引用将被回收。
+  StringBuilder   通过append()、insert()等方法可改变字符串序列，内存地址不变。一般得到最终字符串后转换成String。
+  StringBuffer   同上。</description>
+    </item>
+    
+    <item>
+      <title>Exporter</title>
+      <link>https://lyffin1997.github.io/prometheus/exporter/</link>
+      <pubDate>Tue, 12 Jul 2022 00:28:51 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/prometheus/exporter/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

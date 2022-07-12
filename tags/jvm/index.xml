@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JVM on 小黎的技术指北</title>
+    <link>https://lyffin1997.github.io/tags/jvm/</link>
+    <description>Recent content in JVM on 小黎的技术指北</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 12 Jul 2022 11:31:44 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java对象的类加载过程</title>
+      <link>https://lyffin1997.github.io/java/java%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Tue, 12 Jul 2022 11:31:44 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/java%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B/</guid>
+      <description>  定义：jvm虚拟机把.class文件中类信息加载进内存，并进行解析生成对应的class对象的过程
+  过程：加载、链接、初始化
+  链接：验证、准备、解析
+  完整过程：加载=&amp;gt;验证=&amp;gt;准备=&amp;gt;解析=&amp;gt;初始化
+  加载：把class字节码文件从各个来源通过类加载器装载入内存中。
+  字节码来源：本地路径下编译生成的.class文件，从jar包中的.class文件，从远程网络、以及动态代理实时编译。
+  类加载器：一般包括启动类加载器、扩展类加载器、应用类加载器以及用户自定义加载器。
+  验证：保证加载进来的字节流符合虚拟机规范，不会造成安全错误。
+  对元数据对验证
+  对字节码的验证
+  对文件格式的验证
+  对符号引用对验证
+  准备：为类变量（静态变量）分配内存，并赋予初值。
+  解析：将常量池中的符号引用替换为直接引用的过程。
+  符号引用：字符串，具有唯一识别性，用于识别方法、变量、类信息
+  直接引用：内存地址或偏移量
+   （例如方法hello()，方法的地址为1234567，hello就是符号引用，1234567是直接引用）
+  初始化：主要对类变量进行初始化，并执行类构造器对过程。  </description>
+    </item>
+    
+  </channel>
+</rss>

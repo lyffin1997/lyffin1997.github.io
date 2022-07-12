@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content=" 功能上它们两个的作用是相同的，都是自动注入一个spring容器中的实例 但是它们的注入方式不同 @Resource(J2EE注解)有type和name两个属性，默认按照byName的方式装配，若没有声明name和type，如果标记的字段则以字段名称作为name去匹配，如果标记的是方法，找不到name匹配的bean就会按type去匹配。  那么是如何准确的从容器中找到对应的bean的呢？如下是装配规则
+​ @Resource private Person person; @Resource(name=&amp;#34;xxx&amp;#34;) @Resource(type=&amp;#34;xxx&amp;#34;)   @Autowire（spring注解）按照byType的方式去匹配bean。
+   默认要求必须对象存在，若要允许null值存在，需要声明    @Autowire(required=false)    若要按name匹配需要声明    @Autowired () @Qualifier ( &amp;#34;baseDao&amp;#34; ) " />
+<meta name="keywords" content=", java" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://lyffin1997.github.io/java/autowired%E5%92%8Cresource%E5%8C%BA%E5%88%AB/" />
+
+
+    <title>
+        
+            @Autowired和@Resource区别 :: 小黎的技术指北 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.fcdabe1b7dd6b4453b6efda4f04d8b2127bbed1e9f9e44255a144895e5b14ea1.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="@Autowired和@Resource区别">
+<meta itemprop="description" content=" 功能上它们两个的作用是相同的，都是自动注入一个spring容器中的实例 但是它们的注入方式不同 @Resource(J2EE注解)有type和name两个属性，默认按照byName的方式装配，若没有声明name和type，如果标记的字段则以字段名称作为name去匹配，如果标记的是方法，找不到name匹配的bean就会按type去匹配。  那么是如何准确的从容器中找到对应的bean的呢？如下是装配规则
+​ @Resource private Person person; @Resource(name=&#34;xxx&#34;) @Resource(type=&#34;xxx&#34;)   @Autowire（spring注解）按照byType的方式去匹配bean。
+   默认要求必须对象存在，若要允许null值存在，需要声明    @Autowire(required=false)    若要按name匹配需要声明    @Autowired () @Qualifier ( &#34;baseDao&#34; ) "><meta itemprop="datePublished" content="2022-07-12T11:25:46&#43;08:00" />
+<meta itemprop="dateModified" content="2022-07-12T11:25:46&#43;08:00" />
+<meta itemprop="wordCount" content="21"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
+<meta itemprop="keywords" content="java," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://lyffin1997.github.io/"/>
+
+<meta name="twitter:title" content="@Autowired和@Resource区别"/>
+<meta name="twitter:description" content=" 功能上它们两个的作用是相同的，都是自动注入一个spring容器中的实例 但是它们的注入方式不同 @Resource(J2EE注解)有type和name两个属性，默认按照byName的方式装配，若没有声明name和type，如果标记的字段则以字段名称作为name去匹配，如果标记的是方法，找不到name匹配的bean就会按type去匹配。  那么是如何准确的从容器中找到对应的bean的呢？如下是装配规则
+​ @Resource private Person person; @Resource(name=&#34;xxx&#34;) @Resource(type=&#34;xxx&#34;)   @Autowire（spring注解）按照byType的方式去匹配bean。
+   默认要求必须对象存在，若要允许null值存在，需要声明    @Autowire(required=false)    若要按name匹配需要声明    @Autowired () @Qualifier ( &#34;baseDao&#34; ) "/>
+
+
+
+    <meta property="og:title" content="@Autowired和@Resource区别" />
+<meta property="og:description" content=" 功能上它们两个的作用是相同的，都是自动注入一个spring容器中的实例 但是它们的注入方式不同 @Resource(J2EE注解)有type和name两个属性，默认按照byName的方式装配，若没有声明name和type，如果标记的字段则以字段名称作为name去匹配，如果标记的是方法，找不到name匹配的bean就会按type去匹配。  那么是如何准确的从容器中找到对应的bean的呢？如下是装配规则
+​ @Resource private Person person; @Resource(name=&#34;xxx&#34;) @Resource(type=&#34;xxx&#34;)   @Autowire（spring注解）按照byType的方式去匹配bean。
+   默认要求必须对象存在，若要允许null值存在，需要声明    @Autowire(required=false)    若要按name匹配需要声明    @Autowired () @Qualifier ( &#34;baseDao&#34; ) " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lyffin1997.github.io/java/autowired%E5%92%8Cresource%E5%8C%BA%E5%88%AB/" /><meta property="og:image" content="https://lyffin1997.github.io/"/><meta property="article:section" content="java" />
+<meta property="article:published_time" content="2022-07-12T11:25:46&#43;08:00" />
+<meta property="article:modified_time" content="2022-07-12T11:25:46&#43;08:00" /><meta property="og:site_name" content="小黎的技术指北" />
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2022-07-12 11:25:46 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">lyffin</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/java">java</a></li><li><a href="/modbus">modbus</a></li><li><a href="/prometheus">prometheus</a></li><li><a href="/spring">spring</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://lyffin1997.github.io/java/autowired%E5%92%8Cresource%E5%8C%BA%E5%88%AB/">@Autowired和@Resource区别</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <ul>
+<li>功能上它们两个的作用是相同的，都是自动注入一个spring容器中的实例</li>
+<li>但是它们的注入方式不同</li>
+<li>@Resource(J2EE注解)有type和name两个属性，默认按照byName的方式装配，若没有声明name和type，如果标记的字段则以字段名称作为name去匹配，如果标记的是方法，找不到name匹配的bean就会按type去匹配。</li>
+</ul>
+<p><strong>那么是如何准确的从容器中找到对应的bean的呢？如下是装配规则</strong></p>
+<p>​                 <img src="/img/@Autowired.png" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Resource</span>
+<span style="color:#66d9ef">private</span> Person person<span style="color:#f92672">;</span>
+
+
+<span style="color:#a6e22e">@Resource</span><span style="color:#f92672">(</span>name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;xxx&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#a6e22e">@Resource</span><span style="color:#f92672">(</span>type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;xxx&#34;</span><span style="color:#f92672">)</span>
+</code></pre></div><ul>
+<li>
+<p>@Autowire（spring注解）按照byType的方式去匹配bean。</p>
+</li>
+<li>
+<ul>
+<li>默认要求必须对象存在，若要允许null值存在，需要声明</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Autowire</span><span style="color:#f92672">(</span>required<span style="color:#f92672">=</span><span style="color:#66d9ef">false</span><span style="color:#f92672">)</span>
+</code></pre></div><ul>
+<li>
+<ul>
+<li>若要按name匹配需要声明</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Autowired</span> <span style="color:#f92672">()</span> <span style="color:#a6e22e">@Qualifier</span> <span style="color:#f92672">(</span> <span style="color:#e6db74">&#34;baseDao&#34;</span> <span style="color:#f92672">)</span>
+</code></pre></div>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/java/">java</a></span>
+        
+    </p>
+
+            
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>
