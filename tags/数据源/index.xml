@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据源 on 小黎的技术指北</title>
+    <link>https://lyffin1997.github.io/tags/%E6%95%B0%E6%8D%AE%E6%BA%90/</link>
+    <description>Recent content in 数据源 on 小黎的技术指北</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 12 Jul 2022 22:42:56 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/tags/%E6%95%B0%E6%8D%AE%E6%BA%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>配置durid</title>
+      <link>https://lyffin1997.github.io/application/%E9%85%8D%E7%BD%AEdurid/</link>
+      <pubDate>Tue, 12 Jul 2022 22:42:56 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/application/%E9%85%8D%E7%BD%AEdurid/</guid>
+      <description>1. 配置druid数据源  依赖    配置文件
+   因为配置项里用到了log4j，所以还要引入依赖   2. 配置druid监控 ​ ​ ​ ​ 3. 配置druid过滤器 ​ </description>
+    </item>
+    
+  </channel>
+</rss>

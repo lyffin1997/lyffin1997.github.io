@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Middlewares on 小黎的技术指北</title>
+    <link>https://lyffin1997.github.io/middleware/</link>
+    <description>Recent content in Middlewares on 小黎的技术指北</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 12 Jul 2022 22:30:25 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/middleware/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java中应用kafka</title>
+      <link>https://lyffin1997.github.io/middleware/java%E4%B8%AD%E5%BA%94%E7%94%A8kafka/</link>
+      <pubDate>Tue, 12 Jul 2022 22:30:25 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/middleware/java%E4%B8%AD%E5%BA%94%E7%94%A8kafka/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

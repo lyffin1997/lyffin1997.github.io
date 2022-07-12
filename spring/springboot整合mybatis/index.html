@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content=" 依赖   配置  ​  mybatis.type-aliases-package：指定映射文件所在包 mybatis.mapper-locations：指定xml文件路径  ​   mapper接口（Dao层）
+   @Mapper注解：用于mapper接口文件，表示该文件是mybatis的一个接口类 @MapperScan(&amp;ldquo;com.lyffin.mapper&amp;rdquo;)：用于启动类，扫描该包中所有文件 @Repository：扫描并自动配置bean    ​   xml文件
+   路径：resources/mybatis/mapper（xml文件写在该路径下，注意与上面配置文件对应） namespace：指定dao文件 resultType：指定映射文件（这里直接使用别名而不是路径，因为配置文件已经配置了） parameterType：同上 ：开启缓存，用法未知，自行百度 ：sql片段，不解释    &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; ?&amp;gt; &amp;lt;!DOCTYPE mapper PUBLIC &amp;#34;-//mybatis.org//DTD Mapper 3.0//EN&amp;#34; &amp;#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&amp;#34;&amp;gt; &amp;lt;mapper namespace=&amp;#34;com.lyffin.mapper.UserMapper&amp;#34;&amp;gt; &amp;lt;select id=&amp;#34;selectBlog&amp;#34; resultType=&amp;#34;User&amp;#34;&amp;gt; select * from Blog where id = #{id} &amp;lt;/select&amp;gt; &amp;lt;/mapper&amp;gt; ​ " />
+<meta name="keywords" content=", springboot, mybatis, 框架" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://lyffin1997.github.io/spring/springboot%E6%95%B4%E5%90%88mybatis/" />
+
+
+    <title>
+        
+            Springboot整合mybatis :: 小黎的技术指北 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.fcdabe1b7dd6b4453b6efda4f04d8b2127bbed1e9f9e44255a144895e5b14ea1.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="Springboot整合mybatis">
+<meta itemprop="description" content=" 依赖   配置  ​  mybatis.type-aliases-package：指定映射文件所在包 mybatis.mapper-locations：指定xml文件路径  ​   mapper接口（Dao层）
+   @Mapper注解：用于mapper接口文件，表示该文件是mybatis的一个接口类 @MapperScan(&ldquo;com.lyffin.mapper&rdquo;)：用于启动类，扫描该包中所有文件 @Repository：扫描并自动配置bean    ​   xml文件
+   路径：resources/mybatis/mapper（xml文件写在该路径下，注意与上面配置文件对应） namespace：指定dao文件 resultType：指定映射文件（这里直接使用别名而不是路径，因为配置文件已经配置了） parameterType：同上 ：开启缓存，用法未知，自行百度 ：sql片段，不解释    &lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt; &lt;!DOCTYPE mapper PUBLIC &#34;-//mybatis.org//DTD Mapper 3.0//EN&#34; &#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&#34;&gt; &lt;mapper namespace=&#34;com.lyffin.mapper.UserMapper&#34;&gt; &lt;select id=&#34;selectBlog&#34; resultType=&#34;User&#34;&gt; select * from Blog where id = #{id} &lt;/select&gt; &lt;/mapper&gt; ​ "><meta itemprop="datePublished" content="2022-07-12T22:50:54&#43;08:00" />
+<meta itemprop="dateModified" content="2022-07-12T22:50:54&#43;08:00" />
+<meta itemprop="wordCount" content="45"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
+<meta itemprop="keywords" content="springboot,mybatis,框架," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://lyffin1997.github.io/"/>
+
+<meta name="twitter:title" content="Springboot整合mybatis"/>
+<meta name="twitter:description" content=" 依赖   配置  ​  mybatis.type-aliases-package：指定映射文件所在包 mybatis.mapper-locations：指定xml文件路径  ​   mapper接口（Dao层）
+   @Mapper注解：用于mapper接口文件，表示该文件是mybatis的一个接口类 @MapperScan(&ldquo;com.lyffin.mapper&rdquo;)：用于启动类，扫描该包中所有文件 @Repository：扫描并自动配置bean    ​   xml文件
+   路径：resources/mybatis/mapper（xml文件写在该路径下，注意与上面配置文件对应） namespace：指定dao文件 resultType：指定映射文件（这里直接使用别名而不是路径，因为配置文件已经配置了） parameterType：同上 ：开启缓存，用法未知，自行百度 ：sql片段，不解释    &lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt; &lt;!DOCTYPE mapper PUBLIC &#34;-//mybatis.org//DTD Mapper 3.0//EN&#34; &#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&#34;&gt; &lt;mapper namespace=&#34;com.lyffin.mapper.UserMapper&#34;&gt; &lt;select id=&#34;selectBlog&#34; resultType=&#34;User&#34;&gt; select * from Blog where id = #{id} &lt;/select&gt; &lt;/mapper&gt; ​ "/>
+
+
+
+    <meta property="og:title" content="Springboot整合mybatis" />
+<meta property="og:description" content=" 依赖   配置  ​  mybatis.type-aliases-package：指定映射文件所在包 mybatis.mapper-locations：指定xml文件路径  ​   mapper接口（Dao层）
+   @Mapper注解：用于mapper接口文件，表示该文件是mybatis的一个接口类 @MapperScan(&ldquo;com.lyffin.mapper&rdquo;)：用于启动类，扫描该包中所有文件 @Repository：扫描并自动配置bean    ​   xml文件
+   路径：resources/mybatis/mapper（xml文件写在该路径下，注意与上面配置文件对应） namespace：指定dao文件 resultType：指定映射文件（这里直接使用别名而不是路径，因为配置文件已经配置了） parameterType：同上 ：开启缓存，用法未知，自行百度 ：sql片段，不解释    &lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt; &lt;!DOCTYPE mapper PUBLIC &#34;-//mybatis.org//DTD Mapper 3.0//EN&#34; &#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&#34;&gt; &lt;mapper namespace=&#34;com.lyffin.mapper.UserMapper&#34;&gt; &lt;select id=&#34;selectBlog&#34; resultType=&#34;User&#34;&gt; select * from Blog where id = #{id} &lt;/select&gt; &lt;/mapper&gt; ​ " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lyffin1997.github.io/spring/springboot%E6%95%B4%E5%90%88mybatis/" /><meta property="og:image" content="https://lyffin1997.github.io/"/><meta property="article:section" content="spring" />
+<meta property="article:published_time" content="2022-07-12T22:50:54&#43;08:00" />
+<meta property="article:modified_time" content="2022-07-12T22:50:54&#43;08:00" /><meta property="og:site_name" content="小黎的技术指北" />
+
+
+
+
+
+    <meta property="article:section" content="应用" />
+
+
+
+    <meta property="article:published_time" content="2022-07-12 22:50:54 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">lyffin</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/java">java</a></li><li><a href="/spring">spring</a></li><li><a href="/middleware">中间件</a></li><li><a href="/application">应用</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://lyffin1997.github.io/spring/springboot%E6%95%B4%E5%90%88mybatis/">Springboot整合mybatis</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <ul>
+<li>依赖</li>
+</ul>
+<p><img src="/img/springboot-mybatis1.png" alt="img"></p>
+<ul>
+<li>配置</li>
+</ul>
+<p>​                 <img src="/img/springboot-mybatis2.png" alt="img"></p>
+<ul>
+<li>mybatis.type-aliases-package：指定映射文件所在包</li>
+<li>mybatis.mapper-locations：指定xml文件路径</li>
+</ul>
+<p>​                 <img src="/img/springboot-mybatis3.png" alt="img"></p>
+<ul>
+<li>
+<p>mapper接口（Dao层）</p>
+</li>
+<li>
+<ul>
+<li>@Mapper注解：用于mapper接口文件，表示该文件是mybatis的一个接口类</li>
+<li>@MapperScan(&ldquo;com.lyffin.mapper&rdquo;)：用于启动类，扫描该包中所有文件</li>
+<li>@Repository：扫描并自动配置bean</li>
+</ul>
+</li>
+</ul>
+<p>​                 <img src="/img/springboot-mybatis4.png" alt="img"></p>
+<ul>
+<li>
+<p>xml文件</p>
+</li>
+<li>
+<ul>
+<li>路径：resources/mybatis/mapper（xml文件写在该路径下，注意与上面配置文件对应）</li>
+<li>namespace：指定dao文件</li>
+<li>resultType：指定映射文件（这里直接使用别名而不是路径，因为配置文件已经配置了）</li>
+<li>parameterType：同上</li>
+<li><!-- raw HTML omitted -->：开启缓存，用法未知，自行百度</li>
+<li><!-- raw HTML omitted -->：sql片段，不解释</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt;</span>
+<span style="color:#75715e">&lt;!DOCTYPE mapper   
+</span><span style="color:#75715e">PUBLIC &#34;-//mybatis.org//DTD Mapper 3.0//EN&#34;   &#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&#34;&gt;</span>
+<span style="color:#f92672">&lt;mapper</span> <span style="color:#a6e22e">namespace=</span><span style="color:#e6db74">&#34;com.lyffin.mapper.UserMapper&#34;</span><span style="color:#f92672">&gt;</span>   
+    <span style="color:#f92672">&lt;select</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;selectBlog&#34;</span> <span style="color:#a6e22e">resultType=</span><span style="color:#e6db74">&#34;User&#34;</span><span style="color:#f92672">&gt;</span>     
+        select * from Blog where id = #{id}   
+    <span style="color:#f92672">&lt;/select&gt;</span>
+<span style="color:#f92672">&lt;/mapper&gt;</span>
+</code></pre></div><p>​                 <img src="/img/springboot-mybatis5.png" alt="img"></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/springboot/">springboot</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/mybatis/">mybatis</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/%E6%A1%86%E6%9E%B6/">框架</a></span>
+        
+    </p>
+
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/categories/%E5%BA%94%E7%94%A8/">应用</a></span>
+        
+    </p>
+
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>应用 on 小黎的技术指北</title>
+    <link>https://lyffin1997.github.io/categories/%E5%BA%94%E7%94%A8/</link>
+    <description>Recent content in 应用 on 小黎的技术指北</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 13 Jul 2022 00:10:35 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/categories/%E5%BA%94%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo技巧</title>
+      <link>https://lyffin1997.github.io/application/hugo%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Wed, 13 Jul 2022 00:10:35 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/application/hugo%E6%8A%80%E5%B7%A7/</guid>
+      <description>  编译hugo页面（myblog下运行，生成public）
+hugo --theme=hello-friend-ng --baseUrl=&amp;quot;https://lyffin1997.github.io/&amp;quot; --buildDrafts
+  运行hugo(myblog下运行)
+hugo server -t hello-friend-ng --buildDrafts
+  </description>
+    </item>
+    
+    <item>
+      <title>Springboot Web</title>
+      <link>https://lyffin1997.github.io/spring/springboot-web/</link>
+      <pubDate>Tue, 12 Jul 2022 23:23:57 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springboot-web/</guid>
+      <description>思考：springboot到底替我们配置了什么？能不能进行修改？能修改哪些东西？能不能扩展
+    xxxAutoConfiguration：向容器中自动配置组件 xxxProperties：自动配置类，装配配置文件中自定义的一些属性    1. 静态资源 WebMvcAutoConfiguration.java
+public void addResourceHandlers(ResourceHandlerRegistry registry) { if (!this.resourceProperties.isAddMappings()) { logger.debug(&amp;#34;Default resource handling disabled&amp;#34;); } else { this.addResourceHandler(registry, &amp;#34;/webjars/**&amp;#34;, &amp;#34;classpath:/META-INF/resources/webjars/&amp;#34;); this.addResourceHandler(registry, this.mvcProperties.getStaticPathPattern(), (registration) -&amp;gt; { registration.addResourceLocations(this.resourceProperties.getStaticLocations()); if (this.servletContext != null) { ServletContextResource resource = new ServletContextResource(this.servletContext, &amp;#34;/&amp;#34;); registration.addResourceLocations(new Resource[]{resource}); } }); } }  静态资源路径：  从webjars/**下 classpath:/META-INF/resources/webjars/路径中所有目标获取静态资源 从/**下 classpath:/META-INF/resources/&amp;#34;, &amp;#34;classpath:/resources/&amp;#34;, &amp;#34;classpath:/static/&amp;#34;, &amp;#34;classpath:/public/路径中所有目标获取静态资源 优先级：resources&amp;gt;static(默认)&amp;gt;public 自定义：在yml文件中编写，此时上面两种方式无效 spring: mvc: static-path-pattern: 获取方式：localhost:8080/webjars/jquery/3.</description>
+    </item>
+    
+    <item>
+      <title>Springsecurity</title>
+      <link>https://lyffin1997.github.io/spring/springsecurity/</link>
+      <pubDate>Tue, 12 Jul 2022 23:14:27 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springsecurity/</guid>
+      <description>1. 什么是SpringSecurity  Spring Security是针对spring项目的安全框架，也是springboot底层安全模块默认的技术选型，它可以实现强大的Web安全控制，仅需要引入spring-boot-starter-security
+ 主要功能：认证（Authentication）和授权（Authorization）
+2. 代码实例 2.1 依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-security&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; //themeleaf依赖用于配合教程展示，核心依赖为上面的starter &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.thymeleaf&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;thymeleaf-spring5&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.thymeleaf.extras&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;thymeleaf-extras-java8time&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 2.2 配置文件 //取消页面缓存 spring.thymeleaf.cache=false 2.3 编码   导入themeleaf模板
+  编写业务代码
+  ​  编写路由  @Controller public class RouterController { @RequestMapping({&amp;#34;/&amp;#34;,&amp;#34;/index&amp;#34;}) public String index() { return &amp;#34;index&amp;#34;; } @RequestMapping(&amp;#34;/toLogin&amp;#34;) public String toLogin() { return &amp;#34;views/login&amp;#34;; } @RequestMapping(&amp;#34;/level1/{id}&amp;#34;) public String level1(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level1/&amp;#34;+id; } @RequestMapping(&amp;#34;/level2/{id}&amp;#34;) public String level2(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level2/&amp;#34;+id; } @RequestMapping(&amp;#34;/level3/{id}&amp;#34;) public String level3(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level3/&amp;#34;+id; } }  编写springsecurity配置文件  //开启websecurity功能 @EnableWebSecurity public class SecurityConfig extends WebSecurityConfigurerAdapter { //http安全策略  //授权  @Override protected void configure(HttpSecurity http) throws Exception { //首页所有人可访问，功能页只能有对应权限的人访问  http.</description>
+    </item>
+    
+    <item>
+      <title>Shiro</title>
+      <link>https://lyffin1997.github.io/application/shiro/</link>
+      <pubDate>Tue, 12 Jul 2022 23:09:07 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/application/shiro/</guid>
+      <description>1 什么是shiro   定义：Apache Shiro是一个java的安全框架
+  作用：认证，授权，加密，会话管理，web集成，缓存
+  核心：
+   Subject：用户 SecurityManager：管理所有用户 Realm：连接数据    2 快速开始shiro   依赖   配置文件
+   log4j2.xml    &amp;lt;Configuration name=&amp;#34;ConfigTest&amp;#34; status=&amp;#34;ERROR&amp;#34; monitorInterval=&amp;#34;5&amp;#34;&amp;gt; &amp;lt;!-- ~ Licensed to the Apache Software Foundation (ASF) under one ~ or more contributor license agreements. See the NOTICE file ~ distributed with this work for additional information ~ regarding copyright ownership.</description>
+    </item>
+    
+    <item>
+      <title>Springboot整合mybatis</title>
+      <link>https://lyffin1997.github.io/spring/springboot%E6%95%B4%E5%90%88mybatis/</link>
+      <pubDate>Tue, 12 Jul 2022 22:50:54 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springboot%E6%95%B4%E5%90%88mybatis/</guid>
+      <description> 依赖   配置  ​  mybatis.type-aliases-package：指定映射文件所在包 mybatis.mapper-locations：指定xml文件路径  ​   mapper接口（Dao层）
+   @Mapper注解：用于mapper接口文件，表示该文件是mybatis的一个接口类 @MapperScan(&amp;ldquo;com.lyffin.mapper&amp;rdquo;)：用于启动类，扫描该包中所有文件 @Repository：扫描并自动配置bean    ​   xml文件
+   路径：resources/mybatis/mapper（xml文件写在该路径下，注意与上面配置文件对应） namespace：指定dao文件 resultType：指定映射文件（这里直接使用别名而不是路径，因为配置文件已经配置了） parameterType：同上 ：开启缓存，用法未知，自行百度 ：sql片段，不解释    &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; ?&amp;gt; &amp;lt;!DOCTYPE mapper PUBLIC &amp;#34;-//mybatis.org//DTD Mapper 3.0//EN&amp;#34; &amp;#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&amp;#34;&amp;gt; &amp;lt;mapper namespace=&amp;#34;com.lyffin.mapper.UserMapper&amp;#34;&amp;gt; &amp;lt;select id=&amp;#34;selectBlog&amp;#34; resultType=&amp;#34;User&amp;#34;&amp;gt; select * from Blog where id = #{id} &amp;lt;/select&amp;gt; &amp;lt;/mapper&amp;gt; ​ </description>
+    </item>
+    
+    <item>
+      <title>配置durid</title>
+      <link>https://lyffin1997.github.io/application/%E9%85%8D%E7%BD%AEdurid/</link>
+      <pubDate>Tue, 12 Jul 2022 22:42:56 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/application/%E9%85%8D%E7%BD%AEdurid/</guid>
+      <description>1. 配置druid数据源  依赖    配置文件
+   因为配置项里用到了log4j，所以还要引入依赖   2. 配置druid监控 ​ ​ ​ ​ 3. 配置druid过滤器 ​ </description>
+    </item>
+    
+    <item>
+      <title>Springboot整合jdbc</title>
+      <link>https://lyffin1997.github.io/spring/springboot%E6%95%B4%E5%90%88jdbc/</link>
+      <pubDate>Tue, 12 Jul 2022 22:15:34 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springboot%E6%95%B4%E5%90%88jdbc/</guid>
+      <description>1. 依赖   jdbc依赖
+  mysql驱动
+  2 配置   账号
+  密码
+  url：地址:端口/数据库名？
+   serverTimezone:设置时区(因为mysql服务器默认为东4区，与本地web服务器时间存在时差) useUnicode:防止乱码（和后面连用，mysql用gbk编码，加了这个，存数据先将数据转换为字节码再用gbk编码存，取数据先将gbk格式解码成字节码再按utf-8编码） characterEncoding:编码方式    driver-class-name：驱动名称
+   com.mysql.jdbc.Driver(5.2以上)    ​ 3 连接逻辑   DataSourceAutoConfiguration.java（springboot启动时自动扫描并注册该类）
+   AutoConfiguration参考前面自动装配原理 ConditionalOnClass 该自动装配类生效所需的类 ConditionalOnMissingBean 该自动装配类生效不能存在的bean EnableConfigurationProperties给实体类赋值，参考前面配置文件写法    ​   接上一步，扫描注册该自动装配类时会调用方法进行数据的连接，连接配置则保存在DataSourceProperties.class中
+  DataSourceProperties.java
+   ConfigurationProperties:给当前实体类赋值      连接成功后会自动生成dataSource的bean并注入到容器中</description>
+    </item>
+    
+    <item>
+      <title>Springboot扫描路径问题</title>
+      <link>https://lyffin1997.github.io/spring/springboot%E6%89%AB%E6%8F%8F%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Tue, 12 Jul 2022 11:40:21 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springboot%E6%89%AB%E6%8F%8F%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</guid>
+      <description>  默认扫描路径
+   如下图所示，springboot启动时，会默认扫描启动类所在包及其子包中所有的配置类 启动类所在包及其子包：如图springbootweb路径下所有的文件（引入的jar包注解除外） 配置类：扫描@Component、@Configuration、@Controller、@Service等注解标记的所有类，并注入到容器中    ​   @SpringBootApplication注解的scanBasePackages属性
+   若想扫描默认路径之外的路径可使用scanBasePackages指定路径，重新指定后原默认扫描路径不会再生效    ​   @ComponentScan注解
+   如果注解只指定了一个路径并且该路径与默认启动路径相同，那么@ComponentScan注解不生效 如果指定了正确的路径，则@ComponentScan注解生效，默认路径失效    ​   优先级：@ComponentScan &amp;gt; scanBasePackages &amp;gt; 默认路径
+  jar包扫描问题
+   若第三方jar包在默认路径中，且jar包中的目录也是com.lyffin.springbootweb，那么jar包中的注解能被扫描到，其他目录的jar包无法被扫描，可通过scanBasePackages重新指定扫描路径 若第三方jar包不在默认路径中，则需要@ComponentScan注解或者scanBasePackages属性重新指定扫描路径    现实代码中重新指定的路径必须包含默认扫描路径，否则工程中的注解就扫描不到了
+  </description>
+    </item>
+    
+    <item>
+      <title>如何重写comparator比较器</title>
+      <link>https://lyffin1997.github.io/java/%E5%A6%82%E4%BD%95%E9%87%8D%E5%86%99comparator%E6%AF%94%E8%BE%83%E5%99%A8/</link>
+      <pubDate>Tue, 12 Jul 2022 10:40:29 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/%E5%A6%82%E4%BD%95%E9%87%8D%E5%86%99comparator%E6%AF%94%E8%BE%83%E5%99%A8/</guid>
+      <description>方法一：  //Arrays.sort(T[] a, Comparator&amp;lt;? super T&amp;gt; c) //T[] a：需要比较的数组 //Comparator&amp;lt;? super T&amp;gt; c：比较器 Car[] arr = new Car[3]; Arrays.sort(arr, new Comparator&amp;lt;Car&amp;gt;() { @Override public int compare(Car o1, Car o2) { return o1.position - o2.position; } });  方法二：  Car[] arr = new Car[3]; Arrays.sort(arr, (a, b) -&amp;gt; { //返回值&amp;gt;0交换  return b.position-a.position; });  方法三：  Car[] arr = new Car[3]; Arrays.sort(cars, (a, b) -&amp;gt; Integer.compare(a.position, b.position));  方法四：  Car[] arr = new Car[3]; Arrays.</description>
+    </item>
+    
+  </channel>
+</rss>

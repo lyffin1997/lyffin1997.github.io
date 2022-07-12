@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="1. 语法   yml和yaml一样的文件格式，但是yaml优先级比yml高
+  名称固定：application.properties或者application.yml
+  可以同时存在properties和yml，且都会生效
+  语法:
+   application.properties: key=value    server.port=8080    application.yml: key:空格value    server: port: 8080   yml可以存对象，properties不行
+   yml    student: name: lifeng age: 18 #行内写法 student: {name: lifeng,age: 18}  properties  student.name=lifeng student.age=18  yml可以写数组  pets: - cat - dog - pig pets: [cat,dog,pig]  yml可以用特殊表达式（可搜索spring el表达式）  name: ${random." />
+<meta name="keywords" content=", yml, 问题, springboot" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://lyffin1997.github.io/spring/%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" />
+
+
+    <title>
+        
+            如何编写配置文件 :: 小黎的技术指北 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.fcdabe1b7dd6b4453b6efda4f04d8b2127bbed1e9f9e44255a144895e5b14ea1.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="如何编写配置文件">
+<meta itemprop="description" content="1. 语法   yml和yaml一样的文件格式，但是yaml优先级比yml高
+  名称固定：application.properties或者application.yml
+  可以同时存在properties和yml，且都会生效
+  语法:
+   application.properties: key=value    server.port=8080    application.yml: key:空格value    server: port: 8080   yml可以存对象，properties不行
+   yml    student: name: lifeng age: 18 #行内写法 student: {name: lifeng,age: 18}  properties  student.name=lifeng student.age=18  yml可以写数组  pets: - cat - dog - pig pets: [cat,dog,pig]  yml可以用特殊表达式（可搜索spring el表达式）  name: ${random."><meta itemprop="datePublished" content="2022-07-12T23:50:01&#43;08:00" />
+<meta itemprop="dateModified" content="2022-07-12T23:50:01&#43;08:00" />
+<meta itemprop="wordCount" content="188"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
+<meta itemprop="keywords" content="yml,问题,springboot," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://lyffin1997.github.io/"/>
+
+<meta name="twitter:title" content="如何编写配置文件"/>
+<meta name="twitter:description" content="1. 语法   yml和yaml一样的文件格式，但是yaml优先级比yml高
+  名称固定：application.properties或者application.yml
+  可以同时存在properties和yml，且都会生效
+  语法:
+   application.properties: key=value    server.port=8080    application.yml: key:空格value    server: port: 8080   yml可以存对象，properties不行
+   yml    student: name: lifeng age: 18 #行内写法 student: {name: lifeng,age: 18}  properties  student.name=lifeng student.age=18  yml可以写数组  pets: - cat - dog - pig pets: [cat,dog,pig]  yml可以用特殊表达式（可搜索spring el表达式）  name: ${random."/>
+
+
+
+    <meta property="og:title" content="如何编写配置文件" />
+<meta property="og:description" content="1. 语法   yml和yaml一样的文件格式，但是yaml优先级比yml高
+  名称固定：application.properties或者application.yml
+  可以同时存在properties和yml，且都会生效
+  语法:
+   application.properties: key=value    server.port=8080    application.yml: key:空格value    server: port: 8080   yml可以存对象，properties不行
+   yml    student: name: lifeng age: 18 #行内写法 student: {name: lifeng,age: 18}  properties  student.name=lifeng student.age=18  yml可以写数组  pets: - cat - dog - pig pets: [cat,dog,pig]  yml可以用特殊表达式（可搜索spring el表达式）  name: ${random." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lyffin1997.github.io/spring/%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" /><meta property="og:image" content="https://lyffin1997.github.io/"/><meta property="article:section" content="spring" />
+<meta property="article:published_time" content="2022-07-12T23:50:01&#43;08:00" />
+<meta property="article:modified_time" content="2022-07-12T23:50:01&#43;08:00" /><meta property="og:site_name" content="小黎的技术指北" />
+
+
+
+
+
+    <meta property="article:section" content="知识" />
+
+
+
+    <meta property="article:published_time" content="2022-07-12 23:50:01 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">lyffin</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/java">java</a></li><li><a href="/spring">spring</a></li><li><a href="/middleware">中间件</a></li><li><a href="/application">应用</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://lyffin1997.github.io/spring/%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">如何编写配置文件</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <h2 id="1-语法"><strong>1. 语法</strong></h2>
+<ul>
+<li>
+<p>yml和yaml一样的文件格式，但是yaml优先级比yml高</p>
+</li>
+<li>
+<p>名称固定：application.properties或者application.yml</p>
+</li>
+<li>
+<p>可以同时存在properties和yml，且都会生效</p>
+</li>
+<li>
+<p>语法:</p>
+</li>
+<li>
+<ul>
+<li>application.properties: key=value</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-properties" data-lang="properties">server.port=8080
+</code></pre><ul>
+<li>
+<ul>
+<li>application.yml: key:空格value</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">server</span>:
+    <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8080</span>
+</code></pre></div><ul>
+<li>
+<p>yml可以存对象，properties不行</p>
+</li>
+<li>
+<ul>
+<li>yml</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">student</span>:
+    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">lifeng</span>
+    <span style="color:#f92672">age</span>: <span style="color:#ae81ff">18</span> 
+<span style="color:#75715e">#行内写法</span>
+<span style="color:#f92672">student</span>: {<span style="color:#f92672">name: lifeng,age</span>: <span style="color:#ae81ff">18</span>}
+</code></pre></div><pre><code>    properties
+</code></pre>
+<pre><code class="language-properties" data-lang="properties">student.name=lifeng
+student.age=18
+</code></pre><ul>
+<li>yml可以写数组</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">pets</span>:
+    - <span style="color:#ae81ff">cat</span>
+    - <span style="color:#ae81ff">dog</span>
+    - <span style="color:#ae81ff">pig</span>
+    
+<span style="color:#f92672">pets</span>: [<span style="color:#ae81ff">cat,dog,pig]</span>
+</code></pre></div><ul>
+<li>yml可以用特殊表达式（可搜索spring el表达式）</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">name</span>: <span style="color:#ae81ff">${random.uuid}</span>
+<span style="color:#f92672">age</span>: <span style="color:#ae81ff">${random.int}</span>
+
+
+<span style="color:#f92672">person</span>:
+    <span style="color:#f92672">h</span>: <span style="color:#ae81ff">a</span>
+
+
+<span style="color:#f92672">eee</span>: <span style="color:#ae81ff">${person.h}</span>
+<span style="color:#ae81ff">//若不存在，则需要自己写,如下面写法，bbb的值应当为mmm_ddd，若m存在，则优先取存在的值</span>
+<span style="color:#ae81ff">bbb:${person.m:mmm}_ddd</span>
+</code></pre></div><h2 id="2-yaml与xml"><strong>2. YAML与xml</strong></h2>
+<ul>
+<li>yml配置：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">server</span>:
+   <span style="color:#f92672">port</span>: <span style="color:#ae81ff">8080</span>
+</code></pre></div><ul>
+<li>xml配置</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;sever&gt;</span>
+    <span style="color:#f92672">&lt;port&gt;</span>8080<span style="color:#f92672">&lt;port&gt;</span>
+<span style="color:#f92672">&lt;/sever&gt;</span>
+</code></pre></div><h2 id="3-给实体类赋值"><strong>3. 给实体类赋值</strong></h2>
+<blockquote>
+<p>传统方法需要new实例来赋值，spring简单点可以用@value注解来赋值，但是需要每个字段都用@value，springboot更简单，只需要用@ConfigurationProperties标识类即可（可能会报红，但不影响代码运行，点击错误提示进入网站后它会告诉你需要添加一个依赖，添加到pom文件中即可）</p>
+</blockquote>
+<ul>
+<li>@ConfigurationProperties</li>
+</ul>
+<blockquote>
+<p>将配置文件中配置到每一个属性到值映射到这个组件中（即用注解标识到类）；告诉springboot将本类中所有属性和配置文件中匹配的配置进行绑定，绑定方法：prefix = &ldquo;xxx&rdquo;</p>
+</blockquote>
+<p>前提条件：该组件是容器中的组件（即用了@component注解到类）</p>
+<ul>
+<li><code>Person.java</code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Component</span>
+<span style="color:#a6e22e">@ConfigurationProperties</span><span style="color:#f92672">(</span>prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;person&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> String name<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> Integer age<span style="color:#f92672">;</span>
+    
+    <span style="color:#75715e">//必须要创建好无参构造和有参构造，否则可能会报错
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">,</span> Integer age<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">age</span> <span style="color:#f92672">=</span> age<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#75715e">//然后还要创建号get、set、toString方法
+</span><span style="color:#75715e"></span>    <span style="color:#960050;background-color:#1e0010">……</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>yml</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">person</span>:
+    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">lifeng</span>
+    <span style="color:#f92672">age</span>: <span style="color:#ae81ff">18</span>
+</code></pre></div><ul>
+<li>功能延伸：给实体类赋值的功能，可以把以前需要写到配置文件中的配置信息绑定到java文件中（至于为什么要放到java文件中，看项目具体需求，有的需要这样做）</li>
+</ul>
+<h2 id="4-指定配置文件赋值"><strong>4. 指定配置文件赋值</strong></h2>
+<ul>
+<li>@PropertySource，但是得用@Value一个个配置</li>
+<li><code>Person.java</code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Component</span>
+<span style="color:#a6e22e">@PropertySource</span><span style="color:#f92672">(</span>value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;classpath:lifeng.properties&#34;</span><span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">//SPEL表达式取出配置文件值
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Value</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;${name}&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">private</span> String name<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> Integer age<span style="color:#f92672">;</span>
+    
+    <span style="color:#75715e">//必须要创建好无参构造和有参构造，否则可能会报错
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Person</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">,</span> Integer age<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">name</span> <span style="color:#f92672">=</span> name<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">age</span> <span style="color:#f92672">=</span> age<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#75715e">//然后还要创建号get、set、toString方法
+</span><span style="color:#75715e"></span>    <span style="color:#960050;background-color:#1e0010">……</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>lifeng,properties</li>
+</ul>
+<blockquote>
+<p>值是中文的话把这个勾上，否则会是乱码</p>
+</blockquote>
+<p><img src="/img/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B61.png" alt="img"></p>
+<pre><code class="language-properties" data-lang="properties">name=黎峰
+</code></pre><h2 id="5-configurationproperties和value"><strong>5. @ConfigurationProperties和@Value</strong></h2>
+<p><img src="/img/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B62.png" alt="img"></p>
+<ul>
+<li>
+<p>松散绑定：yml中last-name等价于lastName，-后面的字母默认大写</p>
+</li>
+<li>
+<p>JSR303数据校验：在字段中增加一层过滤器验证，保证数据合法性</p>
+</li>
+<li>
+<ul>
+<li>@Validated：用于标识类，在创建实例时会自动校验字段中标识了相应注解的字段</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Validated</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> <span style="color:#f92672">{</span>
+    <span style="color:#a6e22e">@Email</span><span style="color:#f92672">(</span>message<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;name格式错误&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e">//校验字段是否为邮箱格式
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> String email<span style="color:#f92672">;</span>
+    <span style="color:#75715e">//@Null、@NotNull、@Length等等
+</span><span style="color:#75715e"></span><span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>复杂型封装：可以封装对象</li>
+</ul>
+<h2 id="6-多环境配置"><strong>6. 多环境配置</strong></h2>
+<ul>
+<li>在项目根目录config文件夹下或项目根目录下，可以写application.yml文件</li>
+<li>类路径（resources）下到config文件夹或者类路径下可以写配置文件(classpath指resources目录下)</li>
+<li>优先级：项目路径&gt;类路径；config&gt;同级目录</li>
+</ul>
+<h2 id="7-指定生效环境"><strong>7. 指定生效环境</strong></h2>
+<ul>
+<li>​    spring.profiles.active</li>
+</ul>
+<p><img src="/img/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B63.png" alt="img"></p>
+<p><img src="/img/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B64.png" alt="img"></p>
+<h2 id="8-同一文件配置多环境"><strong>8. 同一文件配置多环境</strong></h2>
+<ul>
+<li>&mdash;：做区分</li>
+<li>spring.profiles：显示声明（注意需要删除application-dev.yml文件）             <img src="/img/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B65.png" alt="img"></li>
+</ul>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/yml/">yml</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/%E9%97%AE%E9%A2%98/">问题</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/springboot/">springboot</a></span>
+        
+    </p>
+
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/categories/%E7%9F%A5%E8%AF%86/">知识</a></span>
+        
+    </p>
+
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>

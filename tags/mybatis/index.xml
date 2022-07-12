@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mybatis on 小黎的技术指北</title>
+    <link>https://lyffin1997.github.io/tags/mybatis/</link>
+    <description>Recent content in mybatis on 小黎的技术指北</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 12 Jul 2022 22:50:54 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/tags/mybatis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Springboot整合mybatis</title>
+      <link>https://lyffin1997.github.io/spring/springboot%E6%95%B4%E5%90%88mybatis/</link>
+      <pubDate>Tue, 12 Jul 2022 22:50:54 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springboot%E6%95%B4%E5%90%88mybatis/</guid>
+      <description> 依赖   配置  ​  mybatis.type-aliases-package：指定映射文件所在包 mybatis.mapper-locations：指定xml文件路径  ​   mapper接口（Dao层）
+   @Mapper注解：用于mapper接口文件，表示该文件是mybatis的一个接口类 @MapperScan(&amp;ldquo;com.lyffin.mapper&amp;rdquo;)：用于启动类，扫描该包中所有文件 @Repository：扫描并自动配置bean    ​   xml文件
+   路径：resources/mybatis/mapper（xml文件写在该路径下，注意与上面配置文件对应） namespace：指定dao文件 resultType：指定映射文件（这里直接使用别名而不是路径，因为配置文件已经配置了） parameterType：同上 ：开启缓存，用法未知，自行百度 ：sql片段，不解释    &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; ?&amp;gt; &amp;lt;!DOCTYPE mapper PUBLIC &amp;#34;-//mybatis.org//DTD Mapper 3.0//EN&amp;#34; &amp;#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&amp;#34;&amp;gt; &amp;lt;mapper namespace=&amp;#34;com.lyffin.mapper.UserMapper&amp;#34;&amp;gt; &amp;lt;select id=&amp;#34;selectBlog&amp;#34; resultType=&amp;#34;User&amp;#34;&amp;gt; select * from Blog where id = #{id} &amp;lt;/select&amp;gt; &amp;lt;/mapper&amp;gt; ​ </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -7,7 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 12 Jul 2022 11:48:09 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 Jul 2022 23:14:27 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Springsecurity</title>
+      <link>https://lyffin1997.github.io/spring/springsecurity/</link>
+      <pubDate>Tue, 12 Jul 2022 23:14:27 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springsecurity/</guid>
+      <description>1. 什么是SpringSecurity  Spring Security是针对spring项目的安全框架，也是springboot底层安全模块默认的技术选型，它可以实现强大的Web安全控制，仅需要引入spring-boot-starter-security
+ 主要功能：认证（Authentication）和授权（Authorization）
+2. 代码实例 2.1 依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-security&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; //themeleaf依赖用于配合教程展示，核心依赖为上面的starter &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.thymeleaf&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;thymeleaf-spring5&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.thymeleaf.extras&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;thymeleaf-extras-java8time&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 2.2 配置文件 //取消页面缓存 spring.thymeleaf.cache=false 2.3 编码   导入themeleaf模板
+  编写业务代码
+  ​  编写路由  @Controller public class RouterController { @RequestMapping({&amp;#34;/&amp;#34;,&amp;#34;/index&amp;#34;}) public String index() { return &amp;#34;index&amp;#34;; } @RequestMapping(&amp;#34;/toLogin&amp;#34;) public String toLogin() { return &amp;#34;views/login&amp;#34;; } @RequestMapping(&amp;#34;/level1/{id}&amp;#34;) public String level1(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level1/&amp;#34;+id; } @RequestMapping(&amp;#34;/level2/{id}&amp;#34;) public String level2(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level2/&amp;#34;+id; } @RequestMapping(&amp;#34;/level3/{id}&amp;#34;) public String level3(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level3/&amp;#34;+id; } }  编写springsecurity配置文件  //开启websecurity功能 @EnableWebSecurity public class SecurityConfig extends WebSecurityConfigurerAdapter { //http安全策略  //授权  @Override protected void configure(HttpSecurity http) throws Exception { //首页所有人可访问，功能页只能有对应权限的人访问  http.</description>
+    </item>
+    
     <item>
       <title>什么是AOP</title>
       <link>https://lyffin1997.github.io/spring/%E4%BB%80%E4%B9%88%E6%98%AFaop/</link>
@@ -23,21 +36,6 @@
    java只能单继承，访问类无法再继承其他类 访问类因包含“锁”状态，只能被重用在有“锁”的场景，重用受限      AOP思想：
    访问类主要功能是访问数据，而不是锁 因此将“锁”抽取出来作为一个切面       实例：
     例如想要实现某个网址增加授权认证：</description>
-    </item>
-    
-    <item>
-      <title>Springboot扫描路径问题</title>
-      <link>https://lyffin1997.github.io/spring/springboot%E6%89%AB%E6%8F%8F%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</link>
-      <pubDate>Tue, 12 Jul 2022 11:40:21 +0800</pubDate>
-      
-      <guid>https://lyffin1997.github.io/spring/springboot%E6%89%AB%E6%8F%8F%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</guid>
-      <description>  默认扫描路径
-   如下图所示，springboot启动时，会默认扫描启动类所在包及其子包中所有的配置类 启动类所在包及其子包：如图springbootweb路径下所有的文件（引入的jar包注解除外） 配置类：扫描@Component、@Configuration、@Controller、@Service等注解标记的所有类，并注入到容器中    ​   @SpringBootApplication注解的scanBasePackages属性
-   若想扫描默认路径之外的路径可使用scanBasePackages指定路径，重新指定后原默认扫描路径不会再生效    ​   @ComponentScan注解
-   如果注解只指定了一个路径并且该路径与默认启动路径相同，那么@ComponentScan注解不生效 如果指定了正确的路径，则@ComponentScan注解生效，默认路径失效    ​   优先级：@ComponentScan &amp;gt; scanBasePackages &amp;gt; 默认路径
-  jar包扫描问题
-   若第三方jar包在默认路径中，且jar包中的目录也是com.lyffin.springbootweb，那么jar包中的注解能被扫描到，其他目录的jar包无法被扫描，可通过scanBasePackages重新指定扫描路径 若第三方jar包不在默认路径中，则需要@ComponentScan注解或者scanBasePackages属性重新指定扫描路径    现实代码中重新指定的路径必须包含默认扫描路径，否则工程中的注解就扫描不到了
-  </description>
     </item>
     
   </channel>

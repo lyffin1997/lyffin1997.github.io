@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="1 什么是shiro   定义：Apache Shiro是一个java的安全框架
+  作用：认证，授权，加密，会话管理，web集成，缓存
+  核心：
+   Subject：用户 SecurityManager：管理所有用户 Realm：连接数据    2 快速开始shiro   依赖   配置文件
+   log4j2.xml    &amp;lt;Configuration name=&amp;#34;ConfigTest&amp;#34; status=&amp;#34;ERROR&amp;#34; monitorInterval=&amp;#34;5&amp;#34;&amp;gt; &amp;lt;!-- ~ Licensed to the Apache Software Foundation (ASF) under one ~ or more contributor license agreements. See the NOTICE file ~ distributed with this work for additional information ~ regarding copyright ownership." />
+<meta name="keywords" content=", 框架, shiro" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://lyffin1997.github.io/application/shiro/" />
+
+
+    <title>
+        
+            Shiro :: 小黎的技术指北 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.fcdabe1b7dd6b4453b6efda4f04d8b2127bbed1e9f9e44255a144895e5b14ea1.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="Shiro">
+<meta itemprop="description" content="1 什么是shiro   定义：Apache Shiro是一个java的安全框架
+  作用：认证，授权，加密，会话管理，web集成，缓存
+  核心：
+   Subject：用户 SecurityManager：管理所有用户 Realm：连接数据    2 快速开始shiro   依赖   配置文件
+   log4j2.xml    &lt;Configuration name=&#34;ConfigTest&#34; status=&#34;ERROR&#34; monitorInterval=&#34;5&#34;&gt; &lt;!-- ~ Licensed to the Apache Software Foundation (ASF) under one ~ or more contributor license agreements. See the NOTICE file ~ distributed with this work for additional information ~ regarding copyright ownership."><meta itemprop="datePublished" content="2022-07-12T23:09:07&#43;08:00" />
+<meta itemprop="dateModified" content="2022-07-12T23:09:07&#43;08:00" />
+<meta itemprop="wordCount" content="841"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
+<meta itemprop="keywords" content="框架,shiro," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://lyffin1997.github.io/"/>
+
+<meta name="twitter:title" content="Shiro"/>
+<meta name="twitter:description" content="1 什么是shiro   定义：Apache Shiro是一个java的安全框架
+  作用：认证，授权，加密，会话管理，web集成，缓存
+  核心：
+   Subject：用户 SecurityManager：管理所有用户 Realm：连接数据    2 快速开始shiro   依赖   配置文件
+   log4j2.xml    &lt;Configuration name=&#34;ConfigTest&#34; status=&#34;ERROR&#34; monitorInterval=&#34;5&#34;&gt; &lt;!-- ~ Licensed to the Apache Software Foundation (ASF) under one ~ or more contributor license agreements. See the NOTICE file ~ distributed with this work for additional information ~ regarding copyright ownership."/>
+
+
+
+    <meta property="og:title" content="Shiro" />
+<meta property="og:description" content="1 什么是shiro   定义：Apache Shiro是一个java的安全框架
+  作用：认证，授权，加密，会话管理，web集成，缓存
+  核心：
+   Subject：用户 SecurityManager：管理所有用户 Realm：连接数据    2 快速开始shiro   依赖   配置文件
+   log4j2.xml    &lt;Configuration name=&#34;ConfigTest&#34; status=&#34;ERROR&#34; monitorInterval=&#34;5&#34;&gt; &lt;!-- ~ Licensed to the Apache Software Foundation (ASF) under one ~ or more contributor license agreements. See the NOTICE file ~ distributed with this work for additional information ~ regarding copyright ownership." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lyffin1997.github.io/application/shiro/" /><meta property="og:image" content="https://lyffin1997.github.io/"/><meta property="article:section" content="application" />
+<meta property="article:published_time" content="2022-07-12T23:09:07&#43;08:00" />
+<meta property="article:modified_time" content="2022-07-12T23:09:07&#43;08:00" /><meta property="og:site_name" content="小黎的技术指北" />
+
+
+
+
+
+    <meta property="article:section" content="应用" />
+
+    <meta property="article:section" content="知识" />
+
+
+
+    <meta property="article:published_time" content="2022-07-12 23:09:07 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">lyffin</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/java">java</a></li><li><a href="/spring">spring</a></li><li><a href="/middleware">中间件</a></li><li><a href="/application">应用</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://lyffin1997.github.io/application/shiro/">Shiro</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <h3 id="1-什么是shiro"><strong>1 什么是shiro</strong></h3>
+<ul>
+<li>
+<p>定义：Apache Shiro是一个java的安全框架</p>
+</li>
+<li>
+<p>作用：认证，授权，加密，会话管理，web集成，缓存</p>
+</li>
+<li>
+<p>核心：</p>
+</li>
+<li>
+<ul>
+<li>Subject：用户</li>
+<li>SecurityManager：管理所有用户</li>
+<li>Realm：连接数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-快速开始shiro"><strong>2 快速开始shiro</strong></h3>
+<ul>
+<li>
+<p>依赖                 <img src="/img/shiro1.png" alt="img"></p>
+</li>
+<li>
+<p>配置文件</p>
+</li>
+<li>
+<ul>
+<li>log4j2.xml</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;Configuration</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ConfigTest&#34;</span> <span style="color:#a6e22e">status=</span><span style="color:#e6db74">&#34;ERROR&#34;</span> <span style="color:#a6e22e">monitorInterval=</span><span style="color:#e6db74">&#34;5&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#75715e">&lt;!--
+</span><span style="color:#75715e">      ~ Licensed to the Apache Software Foundation (ASF) under one
+</span><span style="color:#75715e">      ~ or more contributor license agreements.  See the NOTICE file
+</span><span style="color:#75715e">      ~ distributed with this work for additional information
+</span><span style="color:#75715e">      ~ regarding copyright ownership.  The ASF licenses this file
+</span><span style="color:#75715e">      ~ to you under the Apache License, Version 2.0 (the
+</span><span style="color:#75715e">      ~ &#34;License&#34;); you may not use this file except in compliance
+</span><span style="color:#75715e">      ~ with the License.  You may obtain a copy of the License at
+</span><span style="color:#75715e">      ~
+</span><span style="color:#75715e">      ~     http://www.apache.org/licenses/LICENSE-2.0
+</span><span style="color:#75715e">      ~
+</span><span style="color:#75715e">      ~ Unless required by applicable law or agreed to in writing,
+</span><span style="color:#75715e">      ~ software distributed under the License is distributed on an
+</span><span style="color:#75715e">      ~ &#34;AS IS&#34; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+</span><span style="color:#75715e">      ~ KIND, either express or implied.  See the License for the
+</span><span style="color:#75715e">      ~ specific language governing permissions and limitations
+</span><span style="color:#75715e">      ~ under the License.
+</span><span style="color:#75715e">      --&gt;</span>
+
+
+    <span style="color:#f92672">&lt;Appenders&gt;</span>
+        <span style="color:#f92672">&lt;Console</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Console&#34;</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;SYSTEM_OUT&#34;</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;PatternLayout</span> <span style="color:#a6e22e">pattern=</span><span style="color:#e6db74">&#34;%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n&#34;</span><span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;/Console&gt;</span>
+    <span style="color:#f92672">&lt;/Appenders&gt;</span>
+    <span style="color:#f92672">&lt;Loggers&gt;</span>
+        <span style="color:#f92672">&lt;Logger</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;org.springframework&#34;</span> <span style="color:#a6e22e">level=</span><span style="color:#e6db74">&#34;warn&#34;</span> <span style="color:#a6e22e">additivity=</span><span style="color:#e6db74">&#34;false&#34;</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;AppenderRef</span> <span style="color:#a6e22e">ref=</span><span style="color:#e6db74">&#34;Console&#34;</span><span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;/Logger&gt;</span>
+        <span style="color:#f92672">&lt;Logger</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;org.apache&#34;</span> <span style="color:#a6e22e">level=</span><span style="color:#e6db74">&#34;warn&#34;</span> <span style="color:#a6e22e">additivity=</span><span style="color:#e6db74">&#34;false&#34;</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;AppenderRef</span> <span style="color:#a6e22e">ref=</span><span style="color:#e6db74">&#34;Console&#34;</span><span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;/Logger&gt;</span>
+        <span style="color:#f92672">&lt;Logger</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;net.sf.ehcache&#34;</span> <span style="color:#a6e22e">level=</span><span style="color:#e6db74">&#34;warn&#34;</span> <span style="color:#a6e22e">additivity=</span><span style="color:#e6db74">&#34;false&#34;</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;AppenderRef</span> <span style="color:#a6e22e">ref=</span><span style="color:#e6db74">&#34;Console&#34;</span><span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;/Logger&gt;</span>
+        <span style="color:#f92672">&lt;Logger</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;org.apache.shiro.util.ThreadContext&#34;</span> <span style="color:#a6e22e">level=</span><span style="color:#e6db74">&#34;warn&#34;</span> <span style="color:#a6e22e">additivity=</span><span style="color:#e6db74">&#34;false&#34;</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;AppenderRef</span> <span style="color:#a6e22e">ref=</span><span style="color:#e6db74">&#34;Console&#34;</span><span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;/Logger&gt;</span>
+        <span style="color:#f92672">&lt;Root</span> <span style="color:#a6e22e">level=</span><span style="color:#e6db74">&#34;info&#34;</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;AppenderRef</span> <span style="color:#a6e22e">ref=</span><span style="color:#e6db74">&#34;Console&#34;</span><span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;/Root&gt;</span>
+    <span style="color:#f92672">&lt;/Loggers&gt;</span>
+<span style="color:#f92672">&lt;/Configuration&gt;</span>
+</code></pre></div><ul>
+<li>
+<ul>
+<li>shiro.ini</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#66d9ef">[users]</span>
+<span style="color:#75715e"># user &#39;root&#39; with password &#39;secret&#39; and the &#39;admin&#39; role</span>
+<span style="color:#a6e22e">root</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">secret, admin</span>
+<span style="color:#75715e"># user &#39;guest&#39; with the password &#39;guest&#39; and the &#39;guest&#39; role</span>
+<span style="color:#a6e22e">guest</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">guest, guest</span>
+<span style="color:#75715e"># user &#39;presidentskroob&#39; with password &#39;12345&#39; (&#34;That&#39;s the same combination on</span>
+<span style="color:#75715e"># my luggage!!!&#34; ;)), and role &#39;president&#39;</span>
+<span style="color:#a6e22e">presidentskroob</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">12345, president</span>
+<span style="color:#75715e"># user &#39;darkhelmet&#39; with password &#39;ludicrousspeed&#39; and roles &#39;darklord&#39; and &#39;schwartz&#39;</span>
+<span style="color:#a6e22e">darkhelmet</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">ludicrousspeed, darklord, schwartz</span>
+<span style="color:#75715e"># user &#39;lonestarr&#39; with password &#39;vespa&#39; and roles &#39;goodguy&#39; and &#39;schwartz&#39;</span>
+<span style="color:#a6e22e">lonestarr</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">vespa, goodguy, schwartz</span>
+
+
+<span style="color:#75715e"># -----------------------------------------------------------------------------</span>
+<span style="color:#75715e"># Roles with assigned permissions</span>
+<span style="color:#75715e">#</span>
+<span style="color:#75715e"># Each line conforms to the format defined in the</span>
+<span style="color:#75715e"># org.apache.shiro.realm.text.TextConfigurationRealm#setRoleDefinitions JavaDoc</span>
+<span style="color:#75715e"># -----------------------------------------------------------------------------</span>
+<span style="color:#66d9ef">[roles]</span>
+<span style="color:#75715e"># &#39;admin&#39; role has all permissions, indicated by the wildcard &#39;*&#39;</span>
+<span style="color:#a6e22e">admin</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">*</span>
+<span style="color:#75715e"># The &#39;schwartz&#39; role can do anything (*) with any lightsaber:</span>
+<span style="color:#a6e22e">schwartz</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">lightsaber:*</span>
+<span style="color:#75715e"># The &#39;goodguy&#39; role is allowed to &#39;drive&#39; (action) the winnebago (type) with</span>
+<span style="color:#75715e"># license plate &#39;eagle5&#39; (instance specific id)</span>
+<span style="color:#a6e22e">goodguy</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">winnebago:drive:eagle5</span>
+</code></pre></div><ul>
+<li>编码</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">import</span> org.apache.shiro.SecurityUtils<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.shiro.authc.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.shiro.config.IniSecurityManagerFactory<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.shiro.mgt.SecurityManager<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.shiro.session.Session<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.shiro.subject.Subject<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.apache.shiro.util.Factory<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.slf4j.Logger<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.slf4j.LoggerFactory<span style="color:#f92672">;</span>
+
+
+<span style="color:#75715e">/**
+</span><span style="color:#75715e"> * Simple Quickstart application showing how to use Shiro&#39;s API.
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * @since 0.9 RC2
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Quickstart</span> <span style="color:#f92672">{</span>
+
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">transient</span> Logger log <span style="color:#f92672">=</span> LoggerFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">getLogger</span><span style="color:#f92672">(</span>Quickstart<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+
+
+
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+
+
+        <span style="color:#75715e">// The easiest way to create a Shiro SecurityManager with configured
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// realms, users, roles and permissions is to use the simple INI config.
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// We&#39;ll do that by using a factory that can ingest a .ini file and
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// return a SecurityManager instance:
+</span><span style="color:#75715e"></span>
+
+        <span style="color:#75715e">// Use the shiro.ini file at the root of the classpath
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// (file: and url: prefixes load from files and urls respectively):
+</span><span style="color:#75715e"></span>        Factory<span style="color:#f92672">&lt;</span>SecurityManager<span style="color:#f92672">&gt;</span> factory <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> IniSecurityManagerFactory<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;classpath:shiro.ini&#34;</span><span style="color:#f92672">);</span>
+        SecurityManager securityManager <span style="color:#f92672">=</span> factory<span style="color:#f92672">.</span><span style="color:#a6e22e">getInstance</span><span style="color:#f92672">();</span>
+
+
+        <span style="color:#75715e">// for this simple example quickstart, make the SecurityManager
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// accessible as a JVM singleton.  Most applications wouldn&#39;t do this
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// and instead rely on their container configuration or web.xml for
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// webapps.  That is outside the scope of this simple quickstart, so
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// we&#39;ll just do the bare minimum so you can continue to get a feel
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// for things.
+</span><span style="color:#75715e"></span>        SecurityUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">setSecurityManager</span><span style="color:#f92672">(</span>securityManager<span style="color:#f92672">);</span>
+
+
+        <span style="color:#75715e">// Now that a simple Shiro environment is set up, let&#39;s see what you can do:
+</span><span style="color:#75715e"></span>
+
+        <span style="color:#75715e">// get the currently executing user:
+</span><span style="color:#75715e"></span>        Subject currentUser <span style="color:#f92672">=</span> SecurityUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">getSubject</span><span style="color:#f92672">();</span>
+
+
+        <span style="color:#75715e">// Do some stuff with a Session (no need for a web or EJB container!!!)
+</span><span style="color:#75715e"></span>        Session session <span style="color:#f92672">=</span> currentUser<span style="color:#f92672">.</span><span style="color:#a6e22e">getSession</span><span style="color:#f92672">();</span>
+        session<span style="color:#f92672">.</span><span style="color:#a6e22e">setAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;someKey&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;aValue&#34;</span><span style="color:#f92672">);</span>
+        String value <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>String<span style="color:#f92672">)</span> session<span style="color:#f92672">.</span><span style="color:#a6e22e">getAttribute</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;someKey&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>value<span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;aValue&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            log<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Retrieved the correct value! [&#34;</span> <span style="color:#f92672">+</span> value <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;]&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+
+
+        <span style="color:#75715e">// let&#39;s login the current user so we can check against roles and permissions:
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>currentUser<span style="color:#f92672">.</span><span style="color:#a6e22e">isAuthenticated</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+            UsernamePasswordToken token <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UsernamePasswordToken<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;lonestarr&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;vespa&#34;</span><span style="color:#f92672">);</span>
+            token<span style="color:#f92672">.</span><span style="color:#a6e22e">setRememberMe</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+                currentUser<span style="color:#f92672">.</span><span style="color:#a6e22e">login</span><span style="color:#f92672">(</span>token<span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>UnknownAccountException uae<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                log<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;There is no user with username of &#34;</span> <span style="color:#f92672">+</span> token<span style="color:#f92672">.</span><span style="color:#a6e22e">getPrincipal</span><span style="color:#f92672">());</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>IncorrectCredentialsException ice<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                log<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Password for account &#34;</span> <span style="color:#f92672">+</span> token<span style="color:#f92672">.</span><span style="color:#a6e22e">getPrincipal</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; was incorrect!&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>LockedAccountException lae<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                log<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;The account for username &#34;</span> <span style="color:#f92672">+</span> token<span style="color:#f92672">.</span><span style="color:#a6e22e">getPrincipal</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; is locked.  &#34;</span> <span style="color:#f92672">+</span>
+                        <span style="color:#e6db74">&#34;Please contact your administrator to unlock it.&#34;</span><span style="color:#f92672">);</span>
+            <span style="color:#f92672">}</span>
+            <span style="color:#75715e">// ... catch more exceptions here (maybe custom ones specific to your application?
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>AuthenticationException ae<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#75715e">//unexpected condition?  error?
+</span><span style="color:#75715e"></span>            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+
+
+        <span style="color:#75715e">//say who they are:
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//print their identifying principal (in this case, a username):
+</span><span style="color:#75715e"></span>        log<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;User [&#34;</span> <span style="color:#f92672">+</span> currentUser<span style="color:#f92672">.</span><span style="color:#a6e22e">getPrincipal</span><span style="color:#f92672">()</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;] logged in successfully.&#34;</span><span style="color:#f92672">);</span>
+
+
+        <span style="color:#75715e">//test a role:
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>currentUser<span style="color:#f92672">.</span><span style="color:#a6e22e">hasRole</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;schwartz&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            log<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;May the Schwartz be with you!&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            log<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hello, mere mortal.&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+
+
+        <span style="color:#75715e">//test a typed permission (not instance-level)
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>currentUser<span style="color:#f92672">.</span><span style="color:#a6e22e">isPermitted</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;lightsaber:wield&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            log<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;You may use a lightsaber ring.  Use it wisely.&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            log<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Sorry, lightsaber rings are for schwartz masters only.&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+
+
+        <span style="color:#75715e">//a (very powerful) Instance Level permission:
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>currentUser<span style="color:#f92672">.</span><span style="color:#a6e22e">isPermitted</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;winnebago:drive:eagle5&#34;</span><span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            log<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;You are permitted to &#39;drive&#39; the winnebago with license plate (id) &#39;eagle5&#39;.  &#34;</span> <span style="color:#f92672">+</span>
+                    <span style="color:#e6db74">&#34;Here are the keys - have fun!&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            log<span style="color:#f92672">.</span><span style="color:#a6e22e">info</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Sorry, you aren&#39;t allowed to drive the &#39;eagle5&#39; winnebago!&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+
+
+        <span style="color:#75715e">//all done - log out!
+</span><span style="color:#75715e"></span>        currentUser<span style="color:#f92672">.</span><span style="color:#a6e22e">logout</span><span style="color:#f92672">();</span>
+
+
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">exit</span><span style="color:#f92672">(</span>0<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/%E6%A1%86%E6%9E%B6/">框架</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/shiro/">shiro</a></span>
+        
+    </p>
+
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/categories/%E5%BA%94%E7%94%A8/">应用</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/categories/%E7%9F%A5%E8%AF%86/">知识</a></span>
+        
+    </p>
+
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>

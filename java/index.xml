@@ -151,10 +151,10 @@
     
     <item>
       <title>String、StringBuilder、StringBuffer</title>
-      <link>https://lyffin1997.github.io/java/java%E5%9F%BA%E7%A1%80/</link>
+      <link>https://lyffin1997.github.io/java/stringstringbuilderstringbuffer/</link>
       <pubDate>Tue, 12 Jul 2022 00:50:39 +0800</pubDate>
       
-      <guid>https://lyffin1997.github.io/java/java%E5%9F%BA%E7%A1%80/</guid>
+      <guid>https://lyffin1997.github.io/java/stringstringbuilderstringbuffer/</guid>
       <description>1. 字符串相加方式的区别  String   String str = &amp;ldquo;a&amp;rdquo; + &amp;ldquo;b&amp;rdquo;; //最快
   String str = &amp;quot;&amp;quot; + &amp;ldquo;word&amp;rdquo;;
   StringBuilder   StringBuilder s = new StringBuilder(&amp;ldquo;word&amp;rdquo;).append(&amp;ldquo;a&amp;rdquo;).apend(&amp;ldquo;b&amp;rdquo;);

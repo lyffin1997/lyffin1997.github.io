@@ -7,7 +7,159 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 12 Jul 2022 11:53:54 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Jul 2022 00:10:35 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo技巧</title>
+      <link>https://lyffin1997.github.io/application/hugo%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Wed, 13 Jul 2022 00:10:35 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/application/hugo%E6%8A%80%E5%B7%A7/</guid>
+      <description>  编译hugo页面（myblog下运行，生成public）
+hugo --theme=hello-friend-ng --baseUrl=&amp;quot;https://lyffin1997.github.io/&amp;quot; --buildDrafts
+  运行hugo(myblog下运行)
+hugo server -t hello-friend-ng --buildDrafts
+  </description>
+    </item>
+    
+    <item>
+      <title>Springboot学习简介</title>
+      <link>https://lyffin1997.github.io/spring/springboot%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Wed, 13 Jul 2022 00:02:48 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springboot%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B/</guid>
+      <description>1. 学习路线   javaSE
+  mysql:持久化
+  html+css+js+jquery+框架（jsp、vue等）
+  javaweb（springmvc）
+  M（model）指模型
+  一般指Service和DAO
+ V(view)指视图层  一般指页面，如jsp、html等
+ C(controller)指控制层  如springmvc中的controller
+整体逻辑：V（页面数据）-&amp;gt; C（控制器）-&amp;gt; M（逻辑处理及数据持久化）
+ ssm（除此之外需掌握服务器部署war包的操作。详情参考tomcat部署war包流程） springboot（部署jar包，同上需掌握部署jar包流程及原理（内嵌tomcat），springboot已经开始使用微服务架构）  内嵌tomcat简易流程：通过SpringBootApplication注解run方法创建tomcatWebServer，详情参考spring源码
+​  springcloud（微服务越来越多，spring再优化诞生springcloud）  2. springboot是什么 2.1 spring目的、理念 Spring是为了解决企业级应用开发的复杂性而创建的，简化开发
+2.2 spring如何简化开发  基于POJO的轻量级和最小侵入性编程（bean） 通过IOC，依赖注入（DI）和面向接口实现松耦合（核心：容器） 基于切面（AOP）和惯例进行声明式编程（核心：AOP） 通过切面和模板减少样式代码  2.3 springboot是什么   springboot就是一个javaweb的开发框架，和springmvc类似。
+  正式定义：简化开发，约定大约配置（核心思想，在maven、spring、springmvc、springboot、docker、k8s……中都遵循该思想） ，能迅速的开发web应用，几行代码开发一个http接口。
+  所有的技术框架都遵循一条主线规律：从一个复杂的应用场景，衍生一种规范框架
+  java企业级应用发展：J2EE -&amp;gt; spring -&amp;gt; springboot</description>
+    </item>
+    
+    <item>
+      <title>如何编写配置文件</title>
+      <link>https://lyffin1997.github.io/spring/%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Tue, 12 Jul 2022 23:50:01 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</guid>
+      <description>1. 语法   yml和yaml一样的文件格式，但是yaml优先级比yml高
+  名称固定：application.properties或者application.yml
+  可以同时存在properties和yml，且都会生效
+  语法:
+   application.properties: key=value    server.port=8080    application.yml: key:空格value    server: port: 8080   yml可以存对象，properties不行
+   yml    student: name: lifeng age: 18 #行内写法 student: {name: lifeng,age: 18}  properties  student.name=lifeng student.age=18  yml可以写数组  pets: - cat - dog - pig pets: [cat,dog,pig]  yml可以用特殊表达式（可搜索spring el表达式）  name: ${random.</description>
+    </item>
+    
+    <item>
+      <title>自动装配 狂神笔记</title>
+      <link>https://lyffin1997.github.io/spring/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D-%E7%8B%82%E7%A5%9E%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Tue, 12 Jul 2022 23:42:32 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D-%E7%8B%82%E7%A5%9E%E7%AC%94%E8%AE%B0/</guid>
+      <description>​ 1. pom.xml   spring-boot-dependencies：核心依赖在父工程中
+  在写或者引入springboot依赖的时候不需要指定版本，就是因为父工程中有这些版本仓库
+  2. 启动器 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt;  启动器：springboot的启动场景（如代码中的web、test两种） spring-boot-starter-web：自动导入web环境所有的依赖 springboot会将所有功能场景变成一个个启动器，使用什么场景引入对应的启动器即可 https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.build-systems.starters   spring官网列出的所有启动器依赖包
+3. 主程序  @SpringBootApplication：标注该类为springboot的一个应用类，启动类下的所有资源被导入，是自动装配到核心（需要parent工程才能用这个注解） SpringApplication.run()：将springboot应用启动 注解  @ComponentScan：扫描主启动类同级的包 @SpringBootConfiguration：与@Configuration功能一致，只是它是springboot注解，而另一个是spring注解 @Configuration：spring配置类，标注当前类是配置类，一个Configurarion就是一个Spring的xml版容器（beans），即会将当前类内所有以@Bean注解标注的方法的实例纳入到spring容器中，实例名就是方法名。 @Component：自动检测和使用类路径扫描自动配置bean，每个类即一个bean（即类的实例），并添加到容器中 @Bean：显示声明单个bean,与@Component由spring自动执行不同。标注方法时告诉spring返回对象，并将对象注册为bean。 @EnableAutoConfiguration：自动配置 @AutoConfigurationPackage：自动配置包 @Import({Registrar.class})：自动配置包注册（@ComponentScan扫描到的包到这来注册，所以只能在启动类同级目录下创建包就是因为它） @Import({AutoConfigurationImportSelector.class})：自动配置导入选择（选择pom.xml中dependencies配置需要导入的组件） //获取自动配置的实体 getAutoConfigurationEntry() //获取候选的配置 List&amp;lt;String&amp;gt; configurations = this.getCandidateConfigurations(annotationMetadata, attributes);  this.getSpringFactoriesLoaderFactoryClass()
+  获取候选的配置:标注了@EnableAutoConfiguration的类（即启动类）
+  SpringFactoriesLoader.loadFactoryNames()
+  获取所有的需要加载的配置
+  private static Map&amp;lt;String, List&amp;gt; loadSpringFactories(ClassLoader classLoader)
+  获取系统资源及项目资源（都是从这获取META-INF/spring.</description>
+    </item>
+    
+    <item>
+      <title>Springboot Web</title>
+      <link>https://lyffin1997.github.io/spring/springboot-web/</link>
+      <pubDate>Tue, 12 Jul 2022 23:23:57 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springboot-web/</guid>
+      <description>思考：springboot到底替我们配置了什么？能不能进行修改？能修改哪些东西？能不能扩展
+    xxxAutoConfiguration：向容器中自动配置组件 xxxProperties：自动配置类，装配配置文件中自定义的一些属性    1. 静态资源 WebMvcAutoConfiguration.java
+public void addResourceHandlers(ResourceHandlerRegistry registry) { if (!this.resourceProperties.isAddMappings()) { logger.debug(&amp;#34;Default resource handling disabled&amp;#34;); } else { this.addResourceHandler(registry, &amp;#34;/webjars/**&amp;#34;, &amp;#34;classpath:/META-INF/resources/webjars/&amp;#34;); this.addResourceHandler(registry, this.mvcProperties.getStaticPathPattern(), (registration) -&amp;gt; { registration.addResourceLocations(this.resourceProperties.getStaticLocations()); if (this.servletContext != null) { ServletContextResource resource = new ServletContextResource(this.servletContext, &amp;#34;/&amp;#34;); registration.addResourceLocations(new Resource[]{resource}); } }); } }  静态资源路径：  从webjars/**下 classpath:/META-INF/resources/webjars/路径中所有目标获取静态资源 从/**下 classpath:/META-INF/resources/&amp;#34;, &amp;#34;classpath:/resources/&amp;#34;, &amp;#34;classpath:/static/&amp;#34;, &amp;#34;classpath:/public/路径中所有目标获取静态资源 优先级：resources&amp;gt;static(默认)&amp;gt;public 自定义：在yml文件中编写，此时上面两种方式无效 spring: mvc: static-path-pattern: 获取方式：localhost:8080/webjars/jquery/3.</description>
+    </item>
+    
+    <item>
+      <title>Springsecurity</title>
+      <link>https://lyffin1997.github.io/spring/springsecurity/</link>
+      <pubDate>Tue, 12 Jul 2022 23:14:27 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springsecurity/</guid>
+      <description>1. 什么是SpringSecurity  Spring Security是针对spring项目的安全框架，也是springboot底层安全模块默认的技术选型，它可以实现强大的Web安全控制，仅需要引入spring-boot-starter-security
+ 主要功能：认证（Authentication）和授权（Authorization）
+2. 代码实例 2.1 依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-security&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; //themeleaf依赖用于配合教程展示，核心依赖为上面的starter &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.thymeleaf&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;thymeleaf-spring5&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.thymeleaf.extras&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;thymeleaf-extras-java8time&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 2.2 配置文件 //取消页面缓存 spring.thymeleaf.cache=false 2.3 编码   导入themeleaf模板
+  编写业务代码
+  ​  编写路由  @Controller public class RouterController { @RequestMapping({&amp;#34;/&amp;#34;,&amp;#34;/index&amp;#34;}) public String index() { return &amp;#34;index&amp;#34;; } @RequestMapping(&amp;#34;/toLogin&amp;#34;) public String toLogin() { return &amp;#34;views/login&amp;#34;; } @RequestMapping(&amp;#34;/level1/{id}&amp;#34;) public String level1(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level1/&amp;#34;+id; } @RequestMapping(&amp;#34;/level2/{id}&amp;#34;) public String level2(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level2/&amp;#34;+id; } @RequestMapping(&amp;#34;/level3/{id}&amp;#34;) public String level3(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level3/&amp;#34;+id; } }  编写springsecurity配置文件  //开启websecurity功能 @EnableWebSecurity public class SecurityConfig extends WebSecurityConfigurerAdapter { //http安全策略  //授权  @Override protected void configure(HttpSecurity http) throws Exception { //首页所有人可访问，功能页只能有对应权限的人访问  http.</description>
+    </item>
+    
+    <item>
+      <title>Shiro</title>
+      <link>https://lyffin1997.github.io/application/shiro/</link>
+      <pubDate>Tue, 12 Jul 2022 23:09:07 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/application/shiro/</guid>
+      <description>1 什么是shiro   定义：Apache Shiro是一个java的安全框架
+  作用：认证，授权，加密，会话管理，web集成，缓存
+  核心：
+   Subject：用户 SecurityManager：管理所有用户 Realm：连接数据    2 快速开始shiro   依赖   配置文件
+   log4j2.xml    &amp;lt;Configuration name=&amp;#34;ConfigTest&amp;#34; status=&amp;#34;ERROR&amp;#34; monitorInterval=&amp;#34;5&amp;#34;&amp;gt; &amp;lt;!-- ~ Licensed to the Apache Software Foundation (ASF) under one ~ or more contributor license agreements. See the NOTICE file ~ distributed with this work for additional information ~ regarding copyright ownership.</description>
+    </item>
+    
+    <item>
+      <title>Springboot整合mybatis</title>
+      <link>https://lyffin1997.github.io/spring/springboot%E6%95%B4%E5%90%88mybatis/</link>
+      <pubDate>Tue, 12 Jul 2022 22:50:54 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springboot%E6%95%B4%E5%90%88mybatis/</guid>
+      <description> 依赖   配置  ​  mybatis.type-aliases-package：指定映射文件所在包 mybatis.mapper-locations：指定xml文件路径  ​   mapper接口（Dao层）
+   @Mapper注解：用于mapper接口文件，表示该文件是mybatis的一个接口类 @MapperScan(&amp;ldquo;com.lyffin.mapper&amp;rdquo;)：用于启动类，扫描该包中所有文件 @Repository：扫描并自动配置bean    ​   xml文件
+   路径：resources/mybatis/mapper（xml文件写在该路径下，注意与上面配置文件对应） namespace：指定dao文件 resultType：指定映射文件（这里直接使用别名而不是路径，因为配置文件已经配置了） parameterType：同上 ：开启缓存，用法未知，自行百度 ：sql片段，不解释    &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; ?&amp;gt; &amp;lt;!DOCTYPE mapper PUBLIC &amp;#34;-//mybatis.org//DTD Mapper 3.0//EN&amp;#34; &amp;#34;http://mybatis.org/dtd/mybatis-3-mapper.dtd&amp;#34;&amp;gt; &amp;lt;mapper namespace=&amp;#34;com.lyffin.mapper.UserMapper&amp;#34;&amp;gt; &amp;lt;select id=&amp;#34;selectBlog&amp;#34; resultType=&amp;#34;User&amp;#34;&amp;gt; select * from Blog where id = #{id} &amp;lt;/select&amp;gt; &amp;lt;/mapper&amp;gt; ​ </description>
+    </item>
+    
+    <item>
+      <title>配置durid</title>
+      <link>https://lyffin1997.github.io/application/%E9%85%8D%E7%BD%AEdurid/</link>
+      <pubDate>Tue, 12 Jul 2022 22:42:56 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/application/%E9%85%8D%E7%BD%AEdurid/</guid>
+      <description>1. 配置druid数据源  依赖    配置文件
+   因为配置项里用到了log4j，所以还要引入依赖   2. 配置druid监控 ​ ​ ​ ​ 3. 配置druid过滤器 ​ </description>
+    </item>
+    
+    <item>
+      <title>Java中应用kafka</title>
+      <link>https://lyffin1997.github.io/middleware/java%E4%B8%AD%E5%BA%94%E7%94%A8kafka/</link>
+      <pubDate>Tue, 12 Jul 2022 22:30:25 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/middleware/java%E4%B8%AD%E5%BA%94%E7%94%A8kafka/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Springboot整合jdbc</title>
+      <link>https://lyffin1997.github.io/spring/springboot%E6%95%B4%E5%90%88jdbc/</link>
+      <pubDate>Tue, 12 Jul 2022 22:15:34 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springboot%E6%95%B4%E5%90%88jdbc/</guid>
+      <description>1. 依赖   jdbc依赖
+  mysql驱动
+  2 配置   账号
+  密码
+  url：地址:端口/数据库名？
+   serverTimezone:设置时区(因为mysql服务器默认为东4区，与本地web服务器时间存在时差) useUnicode:防止乱码（和后面连用，mysql用gbk编码，加了这个，存数据先将数据转换为字节码再用gbk编码存，取数据先将gbk格式解码成字节码再按utf-8编码） characterEncoding:编码方式    driver-class-name：驱动名称
+   com.mysql.jdbc.Driver(5.2以上)    ​ 3 连接逻辑   DataSourceAutoConfiguration.java（springboot启动时自动扫描并注册该类）
+   AutoConfiguration参考前面自动装配原理 ConditionalOnClass 该自动装配类生效所需的类 ConditionalOnMissingBean 该自动装配类生效不能存在的bean EnableConfigurationProperties给实体类赋值，参考前面配置文件写法    ​   接上一步，扫描注册该自动装配类时会调用方法进行数据的连接，连接配置则保存在DataSourceProperties.class中
+  DataSourceProperties.java
+   ConfigurationProperties:给当前实体类赋值      连接成功后会自动生成dataSource的bean并注入到容器中</description>
+    </item>
+    
     <item>
       <title>@RequestMapping、@getMapping的区别</title>
       <link>https://lyffin1997.github.io/java/requestmappinggetmapping%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
@@ -182,20 +334,11 @@
     </item>
     
     <item>
-      <title>Java实现modbusTCP</title>
-      <link>https://lyffin1997.github.io/modbus/java%E5%AE%9E%E7%8E%B0modbustcp/</link>
-      <pubDate>Tue, 12 Jul 2022 00:54:11 +0800</pubDate>
-      
-      <guid>https://lyffin1997.github.io/modbus/java%E5%AE%9E%E7%8E%B0modbustcp/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>String、StringBuilder、StringBuffer</title>
-      <link>https://lyffin1997.github.io/java/java%E5%9F%BA%E7%A1%80/</link>
+      <link>https://lyffin1997.github.io/java/stringstringbuilderstringbuffer/</link>
       <pubDate>Tue, 12 Jul 2022 00:50:39 +0800</pubDate>
       
-      <guid>https://lyffin1997.github.io/java/java%E5%9F%BA%E7%A1%80/</guid>
+      <guid>https://lyffin1997.github.io/java/stringstringbuilderstringbuffer/</guid>
       <description>1. 字符串相加方式的区别  String   String str = &amp;ldquo;a&amp;rdquo; + &amp;ldquo;b&amp;rdquo;; //最快
   String str = &amp;quot;&amp;quot; + &amp;ldquo;word&amp;rdquo;;
   StringBuilder   StringBuilder s = new StringBuilder(&amp;ldquo;word&amp;rdquo;).append(&amp;ldquo;a&amp;rdquo;).apend(&amp;ldquo;b&amp;rdquo;);
@@ -211,10 +354,10 @@
     
     <item>
       <title>Exporter</title>
-      <link>https://lyffin1997.github.io/prometheus/exporter/</link>
+      <link>https://lyffin1997.github.io/application/exporter/</link>
       <pubDate>Tue, 12 Jul 2022 00:28:51 +0800</pubDate>
       
-      <guid>https://lyffin1997.github.io/prometheus/exporter/</guid>
+      <guid>https://lyffin1997.github.io/application/exporter/</guid>
       <description></description>
     </item>
     

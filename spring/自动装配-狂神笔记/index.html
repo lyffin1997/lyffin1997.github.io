@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="​ 1. pom.xml   spring-boot-dependencies：核心依赖在父工程中
+  在写或者引入springboot依赖的时候不需要指定版本，就是因为父工程中有这些版本仓库
+  2. 启动器 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt;  启动器：springboot的启动场景（如代码中的web、test两种） spring-boot-starter-web：自动导入web环境所有的依赖 springboot会将所有功能场景变成一个个启动器，使用什么场景引入对应的启动器即可 https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.build-systems.starters   spring官网列出的所有启动器依赖包
+3. 主程序  @SpringBootApplication：标注该类为springboot的一个应用类，启动类下的所有资源被导入，是自动装配到核心（需要parent工程才能用这个注解） SpringApplication.run()：将springboot应用启动 注解  @ComponentScan：扫描主启动类同级的包 @SpringBootConfiguration：与@Configuration功能一致，只是它是springboot注解，而另一个是spring注解 @Configuration：spring配置类，标注当前类是配置类，一个Configurarion就是一个Spring的xml版容器（beans），即会将当前类内所有以@Bean注解标注的方法的实例纳入到spring容器中，实例名就是方法名。 @Component：自动检测和使用类路径扫描自动配置bean，每个类即一个bean（即类的实例），并添加到容器中 @Bean：显示声明单个bean,与@Component由spring自动执行不同。标注方法时告诉spring返回对象，并将对象注册为bean。 @EnableAutoConfiguration：自动配置 @AutoConfigurationPackage：自动配置包 @Import({Registrar.class})：自动配置包注册（@ComponentScan扫描到的包到这来注册，所以只能在启动类同级目录下创建包就是因为它） @Import({AutoConfigurationImportSelector.class})：自动配置导入选择（选择pom.xml中dependencies配置需要导入的组件） //获取自动配置的实体 getAutoConfigurationEntry() //获取候选的配置 List&amp;lt;String&amp;gt; configurations = this.getCandidateConfigurations(annotationMetadata, attributes);  this.getSpringFactoriesLoaderFactoryClass()
+  获取候选的配置:标注了@EnableAutoConfiguration的类（即启动类）
+  SpringFactoriesLoader.loadFactoryNames()
+  获取所有的需要加载的配置
+  private static Map&amp;lt;String, List&amp;gt; loadSpringFactories(ClassLoader classLoader)
+  获取系统资源及项目资源（都是从这获取META-INF/spring." />
+<meta name="keywords" content=", springboot, 面试, 源码" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://lyffin1997.github.io/spring/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D-%E7%8B%82%E7%A5%9E%E7%AC%94%E8%AE%B0/" />
+
+
+    <title>
+        
+            自动装配 狂神笔记 :: 小黎的技术指北 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.fcdabe1b7dd6b4453b6efda4f04d8b2127bbed1e9f9e44255a144895e5b14ea1.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="自动装配 狂神笔记">
+<meta itemprop="description" content="​ 1. pom.xml   spring-boot-dependencies：核心依赖在父工程中
+  在写或者引入springboot依赖的时候不需要指定版本，就是因为父工程中有这些版本仓库
+  2. 启动器 &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt; &lt;/dependency&gt;  启动器：springboot的启动场景（如代码中的web、test两种） spring-boot-starter-web：自动导入web环境所有的依赖 springboot会将所有功能场景变成一个个启动器，使用什么场景引入对应的启动器即可 https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.build-systems.starters   spring官网列出的所有启动器依赖包
+3. 主程序  @SpringBootApplication：标注该类为springboot的一个应用类，启动类下的所有资源被导入，是自动装配到核心（需要parent工程才能用这个注解） SpringApplication.run()：将springboot应用启动 注解  @ComponentScan：扫描主启动类同级的包 @SpringBootConfiguration：与@Configuration功能一致，只是它是springboot注解，而另一个是spring注解 @Configuration：spring配置类，标注当前类是配置类，一个Configurarion就是一个Spring的xml版容器（beans），即会将当前类内所有以@Bean注解标注的方法的实例纳入到spring容器中，实例名就是方法名。 @Component：自动检测和使用类路径扫描自动配置bean，每个类即一个bean（即类的实例），并添加到容器中 @Bean：显示声明单个bean,与@Component由spring自动执行不同。标注方法时告诉spring返回对象，并将对象注册为bean。 @EnableAutoConfiguration：自动配置 @AutoConfigurationPackage：自动配置包 @Import({Registrar.class})：自动配置包注册（@ComponentScan扫描到的包到这来注册，所以只能在启动类同级目录下创建包就是因为它） @Import({AutoConfigurationImportSelector.class})：自动配置导入选择（选择pom.xml中dependencies配置需要导入的组件） //获取自动配置的实体 getAutoConfigurationEntry() //获取候选的配置 List&lt;String&gt; configurations = this.getCandidateConfigurations(annotationMetadata, attributes);  this.getSpringFactoriesLoaderFactoryClass()
+  获取候选的配置:标注了@EnableAutoConfiguration的类（即启动类）
+  SpringFactoriesLoader.loadFactoryNames()
+  获取所有的需要加载的配置
+  private static Map&lt;String, List&gt; loadSpringFactories(ClassLoader classLoader)
+  获取系统资源及项目资源（都是从这获取META-INF/spring."><meta itemprop="datePublished" content="2022-07-12T23:42:32&#43;08:00" />
+<meta itemprop="dateModified" content="2022-07-12T23:42:32&#43;08:00" />
+<meta itemprop="wordCount" content="197"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
+<meta itemprop="keywords" content="springboot,面试,源码," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://lyffin1997.github.io/"/>
+
+<meta name="twitter:title" content="自动装配 狂神笔记"/>
+<meta name="twitter:description" content="​ 1. pom.xml   spring-boot-dependencies：核心依赖在父工程中
+  在写或者引入springboot依赖的时候不需要指定版本，就是因为父工程中有这些版本仓库
+  2. 启动器 &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt; &lt;/dependency&gt;  启动器：springboot的启动场景（如代码中的web、test两种） spring-boot-starter-web：自动导入web环境所有的依赖 springboot会将所有功能场景变成一个个启动器，使用什么场景引入对应的启动器即可 https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.build-systems.starters   spring官网列出的所有启动器依赖包
+3. 主程序  @SpringBootApplication：标注该类为springboot的一个应用类，启动类下的所有资源被导入，是自动装配到核心（需要parent工程才能用这个注解） SpringApplication.run()：将springboot应用启动 注解  @ComponentScan：扫描主启动类同级的包 @SpringBootConfiguration：与@Configuration功能一致，只是它是springboot注解，而另一个是spring注解 @Configuration：spring配置类，标注当前类是配置类，一个Configurarion就是一个Spring的xml版容器（beans），即会将当前类内所有以@Bean注解标注的方法的实例纳入到spring容器中，实例名就是方法名。 @Component：自动检测和使用类路径扫描自动配置bean，每个类即一个bean（即类的实例），并添加到容器中 @Bean：显示声明单个bean,与@Component由spring自动执行不同。标注方法时告诉spring返回对象，并将对象注册为bean。 @EnableAutoConfiguration：自动配置 @AutoConfigurationPackage：自动配置包 @Import({Registrar.class})：自动配置包注册（@ComponentScan扫描到的包到这来注册，所以只能在启动类同级目录下创建包就是因为它） @Import({AutoConfigurationImportSelector.class})：自动配置导入选择（选择pom.xml中dependencies配置需要导入的组件） //获取自动配置的实体 getAutoConfigurationEntry() //获取候选的配置 List&lt;String&gt; configurations = this.getCandidateConfigurations(annotationMetadata, attributes);  this.getSpringFactoriesLoaderFactoryClass()
+  获取候选的配置:标注了@EnableAutoConfiguration的类（即启动类）
+  SpringFactoriesLoader.loadFactoryNames()
+  获取所有的需要加载的配置
+  private static Map&lt;String, List&gt; loadSpringFactories(ClassLoader classLoader)
+  获取系统资源及项目资源（都是从这获取META-INF/spring."/>
+
+
+
+    <meta property="og:title" content="自动装配 狂神笔记" />
+<meta property="og:description" content="​ 1. pom.xml   spring-boot-dependencies：核心依赖在父工程中
+  在写或者引入springboot依赖的时候不需要指定版本，就是因为父工程中有这些版本仓库
+  2. 启动器 &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt; &lt;/dependency&gt;  启动器：springboot的启动场景（如代码中的web、test两种） spring-boot-starter-web：自动导入web环境所有的依赖 springboot会将所有功能场景变成一个个启动器，使用什么场景引入对应的启动器即可 https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.build-systems.starters   spring官网列出的所有启动器依赖包
+3. 主程序  @SpringBootApplication：标注该类为springboot的一个应用类，启动类下的所有资源被导入，是自动装配到核心（需要parent工程才能用这个注解） SpringApplication.run()：将springboot应用启动 注解  @ComponentScan：扫描主启动类同级的包 @SpringBootConfiguration：与@Configuration功能一致，只是它是springboot注解，而另一个是spring注解 @Configuration：spring配置类，标注当前类是配置类，一个Configurarion就是一个Spring的xml版容器（beans），即会将当前类内所有以@Bean注解标注的方法的实例纳入到spring容器中，实例名就是方法名。 @Component：自动检测和使用类路径扫描自动配置bean，每个类即一个bean（即类的实例），并添加到容器中 @Bean：显示声明单个bean,与@Component由spring自动执行不同。标注方法时告诉spring返回对象，并将对象注册为bean。 @EnableAutoConfiguration：自动配置 @AutoConfigurationPackage：自动配置包 @Import({Registrar.class})：自动配置包注册（@ComponentScan扫描到的包到这来注册，所以只能在启动类同级目录下创建包就是因为它） @Import({AutoConfigurationImportSelector.class})：自动配置导入选择（选择pom.xml中dependencies配置需要导入的组件） //获取自动配置的实体 getAutoConfigurationEntry() //获取候选的配置 List&lt;String&gt; configurations = this.getCandidateConfigurations(annotationMetadata, attributes);  this.getSpringFactoriesLoaderFactoryClass()
+  获取候选的配置:标注了@EnableAutoConfiguration的类（即启动类）
+  SpringFactoriesLoader.loadFactoryNames()
+  获取所有的需要加载的配置
+  private static Map&lt;String, List&gt; loadSpringFactories(ClassLoader classLoader)
+  获取系统资源及项目资源（都是从这获取META-INF/spring." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lyffin1997.github.io/spring/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D-%E7%8B%82%E7%A5%9E%E7%AC%94%E8%AE%B0/" /><meta property="og:image" content="https://lyffin1997.github.io/"/><meta property="article:section" content="spring" />
+<meta property="article:published_time" content="2022-07-12T23:42:32&#43;08:00" />
+<meta property="article:modified_time" content="2022-07-12T23:42:32&#43;08:00" /><meta property="og:site_name" content="小黎的技术指北" />
+
+
+
+
+
+    <meta property="article:section" content="知识" />
+
+
+
+    <meta property="article:published_time" content="2022-07-12 23:42:32 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">lyffin</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/java">java</a></li><li><a href="/spring">spring</a></li><li><a href="/middleware">中间件</a></li><li><a href="/application">应用</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://lyffin1997.github.io/spring/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D-%E7%8B%82%E7%A5%9E%E7%AC%94%E8%AE%B0/">自动装配 狂神笔记</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <p>​                 <img src="/img/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D1.png" alt="img"></p>
+<h2 id="1-pomxml"><strong>1. pom.xml</strong></h2>
+<ul>
+<li>
+<p>spring-boot-dependencies：核心依赖在父工程中</p>
+</li>
+<li>
+<p>在写或者引入springboot依赖的时候不需要指定版本，就是因为父工程中有这些版本仓库</p>
+</li>
+</ul>
+<h2 id="2-启动器"><strong>2. 启动器</strong></h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;dependency&gt;</span>
+    <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.boot<span style="color:#f92672">&lt;/groupId&gt;</span>
+    <span style="color:#f92672">&lt;artifactId&gt;</span>spring-boot-starter<span style="color:#f92672">&lt;/artifactId&gt;</span>
+<span style="color:#f92672">&lt;/dependency&gt;</span>
+</code></pre></div><ul>
+<li>启动器：springboot的启动场景（如代码中的web、test两种）</li>
+<li>spring-boot-starter-web：自动导入web环境所有的依赖</li>
+<li>springboot会将所有功能场景变成一个个启动器，使用什么场景引入对应的启动器即可</li>
+<li><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.build-systems.starters">https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.build-systems.starters </a></li>
+</ul>
+<p>spring官网列出的所有启动器依赖包</p>
+<h2 id="3-主程序"><strong>3. 主程序</strong></h2>
+<ul>
+<li>@SpringBootApplication：标注该类为springboot的一个应用类，启动类下的所有资源被导入，是自动装配到核心（需要parent工程才能用这个注解）</li>
+<li>SpringApplication.run()：将springboot应用启动</li>
+<li>注解</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">@ComponentScan：扫描主启动类同级的包
+@SpringBootConfiguration：与@Configuration功能一致，只是它是springboot注解，而另一个是spring注解
+    @Configuration：spring配置类，标注当前类是配置类，一个Configurarion就是一个Spring的xml版容器（beans），即会将当前类内所有以@Bean注解标注的方法的实例纳入到spring容器中，实例名就是方法名。
+        @Component：自动检测和使用类路径扫描自动配置bean，每个类即一个bean（即类的实例），并添加到容器中
+        @Bean：显示声明单个bean,与@Component由spring自动执行不同。标注方法时告诉spring返回对象，并将对象注册为bean。    
+@EnableAutoConfiguration：自动配置
+    @AutoConfigurationPackage：自动配置包
+        @Import({Registrar.class})：自动配置包注册（@ComponentScan扫描到的包到这来注册，所以只能在启动类同级目录下创建包就是因为它）
+    @Import({AutoConfigurationImportSelector.class})：自动配置导入选择（选择pom.xml中dependencies配置需要导入的组件）
+//获取自动配置的实体
+getAutoConfigurationEntry()
+//获取候选的配置
+List&lt;String&gt; configurations = this.getCandidateConfigurations(annotationMetadata, attributes);
+</code></pre></div><blockquote>
+<p>this.getSpringFactoriesLoaderFactoryClass()</p>
+</blockquote>
+<blockquote>
+<p>获取候选的配置:标注了@EnableAutoConfiguration的类（即启动类）</p>
+</blockquote>
+<blockquote>
+<p>SpringFactoriesLoader.loadFactoryNames()</p>
+</blockquote>
+<blockquote>
+<p>获取所有的需要加载的配置</p>
+</blockquote>
+<blockquote>
+<p>private static Map&lt;String, List<!-- raw HTML omitted -->&gt; loadSpringFactories(ClassLoader classLoader)</p>
+</blockquote>
+<blockquote>
+<p>获取系统资源及项目资源（都是从这获取META-INF/spring.factories），并从这些资源中遍历所有的配置，遍历完封装成properties</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">protected</span> List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getCandidateConfigurations</span><span style="color:#f92672">(</span>AnnotationMetadata metadata<span style="color:#f92672">,</span> AnnotationAttributes attributes<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> configurations <span style="color:#f92672">=</span> SpringFactoriesLoader<span style="color:#f92672">.</span><span style="color:#a6e22e">loadFactoryNames</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getSpringFactoriesLoaderFactoryClass</span><span style="color:#f92672">(),</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getBeanClassLoader</span><span style="color:#f92672">());</span>
+    Assert<span style="color:#f92672">.</span><span style="color:#a6e22e">notEmpty</span><span style="color:#f92672">(</span>configurations<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;No auto configuration classes found in META-INF/spring.factories. If you are using a custom packaging, make sure that file is correct.&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">return</span> configurations<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>META-INF/spring.factories（所有的自动配置类都在里面）            <img src="/img/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D2.png" alt="img"></p>
+<ul>
+<li>为何自动配置了所有的包还需要在pom.xml中配置对应的starter才能有效？</li>
+</ul>
+<blockquote>
+<p>核心注解：@ConditionnalOnXXX:如果满足条件才会生效(该配置类下到bean才会注入到容器中)</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>结论：springboot所有的自动配置都在启动的时候扫描并加载：</strong></p>
+<blockquote>
+<p>spring.factories，但是不一定生效，需要判断条件，只要倒入对应的starter，对应的启动器才能生效。</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>详细步骤</strong> ：</p>
+<ol>
+<li>springboot在启动时，在类路径META-INF/spring.factories获取指定的值</li>
+<li>将这些自动配置的类导入容器，自动配置类就会生效（@Configuration和@Bean等，前提是生效）</li>
+<li>整合javaEE，解决方案和自动配置等东西都在spring-boot-autoconfigure-2.6.6.jar里</li>
+<li>它会把所有需要导入的配置，以类名等方式返回，被添加到容器中</li>
+<li>容器中存在非常多的XXXAutoConfiguration的文件（@Configuration、@Bean），就是这些被添加到容器中的类</li>
+<li>有了自动配置类，免去的手动编写配置文件到步骤</li>
+</ol>
+<h2 id="4-run方法"><strong>4. run方法</strong></h2>
+<h3 id="41-springapplication初始化"><strong>4.1 SpringApplication初始化</strong></h3>
+<ul>
+<li>推断应用的类型是普通项目还是web项目（导入web依赖的项目）</li>
+<li>查找并加载所有可用的初始化器，并设置到initializers属性中</li>
+<li>找出所有应用程序监听器，设置到listeners属性中</li>
+<li>推断并设置main方法等定义类，找到运行的主类（因此参数要传主类）</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">SpringApplication</span><span style="color:#f92672">(</span>ResourceLoader resourceLoader<span style="color:#f92672">,</span> Class<span style="color:#f92672">&lt;?&gt;...</span> primarySources<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">sources</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedHashSet<span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">bannerMode</span> <span style="color:#f92672">=</span> Mode<span style="color:#f92672">.</span><span style="color:#a6e22e">CONSOLE</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">logStartupInfo</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">addCommandLineProperties</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">addConversionService</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">headless</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">registerShutdownHook</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">additionalProfiles</span> <span style="color:#f92672">=</span> Collections<span style="color:#f92672">.</span><span style="color:#a6e22e">emptySet</span><span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">isCustomEnvironment</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">lazyInitialization</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">applicationContextFactory</span> <span style="color:#f92672">=</span> ApplicationContextFactory<span style="color:#f92672">.</span><span style="color:#a6e22e">DEFAULT</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">applicationStartup</span> <span style="color:#f92672">=</span> ApplicationStartup<span style="color:#f92672">.</span><span style="color:#a6e22e">DEFAULT</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">resourceLoader</span> <span style="color:#f92672">=</span> resourceLoader<span style="color:#f92672">;</span>
+    Assert<span style="color:#f92672">.</span><span style="color:#a6e22e">notNull</span><span style="color:#f92672">(</span>primarySources<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;PrimarySources must not be null&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">primarySources</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedHashSet<span style="color:#f92672">(</span>Arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">asList</span><span style="color:#f92672">(</span>primarySources<span style="color:#f92672">));</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">webApplicationType</span> <span style="color:#f92672">=</span> WebApplicationType<span style="color:#f92672">.</span><span style="color:#a6e22e">deduceFromClasspath</span><span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">bootstrapRegistryInitializers</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getSpringFactoriesInstances</span><span style="color:#f92672">(</span>BootstrapRegistryInitializer<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">));</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">setInitializers</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getSpringFactoriesInstances</span><span style="color:#f92672">(</span>ApplicationContextInitializer<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">));</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">setListeners</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getSpringFactoriesInstances</span><span style="color:#f92672">(</span>ApplicationListener<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">));</span>
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">mainApplicationClass</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">deduceMainApplicationClass</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="42-run"><strong>4.2 run()</strong></h3>
+<ul>
+<li>初始化SpringApplication</li>
+<li>启动监听器</li>
+<li>获取默认环境配置参数（yml文件）</li>
+<li>打印banner</li>
+<li>创建一个合适的(这里指web应用)ApplicationContext实例 （取决于classpath）</li>
+<li>还做了很多事情，总的来说就是全面接管springmvc配置（不用再去写那些配置文件什么的了）</li>
+</ul>
+<h2 id="5-自动装配精髓"><strong>5 自动装配精髓</strong></h2>
+<ul>
+<li>
+<p>springboot启动会加载大量自动配置类（spring.factories）</p>
+</li>
+<li>
+<p>查找springbootm默认的自动配置类中有没有能够实现我们所需要的功能的</p>
+</li>
+<li>
+<p>查看该自动配置类配置了哪些组件（看我们需要用的组件是否存在）</p>
+</li>
+<li>
+<p>容器中添加组件时，会从properties类中获取某些属性，可自定义修改properties中相关属性的值</p>
+</li>
+<li>
+<ul>
+<li>XXXAutoConfiguration：自动配置类（给容器中添加组件）</li>
+<li>xxxProperties：封装配置文件中相关属性</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-查看已配置类"><strong>6 查看已配置类</strong></h2>
+<ul>
+<li>在yml中改变配置然后启动项目</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">debug</span>: <span style="color:#66d9ef">true</span>
+</code></pre></div>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/springboot/">springboot</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/%E6%BA%90%E7%A0%81/">源码</a></span>
+        
+    </p>
+
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/categories/%E7%9F%A5%E8%AF%86/">知识</a></span>
+        
+    </p>
+
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>

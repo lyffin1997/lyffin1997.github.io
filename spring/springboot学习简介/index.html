@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="1. 学习路线   javaSE
+  mysql:持久化
+  html&#43;css&#43;js&#43;jquery&#43;框架（jsp、vue等）
+  javaweb（springmvc）
+  M（model）指模型
+  一般指Service和DAO
+ V(view)指视图层  一般指页面，如jsp、html等
+ C(controller)指控制层  如springmvc中的controller
+整体逻辑：V（页面数据）-&amp;gt; C（控制器）-&amp;gt; M（逻辑处理及数据持久化）
+ ssm（除此之外需掌握服务器部署war包的操作。详情参考tomcat部署war包流程） springboot（部署jar包，同上需掌握部署jar包流程及原理（内嵌tomcat），springboot已经开始使用微服务架构）  内嵌tomcat简易流程：通过SpringBootApplication注解run方法创建tomcatWebServer，详情参考spring源码
+​  springcloud（微服务越来越多，spring再优化诞生springcloud）  2. springboot是什么 2.1 spring目的、理念 Spring是为了解决企业级应用开发的复杂性而创建的，简化开发
+2.2 spring如何简化开发  基于POJO的轻量级和最小侵入性编程（bean） 通过IOC，依赖注入（DI）和面向接口实现松耦合（核心：容器） 基于切面（AOP）和惯例进行声明式编程（核心：AOP） 通过切面和模板减少样式代码  2.3 springboot是什么   springboot就是一个javaweb的开发框架，和springmvc类似。
+  正式定义：简化开发，约定大约配置（核心思想，在maven、spring、springmvc、springboot、docker、k8s……中都遵循该思想） ，能迅速的开发web应用，几行代码开发一个http接口。
+  所有的技术框架都遵循一条主线规律：从一个复杂的应用场景，衍生一种规范框架
+  java企业级应用发展：J2EE -&amp;gt; spring -&amp;gt; springboot" />
+<meta name="keywords" content=", springboot, 问题, 面试, 框架" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://lyffin1997.github.io/spring/springboot%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B/" />
+
+
+    <title>
+        
+            Springboot学习简介 :: 小黎的技术指北 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.fcdabe1b7dd6b4453b6efda4f04d8b2127bbed1e9f9e44255a144895e5b14ea1.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="Springboot学习简介">
+<meta itemprop="description" content="1. 学习路线   javaSE
+  mysql:持久化
+  html&#43;css&#43;js&#43;jquery&#43;框架（jsp、vue等）
+  javaweb（springmvc）
+  M（model）指模型
+  一般指Service和DAO
+ V(view)指视图层  一般指页面，如jsp、html等
+ C(controller)指控制层  如springmvc中的controller
+整体逻辑：V（页面数据）-&gt; C（控制器）-&gt; M（逻辑处理及数据持久化）
+ ssm（除此之外需掌握服务器部署war包的操作。详情参考tomcat部署war包流程） springboot（部署jar包，同上需掌握部署jar包流程及原理（内嵌tomcat），springboot已经开始使用微服务架构）  内嵌tomcat简易流程：通过SpringBootApplication注解run方法创建tomcatWebServer，详情参考spring源码
+​  springcloud（微服务越来越多，spring再优化诞生springcloud）  2. springboot是什么 2.1 spring目的、理念 Spring是为了解决企业级应用开发的复杂性而创建的，简化开发
+2.2 spring如何简化开发  基于POJO的轻量级和最小侵入性编程（bean） 通过IOC，依赖注入（DI）和面向接口实现松耦合（核心：容器） 基于切面（AOP）和惯例进行声明式编程（核心：AOP） 通过切面和模板减少样式代码  2.3 springboot是什么   springboot就是一个javaweb的开发框架，和springmvc类似。
+  正式定义：简化开发，约定大约配置（核心思想，在maven、spring、springmvc、springboot、docker、k8s……中都遵循该思想） ，能迅速的开发web应用，几行代码开发一个http接口。
+  所有的技术框架都遵循一条主线规律：从一个复杂的应用场景，衍生一种规范框架
+  java企业级应用发展：J2EE -&gt; spring -&gt; springboot"><meta itemprop="datePublished" content="2022-07-13T00:02:48&#43;08:00" />
+<meta itemprop="dateModified" content="2022-07-13T00:02:48&#43;08:00" />
+<meta itemprop="wordCount" content="136"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
+<meta itemprop="keywords" content="springboot,问题,面试,框架," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://lyffin1997.github.io/"/>
+
+<meta name="twitter:title" content="Springboot学习简介"/>
+<meta name="twitter:description" content="1. 学习路线   javaSE
+  mysql:持久化
+  html&#43;css&#43;js&#43;jquery&#43;框架（jsp、vue等）
+  javaweb（springmvc）
+  M（model）指模型
+  一般指Service和DAO
+ V(view)指视图层  一般指页面，如jsp、html等
+ C(controller)指控制层  如springmvc中的controller
+整体逻辑：V（页面数据）-&gt; C（控制器）-&gt; M（逻辑处理及数据持久化）
+ ssm（除此之外需掌握服务器部署war包的操作。详情参考tomcat部署war包流程） springboot（部署jar包，同上需掌握部署jar包流程及原理（内嵌tomcat），springboot已经开始使用微服务架构）  内嵌tomcat简易流程：通过SpringBootApplication注解run方法创建tomcatWebServer，详情参考spring源码
+​  springcloud（微服务越来越多，spring再优化诞生springcloud）  2. springboot是什么 2.1 spring目的、理念 Spring是为了解决企业级应用开发的复杂性而创建的，简化开发
+2.2 spring如何简化开发  基于POJO的轻量级和最小侵入性编程（bean） 通过IOC，依赖注入（DI）和面向接口实现松耦合（核心：容器） 基于切面（AOP）和惯例进行声明式编程（核心：AOP） 通过切面和模板减少样式代码  2.3 springboot是什么   springboot就是一个javaweb的开发框架，和springmvc类似。
+  正式定义：简化开发，约定大约配置（核心思想，在maven、spring、springmvc、springboot、docker、k8s……中都遵循该思想） ，能迅速的开发web应用，几行代码开发一个http接口。
+  所有的技术框架都遵循一条主线规律：从一个复杂的应用场景，衍生一种规范框架
+  java企业级应用发展：J2EE -&gt; spring -&gt; springboot"/>
+
+
+
+    <meta property="og:title" content="Springboot学习简介" />
+<meta property="og:description" content="1. 学习路线   javaSE
+  mysql:持久化
+  html&#43;css&#43;js&#43;jquery&#43;框架（jsp、vue等）
+  javaweb（springmvc）
+  M（model）指模型
+  一般指Service和DAO
+ V(view)指视图层  一般指页面，如jsp、html等
+ C(controller)指控制层  如springmvc中的controller
+整体逻辑：V（页面数据）-&gt; C（控制器）-&gt; M（逻辑处理及数据持久化）
+ ssm（除此之外需掌握服务器部署war包的操作。详情参考tomcat部署war包流程） springboot（部署jar包，同上需掌握部署jar包流程及原理（内嵌tomcat），springboot已经开始使用微服务架构）  内嵌tomcat简易流程：通过SpringBootApplication注解run方法创建tomcatWebServer，详情参考spring源码
+​  springcloud（微服务越来越多，spring再优化诞生springcloud）  2. springboot是什么 2.1 spring目的、理念 Spring是为了解决企业级应用开发的复杂性而创建的，简化开发
+2.2 spring如何简化开发  基于POJO的轻量级和最小侵入性编程（bean） 通过IOC，依赖注入（DI）和面向接口实现松耦合（核心：容器） 基于切面（AOP）和惯例进行声明式编程（核心：AOP） 通过切面和模板减少样式代码  2.3 springboot是什么   springboot就是一个javaweb的开发框架，和springmvc类似。
+  正式定义：简化开发，约定大约配置（核心思想，在maven、spring、springmvc、springboot、docker、k8s……中都遵循该思想） ，能迅速的开发web应用，几行代码开发一个http接口。
+  所有的技术框架都遵循一条主线规律：从一个复杂的应用场景，衍生一种规范框架
+  java企业级应用发展：J2EE -&gt; spring -&gt; springboot" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lyffin1997.github.io/spring/springboot%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B/" /><meta property="og:image" content="https://lyffin1997.github.io/"/><meta property="article:section" content="spring" />
+<meta property="article:published_time" content="2022-07-13T00:02:48&#43;08:00" />
+<meta property="article:modified_time" content="2022-07-13T00:02:48&#43;08:00" /><meta property="og:site_name" content="小黎的技术指北" />
+
+
+
+
+
+    <meta property="article:section" content="知识" />
+
+
+
+    <meta property="article:published_time" content="2022-07-13 00:02:48 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">lyffin</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/java">java</a></li><li><a href="/spring">spring</a></li><li><a href="/middleware">中间件</a></li><li><a href="/application">应用</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://lyffin1997.github.io/spring/springboot%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B/">Springboot学习简介</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <h1 id="1-学习路线"><strong>1. 学习路线</strong></h1>
+<ul>
+<li>
+<p>javaSE</p>
+</li>
+<li>
+<p>mysql:持久化</p>
+</li>
+<li>
+<p>html+css+js+jquery+框架（jsp、vue等）</p>
+</li>
+<li>
+<p>javaweb（springmvc）</p>
+</li>
+<li>
+<p>M（model）指模型</p>
+</li>
+</ul>
+<p>一般指Service和DAO</p>
+<ul>
+<li>V(view)指视图层</li>
+</ul>
+<p>一般指页面，如jsp、html等</p>
+<ul>
+<li>C(controller)指控制层</li>
+</ul>
+<p>如springmvc中的controller</p>
+<p>整体逻辑：V（页面数据）-&gt; C（控制器）-&gt; M（逻辑处理及数据持久化）</p>
+<ul>
+<li>ssm（除此之外需掌握服务器部署war包的操作。详情参考tomcat部署war包流程）</li>
+<li>springboot（部署jar包，同上需掌握部署jar包流程及原理（内嵌tomcat），springboot已经开始使用微服务架构）</li>
+</ul>
+<p>内嵌tomcat简易流程：通过SpringBootApplication注解run方法创建tomcatWebServer，详情参考spring源码</p>
+<p>​                 <img src="/img/springboot%E5%AD%A6%E4%B9%A01.png" alt="img"></p>
+<ul>
+<li>springcloud（微服务越来越多，spring再优化诞生springcloud）</li>
+</ul>
+<h1 id="2-springboot是什么"><strong>2. springboot是什么</strong></h1>
+<h2 id="21-spring目的理念"><strong>2.1 spring目的、理念</strong></h2>
+<p>Spring是为了解决企业级应用开发的复杂性而创建的，简化开发</p>
+<h2 id="22-spring如何简化开发"><strong>2.2 spring如何简化开发</strong></h2>
+<ul>
+<li>基于POJO的轻量级和最小侵入性编程（bean）</li>
+<li><strong>通过IOC，依赖注入（DI）和面向接口实现松耦合（核心：容器）</strong></li>
+<li><strong>基于切面（AOP）和惯例进行声明式编程（核心：AOP）</strong></li>
+<li>通过切面和模板减少样式代码</li>
+</ul>
+<h2 id="23-springboot是什么"><strong>2.3 springboot是什么</strong></h2>
+<ul>
+<li>
+<p>springboot就是一个javaweb的开发框架，和springmvc类似。</p>
+</li>
+<li>
+<p>正式定义：简化开发，<strong>约定大约配置（核心思想，在maven、spring、springmvc、springboot、docker、k8s……中都遵循该思想）</strong> ，能迅速的开发web应用，几行代码开发一个http接口。</p>
+</li>
+<li>
+<p>所有的技术框架都遵循一条主线规律：<strong>从一个复杂的应用场景，衍生一种规范框架</strong></p>
+</li>
+<li>
+<p>java企业级应用发展：<strong>J2EE -&gt; spring -&gt; springboot</strong></p>
+</li>
+<li>
+<p>默认帮和我们进行很多设置，只需要我门进行很少量的spring配置，同时集成了大量常用的第三方库配置（Redis、MongoDB、Jpa、RabbitMQ、Quartz等）</p>
+</li>
+</ul>
+<h2 id="24-springboot优点"><strong>2.4 springboot优点</strong></h2>
+<ul>
+<li>为所有spring开发者更快的入门</li>
+<li><strong>开箱即用</strong> ，提供各种默认的配置来简化项目配置</li>
+<li>内嵌式容器简化Web项目</li>
+<li>没有冗余代码生成和XML配置的要求</li>
+</ul>
+<h2 id="25-什么是微服务"><strong>2.5 什么是微服务</strong></h2>
+<blockquote>
+<p>微服务是一种架构风格（MVC、MVVM都是一种架构）。要求在开发应用时，将应用构建成一系列小服务的组合，可以通过http（以及rpc等）的方式进行沟通。</p>
+</blockquote>
+<p>​                 <img src="/img/springboot%E5%AD%A6%E4%B9%A02.png" alt="img"></p>
+<h3 id="251-单体架构"><strong>2.5.1 单体架构</strong></h3>
+<blockquote>
+<p>单体架构（all in one ）是指，我们将一个应用中的所有应用服务都封装在一个应用中。（把数据库访问、web访问等各个功能放到一个war包中，如ssm框架）</p>
+</blockquote>
+<p>优点：</p>
+<ul>
+<li>易于开发和测试，也方便部署。扩展时，只需将war包复制到各个服务器上，再做负载均衡即可。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>维护难：哪怕只修改一行代码，都需要停掉整个服务，重新部署war包。</li>
+</ul>
+<h3 id="252-微服务架构"><strong>2.5.2 微服务架构</strong></h3>
+<blockquote>
+<p>打破all in one架构方式，把每个功能元素独立出来，把每个功能元素独立出来，然后将独立出来的功能元素根据需求动态组合。</p>
+</blockquote>
+<p>​                 <img src="/img/springboot%E5%AD%A6%E4%B9%A03.png" alt="img"></p>
+<p><a href="https://martinfowler.com/articles/microservices.html">https://martinfowler.com/articles/microservices.html</a></p>
+<p><a href="https://www.cnblogs.com/liuning8023/p/4493156.html">https://www.cnblogs.com/liuning8023/p/4493156.html </a>(翻译版)</p>
+<p>微服务架构是对功能元素进行复制，而没有对整个应用复制。</p>
+<p>优点：</p>
+<ul>
+<li>节省了调用资源</li>
+<li>每个功能元素的服务都是一个可替换、可独立升级等软件代码（<strong>高内聚，低耦合</strong>）</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>运维难度增大，原来只需维护tomcat和war包，现在需要维护所有服务、以及负载均衡等一系列问题（但是spring推出了解决方案，后续会提到）</li>
+</ul>
+<h3 id="253-如何构建微服务"><strong>2.5.3 如何构建微服务</strong></h3>
+<blockquote>
+<p>大型微服务架构中，每个功能元素（即微服务）各自完成自己的功能，然后通过http请求相互调用（如咱们的IOT2、大运项目）。若需升级修改，只需更新升级其中一个功能服务单元，而不需要停掉整个应用。</p>
+</blockquote>
+<ul>
+<li>
+<p>spring推出的大型分布式微服务等全套、全程产品</p>
+</li>
+<li>
+<p>springboot（build anything）可以快速的帮我们构建一个个功能独立的微服务应用单元</p>
+</li>
+<li>
+<p>springcloud（coordinate anything）帮我们实现大型分布式网络服务的调用</p>
+</li>
+<li>
+<p>spring cloud data flow（connect everything）帮我们在分布式中，进行流式数据计算、批处理</p>
+</li>
+<li>
+<p>spring为我们想清楚了整个从构建应用到大型分布式应用的全流程方案</p>
+</li>
+</ul>
+<h3 id="254-第一个springboot程序"><strong>2.5.4 第一个springboot程序</strong></h3>
+<ul>
+<li>
+<p>jdk 1.8</p>
+</li>
+<li>
+<p>maven 3.6.1</p>
+</li>
+<li>
+<p>springboot最新版</p>
+</li>
+<li>
+<p>IDEA</p>
+</li>
+<li>
+<p>@Controller</p>
+</li>
+</ul>
+<p>用@Controller标识的类代表控制器类（控制层），可以调用用@Service标识的类</p>
+<p>控制器由spring管理，在applicationContext.xml中如下</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"> <span style="color:#f92672">&lt;context:component-scan</span> <span style="color:#a6e22e">base-package=</span><span style="color:#e6db74">&#34;com.byd...&#34;</span><span style="color:#f92672">&gt;</span>
+   <span style="color:#f92672">&lt;/context:component-scan&gt;</span>
+</code></pre></div><p>扫描器会扫描该包下所有@Component、@Controller等注解，并将他们添加到IOC容器中，由IOC容器来管理。</p>
+<ul>
+<li>
+<p>@RestController = @Controller+@ResponseBody</p>
+</li>
+<li>
+<p>@ResponseBody 规定返回值为json字符串，用于标识方法，注意是返回数据不是返回页面</p>
+</li>
+<li>
+<p>@RequestMapping给出外界访问方法路径，用于出发请求</p>
+</li>
+<li>
+<p>parent:继承spring-boot-starter-parent的依赖管理，控制版本与打包等内容</p>
+</li>
+<li>
+<p>dependencies:项目具体依赖</p>
+</li>
+<li>
+<p>starter:启动器</p>
+</li>
+<li>
+<p>spring-boot-starter-web 实现http接口（包含了springmvc）</p>
+</li>
+</ul>
+<p>使用springmvc构建web应用程序等入门者</p>
+<p>使用tomcat作为默认嵌入式容器</p>
+<ul>
+<li>
+<p>spring-boot-starter-test 编写单元测试的依赖包</p>
+</li>
+<li>
+<p>build：构建配置部分。默认使用spring-boot-maven-plugin，配合spring-boot-starter-parent可以将spring boot应用打成jar包来运行。</p>
+</li>
+<li>
+<p>双击maven-&gt;Lifecycle-&gt;package即可，然后在左侧项目结构target-&gt;test-classes下可以看到jar包</p>
+</li>
+<li>
+<p>然后打开终端（windows打开cmd或powershell），在jar包路径下运行java -jar + jar包名称即可启动该微服务应用</p>
+</li>
+<li>
+<p>server-port：端口号</p>
+</li>
+<li>
+<p><a href="https://www.bootschool.net/ascii-art/search">https://www.bootschool.net/ascii-art/search </a>改启动图</p>
+</li>
+<li>
+<p>resource目录下新建banner.txt</p>
+</li>
+<li>
+<p>将图案复制</p>
+</li>
+<li>
+<p>重启服务</p>
+</li>
+</ul>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/springboot/">springboot</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/%E9%97%AE%E9%A2%98/">问题</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/%E9%9D%A2%E8%AF%95/">面试</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/%E6%A1%86%E6%9E%B6/">框架</a></span>
+        
+    </p>
+
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/categories/%E7%9F%A5%E8%AF%86/">知识</a></span>
+        
+    </p>
+
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>web开发 on 小黎的技术指北</title>
+    <link>https://lyffin1997.github.io/tags/web%E5%BC%80%E5%8F%91/</link>
+    <description>Recent content in web开发 on 小黎的技术指北</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 12 Jul 2022 23:23:57 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/tags/web%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Springboot Web</title>
+      <link>https://lyffin1997.github.io/spring/springboot-web/</link>
+      <pubDate>Tue, 12 Jul 2022 23:23:57 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springboot-web/</guid>
+      <description>思考：springboot到底替我们配置了什么？能不能进行修改？能修改哪些东西？能不能扩展
+    xxxAutoConfiguration：向容器中自动配置组件 xxxProperties：自动配置类，装配配置文件中自定义的一些属性    1. 静态资源 WebMvcAutoConfiguration.java
+public void addResourceHandlers(ResourceHandlerRegistry registry) { if (!this.resourceProperties.isAddMappings()) { logger.debug(&amp;#34;Default resource handling disabled&amp;#34;); } else { this.addResourceHandler(registry, &amp;#34;/webjars/**&amp;#34;, &amp;#34;classpath:/META-INF/resources/webjars/&amp;#34;); this.addResourceHandler(registry, this.mvcProperties.getStaticPathPattern(), (registration) -&amp;gt; { registration.addResourceLocations(this.resourceProperties.getStaticLocations()); if (this.servletContext != null) { ServletContextResource resource = new ServletContextResource(this.servletContext, &amp;#34;/&amp;#34;); registration.addResourceLocations(new Resource[]{resource}); } }); } }  静态资源路径：  从webjars/**下 classpath:/META-INF/resources/webjars/路径中所有目标获取静态资源 从/**下 classpath:/META-INF/resources/&amp;#34;, &amp;#34;classpath:/resources/&amp;#34;, &amp;#34;classpath:/static/&amp;#34;, &amp;#34;classpath:/public/路径中所有目标获取静态资源 优先级：resources&amp;gt;static(默认)&amp;gt;public 自定义：在yml文件中编写，此时上面两种方式无效 spring: mvc: static-path-pattern: 获取方式：localhost:8080/webjars/jquery/3.</description>
+    </item>
+    
+  </channel>
+</rss>

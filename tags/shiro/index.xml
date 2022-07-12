@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shiro on 小黎的技术指北</title>
+    <link>https://lyffin1997.github.io/tags/shiro/</link>
+    <description>Recent content in shiro on 小黎的技术指北</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 12 Jul 2022 23:09:07 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/tags/shiro/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shiro</title>
+      <link>https://lyffin1997.github.io/application/shiro/</link>
+      <pubDate>Tue, 12 Jul 2022 23:09:07 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/application/shiro/</guid>
+      <description>1 什么是shiro   定义：Apache Shiro是一个java的安全框架
+  作用：认证，授权，加密，会话管理，web集成，缓存
+  核心：
+   Subject：用户 SecurityManager：管理所有用户 Realm：连接数据    2 快速开始shiro   依赖   配置文件
+   log4j2.xml    &amp;lt;Configuration name=&amp;#34;ConfigTest&amp;#34; status=&amp;#34;ERROR&amp;#34; monitorInterval=&amp;#34;5&amp;#34;&amp;gt; &amp;lt;!-- ~ Licensed to the Apache Software Foundation (ASF) under one ~ or more contributor license agreements. See the NOTICE file ~ distributed with this work for additional information ~ regarding copyright ownership.</description>
+    </item>
+    
+  </channel>
+</rss>

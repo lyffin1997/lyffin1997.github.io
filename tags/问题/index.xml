@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>问题 on 小黎的技术指北</title>
+    <link>https://lyffin1997.github.io/tags/%E9%97%AE%E9%A2%98/</link>
+    <description>Recent content in 问题 on 小黎的技术指北</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 13 Jul 2022 00:02:48 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/tags/%E9%97%AE%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Springboot学习简介</title>
+      <link>https://lyffin1997.github.io/spring/springboot%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Wed, 13 Jul 2022 00:02:48 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springboot%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B/</guid>
+      <description>1. 学习路线   javaSE
+  mysql:持久化
+  html+css+js+jquery+框架（jsp、vue等）
+  javaweb（springmvc）
+  M（model）指模型
+  一般指Service和DAO
+ V(view)指视图层  一般指页面，如jsp、html等
+ C(controller)指控制层  如springmvc中的controller
+整体逻辑：V（页面数据）-&amp;gt; C（控制器）-&amp;gt; M（逻辑处理及数据持久化）
+ ssm（除此之外需掌握服务器部署war包的操作。详情参考tomcat部署war包流程） springboot（部署jar包，同上需掌握部署jar包流程及原理（内嵌tomcat），springboot已经开始使用微服务架构）  内嵌tomcat简易流程：通过SpringBootApplication注解run方法创建tomcatWebServer，详情参考spring源码
+​  springcloud（微服务越来越多，spring再优化诞生springcloud）  2. springboot是什么 2.1 spring目的、理念 Spring是为了解决企业级应用开发的复杂性而创建的，简化开发
+2.2 spring如何简化开发  基于POJO的轻量级和最小侵入性编程（bean） 通过IOC，依赖注入（DI）和面向接口实现松耦合（核心：容器） 基于切面（AOP）和惯例进行声明式编程（核心：AOP） 通过切面和模板减少样式代码  2.3 springboot是什么   springboot就是一个javaweb的开发框架，和springmvc类似。
+  正式定义：简化开发，约定大约配置（核心思想，在maven、spring、springmvc、springboot、docker、k8s……中都遵循该思想） ，能迅速的开发web应用，几行代码开发一个http接口。
+  所有的技术框架都遵循一条主线规律：从一个复杂的应用场景，衍生一种规范框架
+  java企业级应用发展：J2EE -&amp;gt; spring -&amp;gt; springboot</description>
+    </item>
+    
+    <item>
+      <title>如何编写配置文件</title>
+      <link>https://lyffin1997.github.io/spring/%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Tue, 12 Jul 2022 23:50:01 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</guid>
+      <description>1. 语法   yml和yaml一样的文件格式，但是yaml优先级比yml高
+  名称固定：application.properties或者application.yml
+  可以同时存在properties和yml，且都会生效
+  语法:
+   application.properties: key=value    server.port=8080    application.yml: key:空格value    server: port: 8080   yml可以存对象，properties不行
+   yml    student: name: lifeng age: 18 #行内写法 student: {name: lifeng,age: 18}  properties  student.name=lifeng student.age=18  yml可以写数组  pets: - cat - dog - pig pets: [cat,dog,pig]  yml可以用特殊表达式（可搜索spring el表达式）  name: ${random.</description>
+    </item>
+    
+    <item>
+      <title>Springboot扫描路径问题</title>
+      <link>https://lyffin1997.github.io/spring/springboot%E6%89%AB%E6%8F%8F%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Tue, 12 Jul 2022 11:40:21 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springboot%E6%89%AB%E6%8F%8F%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/</guid>
+      <description>  默认扫描路径
+   如下图所示，springboot启动时，会默认扫描启动类所在包及其子包中所有的配置类 启动类所在包及其子包：如图springbootweb路径下所有的文件（引入的jar包注解除外） 配置类：扫描@Component、@Configuration、@Controller、@Service等注解标记的所有类，并注入到容器中    ​   @SpringBootApplication注解的scanBasePackages属性
+   若想扫描默认路径之外的路径可使用scanBasePackages指定路径，重新指定后原默认扫描路径不会再生效    ​   @ComponentScan注解
+   如果注解只指定了一个路径并且该路径与默认启动路径相同，那么@ComponentScan注解不生效 如果指定了正确的路径，则@ComponentScan注解生效，默认路径失效    ​   优先级：@ComponentScan &amp;gt; scanBasePackages &amp;gt; 默认路径
+  jar包扫描问题
+   若第三方jar包在默认路径中，且jar包中的目录也是com.lyffin.springbootweb，那么jar包中的注解能被扫描到，其他目录的jar包无法被扫描，可通过scanBasePackages重新指定扫描路径 若第三方jar包不在默认路径中，则需要@ComponentScan注解或者scanBasePackages属性重新指定扫描路径    现实代码中重新指定的路径必须包含默认扫描路径，否则工程中的注解就扫描不到了
+  </description>
+    </item>
+    
+    <item>
+      <title>@Autowired和@Resource区别</title>
+      <link>https://lyffin1997.github.io/java/autowired%E5%92%8Cresource%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Tue, 12 Jul 2022 11:25:46 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/autowired%E5%92%8Cresource%E5%8C%BA%E5%88%AB/</guid>
+      <description> 功能上它们两个的作用是相同的，都是自动注入一个spring容器中的实例 但是它们的注入方式不同 @Resource(J2EE注解)有type和name两个属性，默认按照byName的方式装配，若没有声明name和type，如果标记的字段则以字段名称作为name去匹配，如果标记的是方法，找不到name匹配的bean就会按type去匹配。  那么是如何准确的从容器中找到对应的bean的呢？如下是装配规则
+​ @Resource private Person person; @Resource(name=&amp;#34;xxx&amp;#34;) @Resource(type=&amp;#34;xxx&amp;#34;)   @Autowire（spring注解）按照byType的方式去匹配bean。
+   默认要求必须对象存在，若要允许null值存在，需要声明    @Autowire(required=false)    若要按name匹配需要声明    @Autowired () @Qualifier ( &amp;#34;baseDao&amp;#34; ) </description>
+    </item>
+    
+    <item>
+      <title>@PostConstruct的用法</title>
+      <link>https://lyffin1997.github.io/java/postconstruct%E7%9A%84%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Tue, 12 Jul 2022 11:16:11 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/postconstruct%E7%9A%84%E7%94%A8%E6%B3%95/</guid>
+      <description> 项目启动时，会自动执行用@PostConstruct标记的方法 只能修饰非静态的void方法  @PostConstruct public void init() {}  需要和@Component一起使用，否则会报错 优先级：Constructor &amp;raquo; @Autowired &amp;raquo; @PostConstruct   比如一个用@Component标记的类要在项目启动时创建bean注入到容器中，它的过程应该是这样的：
+   先调用类的Constructor（构造方法）创建一个对象，该对象是空对象，因为它还没有初始化。    自动注入@Autowire标记的变量，此时自动注入的变量才会有值    最后再调用@PostConstruct标记的方法，在想对该对象进行一些初始化操作时，可以使用该注解。    初始化完成后将该对象的实例注入spring容器中   问题：构造方法里也能进行初始化操作，为什么还要@PostConstruct注解？
+ 这就涉及到上面说的优先级了，如下图所示，假如构造方法中进行的初始化操作需要用到@Autowire标记的变量，但是@Autowire的优先级在Constructor后面，也就是说在构造方法结束之前，mqttClient的值是null的，所以此时无法完成想要进行的初始化
+ ​ 解决方法：
+ 将初始化操作放在@PostConstruct标记的方法中，这样@Autowire标记的变量就有值了
+ </description>
+    </item>
+    
+    <item>
+      <title>@Component和@service的区别</title>
+      <link>https://lyffin1997.github.io/java/component%E5%92%8Cservice%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Tue, 12 Jul 2022 10:46:38 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/component%E5%92%8Cservice%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description>   @Controller，@Service，@Repository都包含了@Component子注解，即它们都有@Component的功能
+   ​    @Controller用于表现层（就是那些XXXController的文件，表现层可以理解为与前端交互数据的层面），@Service用于服务层（服务层可以理解为处理业务逻辑的层面），@Repository用于持久层（持久层即为与数据库交互的层面，一般的DAO文件就是该层）
+    @Component：spring基本注解，可以自动检测和使用类路径（@Component标记的当前类的路径）扫描并自动配置bean，每个类即一个bean（即类的实例），并添加到容器中。
+    简单意思就是可以把@Component标记的类自动创建一个它的实例注入到容器中（在项目启动时完成spring注入）
+ </description>
+    </item>
+    
+    <item>
+      <title>如何重写comparator比较器</title>
+      <link>https://lyffin1997.github.io/java/%E5%A6%82%E4%BD%95%E9%87%8D%E5%86%99comparator%E6%AF%94%E8%BE%83%E5%99%A8/</link>
+      <pubDate>Tue, 12 Jul 2022 10:40:29 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/java/%E5%A6%82%E4%BD%95%E9%87%8D%E5%86%99comparator%E6%AF%94%E8%BE%83%E5%99%A8/</guid>
+      <description>方法一：  //Arrays.sort(T[] a, Comparator&amp;lt;? super T&amp;gt; c) //T[] a：需要比较的数组 //Comparator&amp;lt;? super T&amp;gt; c：比较器 Car[] arr = new Car[3]; Arrays.sort(arr, new Comparator&amp;lt;Car&amp;gt;() { @Override public int compare(Car o1, Car o2) { return o1.position - o2.position; } });  方法二：  Car[] arr = new Car[3]; Arrays.sort(arr, (a, b) -&amp;gt; { //返回值&amp;gt;0交换  return b.position-a.position; });  方法三：  Car[] arr = new Car[3]; Arrays.sort(cars, (a, b) -&amp;gt; Integer.compare(a.position, b.position));  方法四：  Car[] arr = new Car[3]; Arrays.</description>
+    </item>
+    
+  </channel>
+</rss>

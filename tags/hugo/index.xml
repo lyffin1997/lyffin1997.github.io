@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hugo on 小黎的技术指北</title>
+    <link>https://lyffin1997.github.io/tags/hugo/</link>
+    <description>Recent content in hugo on 小黎的技术指北</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 13 Jul 2022 00:10:35 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo技巧</title>
+      <link>https://lyffin1997.github.io/application/hugo%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Wed, 13 Jul 2022 00:10:35 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/application/hugo%E6%8A%80%E5%B7%A7/</guid>
+      <description>  编译hugo页面（myblog下运行，生成public）
+hugo --theme=hello-friend-ng --baseUrl=&amp;quot;https://lyffin1997.github.io/&amp;quot; --buildDrafts
+  运行hugo(myblog下运行)
+hugo server -t hello-friend-ng --buildDrafts
+  </description>
+    </item>
+    
+  </channel>
+</rss>

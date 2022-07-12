@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>yml on 小黎的技术指北</title>
+    <link>https://lyffin1997.github.io/tags/yml/</link>
+    <description>Recent content in yml on 小黎的技术指北</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 12 Jul 2022 23:50:01 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/tags/yml/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何编写配置文件</title>
+      <link>https://lyffin1997.github.io/spring/%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Tue, 12 Jul 2022 23:50:01 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/</guid>
+      <description>1. 语法   yml和yaml一样的文件格式，但是yaml优先级比yml高
+  名称固定：application.properties或者application.yml
+  可以同时存在properties和yml，且都会生效
+  语法:
+   application.properties: key=value    server.port=8080    application.yml: key:空格value    server: port: 8080   yml可以存对象，properties不行
+   yml    student: name: lifeng age: 18 #行内写法 student: {name: lifeng,age: 18}  properties  student.name=lifeng student.age=18  yml可以写数组  pets: - cat - dog - pig pets: [cat,dog,pig]  yml可以用特殊表达式（可搜索spring el表达式）  name: ${random.</description>
+    </item>
+    
+  </channel>
+</rss>

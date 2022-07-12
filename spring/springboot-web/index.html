@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="思考：springboot到底替我们配置了什么？能不能进行修改？能修改哪些东西？能不能扩展
+    xxxAutoConfiguration：向容器中自动配置组件 xxxProperties：自动配置类，装配配置文件中自定义的一些属性    1. 静态资源 WebMvcAutoConfiguration.java
+public void addResourceHandlers(ResourceHandlerRegistry registry) { if (!this.resourceProperties.isAddMappings()) { logger.debug(&amp;#34;Default resource handling disabled&amp;#34;); } else { this.addResourceHandler(registry, &amp;#34;/webjars/**&amp;#34;, &amp;#34;classpath:/META-INF/resources/webjars/&amp;#34;); this.addResourceHandler(registry, this.mvcProperties.getStaticPathPattern(), (registration) -&amp;gt; { registration.addResourceLocations(this.resourceProperties.getStaticLocations()); if (this.servletContext != null) { ServletContextResource resource = new ServletContextResource(this.servletContext, &amp;#34;/&amp;#34;); registration.addResourceLocations(new Resource[]{resource}); } }); } }  静态资源路径：  从webjars/**下 classpath:/META-INF/resources/webjars/路径中所有目标获取静态资源 从/**下 classpath:/META-INF/resources/&amp;#34;, &amp;#34;classpath:/resources/&amp;#34;, &amp;#34;classpath:/static/&amp;#34;, &amp;#34;classpath:/public/路径中所有目标获取静态资源 优先级：resources&amp;gt;static(默认)&amp;gt;public 自定义：在yml文件中编写，此时上面两种方式无效 spring: mvc: static-path-pattern: 获取方式：localhost:8080/webjars/jquery/3." />
+<meta name="keywords" content=", springboot, web开发, 框架" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://lyffin1997.github.io/spring/springboot-web/" />
+
+
+    <title>
+        
+            Springboot Web :: 小黎的技术指北 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.fcdabe1b7dd6b4453b6efda4f04d8b2127bbed1e9f9e44255a144895e5b14ea1.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="Springboot Web">
+<meta itemprop="description" content="思考：springboot到底替我们配置了什么？能不能进行修改？能修改哪些东西？能不能扩展
+    xxxAutoConfiguration：向容器中自动配置组件 xxxProperties：自动配置类，装配配置文件中自定义的一些属性    1. 静态资源 WebMvcAutoConfiguration.java
+public void addResourceHandlers(ResourceHandlerRegistry registry) { if (!this.resourceProperties.isAddMappings()) { logger.debug(&#34;Default resource handling disabled&#34;); } else { this.addResourceHandler(registry, &#34;/webjars/**&#34;, &#34;classpath:/META-INF/resources/webjars/&#34;); this.addResourceHandler(registry, this.mvcProperties.getStaticPathPattern(), (registration) -&gt; { registration.addResourceLocations(this.resourceProperties.getStaticLocations()); if (this.servletContext != null) { ServletContextResource resource = new ServletContextResource(this.servletContext, &#34;/&#34;); registration.addResourceLocations(new Resource[]{resource}); } }); } }  静态资源路径：  从webjars/**下 classpath:/META-INF/resources/webjars/路径中所有目标获取静态资源 从/**下 classpath:/META-INF/resources/&#34;, &#34;classpath:/resources/&#34;, &#34;classpath:/static/&#34;, &#34;classpath:/public/路径中所有目标获取静态资源 优先级：resources&gt;static(默认)&gt;public 自定义：在yml文件中编写，此时上面两种方式无效 spring: mvc: static-path-pattern: 获取方式：localhost:8080/webjars/jquery/3."><meta itemprop="datePublished" content="2022-07-12T23:23:57&#43;08:00" />
+<meta itemprop="dateModified" content="2022-07-12T23:23:57&#43;08:00" />
+<meta itemprop="wordCount" content="91"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
+<meta itemprop="keywords" content="springboot,web开发,框架," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://lyffin1997.github.io/"/>
+
+<meta name="twitter:title" content="Springboot Web"/>
+<meta name="twitter:description" content="思考：springboot到底替我们配置了什么？能不能进行修改？能修改哪些东西？能不能扩展
+    xxxAutoConfiguration：向容器中自动配置组件 xxxProperties：自动配置类，装配配置文件中自定义的一些属性    1. 静态资源 WebMvcAutoConfiguration.java
+public void addResourceHandlers(ResourceHandlerRegistry registry) { if (!this.resourceProperties.isAddMappings()) { logger.debug(&#34;Default resource handling disabled&#34;); } else { this.addResourceHandler(registry, &#34;/webjars/**&#34;, &#34;classpath:/META-INF/resources/webjars/&#34;); this.addResourceHandler(registry, this.mvcProperties.getStaticPathPattern(), (registration) -&gt; { registration.addResourceLocations(this.resourceProperties.getStaticLocations()); if (this.servletContext != null) { ServletContextResource resource = new ServletContextResource(this.servletContext, &#34;/&#34;); registration.addResourceLocations(new Resource[]{resource}); } }); } }  静态资源路径：  从webjars/**下 classpath:/META-INF/resources/webjars/路径中所有目标获取静态资源 从/**下 classpath:/META-INF/resources/&#34;, &#34;classpath:/resources/&#34;, &#34;classpath:/static/&#34;, &#34;classpath:/public/路径中所有目标获取静态资源 优先级：resources&gt;static(默认)&gt;public 自定义：在yml文件中编写，此时上面两种方式无效 spring: mvc: static-path-pattern: 获取方式：localhost:8080/webjars/jquery/3."/>
+
+
+
+    <meta property="og:title" content="Springboot Web" />
+<meta property="og:description" content="思考：springboot到底替我们配置了什么？能不能进行修改？能修改哪些东西？能不能扩展
+    xxxAutoConfiguration：向容器中自动配置组件 xxxProperties：自动配置类，装配配置文件中自定义的一些属性    1. 静态资源 WebMvcAutoConfiguration.java
+public void addResourceHandlers(ResourceHandlerRegistry registry) { if (!this.resourceProperties.isAddMappings()) { logger.debug(&#34;Default resource handling disabled&#34;); } else { this.addResourceHandler(registry, &#34;/webjars/**&#34;, &#34;classpath:/META-INF/resources/webjars/&#34;); this.addResourceHandler(registry, this.mvcProperties.getStaticPathPattern(), (registration) -&gt; { registration.addResourceLocations(this.resourceProperties.getStaticLocations()); if (this.servletContext != null) { ServletContextResource resource = new ServletContextResource(this.servletContext, &#34;/&#34;); registration.addResourceLocations(new Resource[]{resource}); } }); } }  静态资源路径：  从webjars/**下 classpath:/META-INF/resources/webjars/路径中所有目标获取静态资源 从/**下 classpath:/META-INF/resources/&#34;, &#34;classpath:/resources/&#34;, &#34;classpath:/static/&#34;, &#34;classpath:/public/路径中所有目标获取静态资源 优先级：resources&gt;static(默认)&gt;public 自定义：在yml文件中编写，此时上面两种方式无效 spring: mvc: static-path-pattern: 获取方式：localhost:8080/webjars/jquery/3." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lyffin1997.github.io/spring/springboot-web/" /><meta property="og:image" content="https://lyffin1997.github.io/"/><meta property="article:section" content="spring" />
+<meta property="article:published_time" content="2022-07-12T23:23:57&#43;08:00" />
+<meta property="article:modified_time" content="2022-07-12T23:23:57&#43;08:00" /><meta property="og:site_name" content="小黎的技术指北" />
+
+
+
+
+
+    <meta property="article:section" content="知识" />
+
+    <meta property="article:section" content="应用" />
+
+
+
+    <meta property="article:published_time" content="2022-07-12 23:23:57 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">lyffin</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/java">java</a></li><li><a href="/spring">spring</a></li><li><a href="/middleware">中间件</a></li><li><a href="/application">应用</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://lyffin1997.github.io/spring/springboot-web/">Springboot Web</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <blockquote>
+<p><strong>思考：springboot到底替我们配置了什么？能不能进行修改？能修改哪些东西？能不能扩展</strong></p>
+</blockquote>
+<ul>
+<li>
+<ul>
+<li>xxxAutoConfiguration：向容器中自动配置组件</li>
+<li>xxxProperties：自动配置类，装配配置文件中自定义的一些属性</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-静态资源"><strong>1. 静态资源</strong></h2>
+<p><code>WebMvcAutoConfiguration.java</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addResourceHandlers</span><span style="color:#f92672">(</span>ResourceHandlerRegistry registry<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">resourceProperties</span><span style="color:#f92672">.</span><span style="color:#a6e22e">isAddMappings</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+        logger<span style="color:#f92672">.</span><span style="color:#a6e22e">debug</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Default resource handling disabled&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">addResourceHandler</span><span style="color:#f92672">(</span>registry<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;/webjars/**&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;classpath:/META-INF/resources/webjars/&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">addResourceHandler</span><span style="color:#f92672">(</span>registry<span style="color:#f92672">,</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">mvcProperties</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getStaticPathPattern</span><span style="color:#f92672">(),</span> <span style="color:#f92672">(</span>registration<span style="color:#f92672">)</span> <span style="color:#f92672">-&gt;</span> <span style="color:#f92672">{</span>
+            registration<span style="color:#f92672">.</span><span style="color:#a6e22e">addResourceLocations</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">resourceProperties</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getStaticLocations</span><span style="color:#f92672">());</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">servletContext</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                ServletContextResource resource <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ServletContextResource<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">servletContext</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;/&#34;</span><span style="color:#f92672">);</span>
+                registration<span style="color:#f92672">.</span><span style="color:#a6e22e">addResourceLocations</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Resource<span style="color:#f92672">[]{</span>resource<span style="color:#f92672">});</span>
+            <span style="color:#f92672">}</span>
+
+
+        <span style="color:#f92672">});</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>静态资源路径：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">从webjars/**下
+classpath:/META-INF/resources/webjars/路径中所有目标获取静态资源
+
+
+从/**下
+classpath:/META-INF/resources/&#34;, &#34;classpath:/resources/&#34;, &#34;classpath:/static/&#34;, &#34;classpath:/public/路径中所有目标获取静态资源
+优先级：resources&gt;static(默认)&gt;public
+
+
+自定义：在yml文件中编写，此时上面两种方式无效
+spring:
+  mvc:
+    static-path-pattern: 
+
+
+获取方式：localhost:8080/webjars/jquery/3.4.1/jquery.js
+或者：localhost:8080/1.js
+</code></pre></div><p>​                 <img src="/img/springboot-web1.png" alt="img"></p>
+<p>​                 <img src="/img/springboot-web2.png" alt="img"></p>
+<p>​                 <img src="/img/springboot-web3.png" alt="img"></p>
+<h2 id="52-首页"><strong>5.2 首页</strong></h2>
+<ul>
+<li>
+<p>寻找静态资源目录下“index.html”的文件</p>
+</li>
+<li>
+<p>然后输入路径 localhost:8080 或者	localhost:8080/index.html           <img src="/img/springboot-web4.png" alt="img"></p>
+<p><img src="/img/springboot-web5.png" alt="img"></p>
+</li>
+<li>
+<p>templates下的所有页面只能通过controller跳转</p>
+</li>
+<li>
+<p>并且需要模板引擎的支持（Thymeleaf、freemarker、mustache等）                 <img src="/img/springboot-web6.png" alt="img"></p>
+</li>
+<li>
+<p><img src="/img/springboot-web7.png" alt="img"></p>
+</li>
+</ul>
+<h2 id="53-模板引擎"><strong>5.3 模板引擎</strong></h2>
+<p>//自动查抄templates路径下.html的文件</p>
+<p><img src="/img/springboot-web8.png" alt="img"></p>
+<p><img src="/img/springboot-web9.png" alt="img"></p>
+<p><img src="/img/springboot-web10.png" alt="img"></p>
+<p><img src="/img/springboot-web11.png" alt="img"></p>
+<p><img src="/img/springboot-web12.png" alt="img"></p>
+<h2 id="54-扩展springmvc"><strong>5.4 扩展springmvc</strong></h2>
+<ul>
+<li>官方文档</li>
+</ul>
+<p><a href="https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/boot-features-developing-web-applications.html">https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/boot-features-developing-web-applications.html</a></p>
+<p>//如果你想扩展springmvc，只需要新增一个WebMvcConfigurer实现类</p>
+<p><img src="/img/springboot-web13.png" alt="img"></p>
+<ul>
+<li>
+<p>扩展视图解析器</p>
+<p><img src="/img/springboot-web14.png" alt="img"></p>
+</li>
+<li>
+<p>自定义视图控制器</p>
+</li>
+</ul>
+<p>将/lyffin的页面请求指定test文件（test文件依旧要放在templates下）                <img src="/img/springboot-web15.png" alt="img"></p>
+<ul>
+<li>
+<p>@EnableWebMvc</p>
+</li>
+<li>
+<ul>
+<li>
+<p><strong>在自动扩展mvc时一定不能在WebMvcConfigurer实现类上使用这个注解</strong></p>
+</li>
+<li>
+<p>该注解导入了一个DelegatingWebMvcConfiguration类，其作用是获取容器中所有的webmvcconfigurer</p>
+<p><img src="/img/springboot-web16.png" alt="img"></p>
+</li>
+<li>
+<p>为什么不能使用这个注解</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>该导入类继承了一个父类</p>
+<p><img src="/img/springboot-web17.png" alt="img"></p>
+<p>springboot要想实现自动装配，要求不能有这个类的bean存在，否则就不能自动装配</p>
+</blockquote>
+<blockquote>
+<p><img src="/img/springboot-web18.png" alt="img"></p>
+</blockquote>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/springboot/">springboot</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/web%E5%BC%80%E5%8F%91/">web开发</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/%E6%A1%86%E6%9E%B6/">框架</a></span>
+        
+    </p>
+
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/categories/%E7%9F%A5%E8%AF%86/">知识</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/categories/%E5%BA%94%E7%94%A8/">应用</a></span>
+        
+    </p>
+
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>
