@@ -7,7 +7,29 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 13 Jul 2022 00:02:48 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/categories/%E7%9F%A5%E8%AF%86/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Jul 2022 23:34:27 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/categories/%E7%9F%A5%E8%AF%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prometheus简介</title>
+      <link>https://lyffin1997.github.io/application/prometheus%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Wed, 13 Jul 2022 23:34:27 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/application/prometheus%E7%AE%80%E4%BB%8B/</guid>
+      <description>1. 定位  promethues本身并没有监控的功能，它的作用是采用times-series（时间序列）的方式，以一种自定义的格式存储数据在本地硬盘上
+ 2. 数据格式 2.1 time-series  Prometheus会将所有采集到的样本数据以时间序列（time-series）的方式保存在内存数据库中,并且定时保存到硬盘上。
+  time-series按照时间戳和值的顺序存放，每个time-series称为一个样本（sample），它由三部分组成：
+   指标(metric)：metric name和描述当前样本特征的labelsets;     时间戳(timestamp)：一个精确到毫秒的时间戳;     样本值(value)： 一个float64的浮点型数据表示当前样本的值。    图中每个点为一个time-series，横坐标为时间戳timestamp，纵坐标为样本值，每个time-series都有一个唯一的描述该样本特征的metric。
+ 2.2 指标（metric） 指标由metric name和用于描述样本特征的labelsets组成
+2.2.1 metric name 反映样本名称，如，http_request_total - 表示当前系统接收到的HTTP请求总量。
+2.2.2 Lablesets 该部分是一个{lable}集，标签(label)反映了当前样本的特征维度，通过这些维度Prometheus可以对样本数据进行过滤，聚合等（类似于mysql查询语句）。
+每个lable由lable name和 lable value两部分组成:
+ “method”为lable name ”POST”为lable value。  2.2.3 metric类型 大致可分为四种类型：
+Counter（计数器）、Gauge（仪表盘）、Histogram（直方图）、Summary（摘要）。
+2.2.3.1 Counter Counter：只增不减的计数器。
+一般用于监控http请求次数、cpu使用时间等只增不长的指标
+2.2.3.2 Gauge Gauge：可增可减的仪表盘
+常见指标如：node_memory_MemFree（主机当前空闲的内容大小）、node_memory_MemAvailable（可用内存大小）都是Gauge类型的监控指标。</description>
+    </item>
+    
     <item>
       <title>Springboot学习简介</title>
       <link>https://lyffin1997.github.io/spring/springboot%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B/</link>

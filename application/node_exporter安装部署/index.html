@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="1. 安装部署 1. cd /usr/local/prometheus （先进入你想安装的目录）
+2. 下载node_exporter包 wget https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-amd64.tar.gz -P /usr/local/prometheus 3. 解压 tar zxvf /usr/local/prometheus/node_exporter-0.18.1.linux-amd64.tar.gz 4. 重命名 mv /usr/local/prometheus/node_exporter-0.18.1.linux-amd64.tar.gz /usr/local/prometheus/node_exporter 5. 创建启动服务 touch /etc/systemd/system/node_exporter.service 6. 编辑启动服务文件  vim /etc/systemd/system/node_exporter.service 按i（注意切换英文输入） 将下列代码复制粘贴  [Unit] Description=node_exporter Documentation=https://prometheus.io/ After=network.target [Service] Type=simple User=root ExecStart=/usr/local/prometheus/node_exporter/node_exporter Restart=on-failure [Install] WantedBy=multi-user.target  按esc 按 :wq (注意:也要按)  7. 重新加载系统服务 systemctl daemon-reload 8. 开机自启 systemctl enable node_exporter 9. 启动 systemctl start node_exporter 10. 验证 http://10.4.4.173:9100/metrics
+2. promQL 2." />
+<meta name="keywords" content=", exporter, prometheus" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://lyffin1997.github.io/application/node_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" />
+
+
+    <title>
+        
+            Node_exporter安装部署 :: 小黎的技术指北 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.fcdabe1b7dd6b4453b6efda4f04d8b2127bbed1e9f9e44255a144895e5b14ea1.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="Node_exporter安装部署">
+<meta itemprop="description" content="1. 安装部署 1. cd /usr/local/prometheus （先进入你想安装的目录）
+2. 下载node_exporter包 wget https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-amd64.tar.gz -P /usr/local/prometheus 3. 解压 tar zxvf /usr/local/prometheus/node_exporter-0.18.1.linux-amd64.tar.gz 4. 重命名 mv /usr/local/prometheus/node_exporter-0.18.1.linux-amd64.tar.gz /usr/local/prometheus/node_exporter 5. 创建启动服务 touch /etc/systemd/system/node_exporter.service 6. 编辑启动服务文件  vim /etc/systemd/system/node_exporter.service 按i（注意切换英文输入） 将下列代码复制粘贴  [Unit] Description=node_exporter Documentation=https://prometheus.io/ After=network.target [Service] Type=simple User=root ExecStart=/usr/local/prometheus/node_exporter/node_exporter Restart=on-failure [Install] WantedBy=multi-user.target  按esc 按 :wq (注意:也要按)  7. 重新加载系统服务 systemctl daemon-reload 8. 开机自启 systemctl enable node_exporter 9. 启动 systemctl start node_exporter 10. 验证 http://10.4.4.173:9100/metrics
+2. promQL 2."><meta itemprop="datePublished" content="2022-07-13T23:14:57&#43;08:00" />
+<meta itemprop="dateModified" content="2022-07-13T23:14:57&#43;08:00" />
+<meta itemprop="wordCount" content="146"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
+<meta itemprop="keywords" content="exporter,prometheus," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://lyffin1997.github.io/"/>
+
+<meta name="twitter:title" content="Node_exporter安装部署"/>
+<meta name="twitter:description" content="1. 安装部署 1. cd /usr/local/prometheus （先进入你想安装的目录）
+2. 下载node_exporter包 wget https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-amd64.tar.gz -P /usr/local/prometheus 3. 解压 tar zxvf /usr/local/prometheus/node_exporter-0.18.1.linux-amd64.tar.gz 4. 重命名 mv /usr/local/prometheus/node_exporter-0.18.1.linux-amd64.tar.gz /usr/local/prometheus/node_exporter 5. 创建启动服务 touch /etc/systemd/system/node_exporter.service 6. 编辑启动服务文件  vim /etc/systemd/system/node_exporter.service 按i（注意切换英文输入） 将下列代码复制粘贴  [Unit] Description=node_exporter Documentation=https://prometheus.io/ After=network.target [Service] Type=simple User=root ExecStart=/usr/local/prometheus/node_exporter/node_exporter Restart=on-failure [Install] WantedBy=multi-user.target  按esc 按 :wq (注意:也要按)  7. 重新加载系统服务 systemctl daemon-reload 8. 开机自启 systemctl enable node_exporter 9. 启动 systemctl start node_exporter 10. 验证 http://10.4.4.173:9100/metrics
+2. promQL 2."/>
+
+
+
+    <meta property="og:title" content="Node_exporter安装部署" />
+<meta property="og:description" content="1. 安装部署 1. cd /usr/local/prometheus （先进入你想安装的目录）
+2. 下载node_exporter包 wget https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-amd64.tar.gz -P /usr/local/prometheus 3. 解压 tar zxvf /usr/local/prometheus/node_exporter-0.18.1.linux-amd64.tar.gz 4. 重命名 mv /usr/local/prometheus/node_exporter-0.18.1.linux-amd64.tar.gz /usr/local/prometheus/node_exporter 5. 创建启动服务 touch /etc/systemd/system/node_exporter.service 6. 编辑启动服务文件  vim /etc/systemd/system/node_exporter.service 按i（注意切换英文输入） 将下列代码复制粘贴  [Unit] Description=node_exporter Documentation=https://prometheus.io/ After=network.target [Service] Type=simple User=root ExecStart=/usr/local/prometheus/node_exporter/node_exporter Restart=on-failure [Install] WantedBy=multi-user.target  按esc 按 :wq (注意:也要按)  7. 重新加载系统服务 systemctl daemon-reload 8. 开机自启 systemctl enable node_exporter 9. 启动 systemctl start node_exporter 10. 验证 http://10.4.4.173:9100/metrics
+2. promQL 2." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lyffin1997.github.io/application/node_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" /><meta property="og:image" content="https://lyffin1997.github.io/"/><meta property="article:section" content="application" />
+<meta property="article:published_time" content="2022-07-13T23:14:57&#43;08:00" />
+<meta property="article:modified_time" content="2022-07-13T23:14:57&#43;08:00" /><meta property="og:site_name" content="小黎的技术指北" />
+
+
+
+
+
+    <meta property="article:section" content="应用" />
+
+
+
+    <meta property="article:published_time" content="2022-07-13 23:14:57 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">lyffin</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/java">java</a></li><li><a href="/spring">spring</a></li><li><a href="/middleware">中间件</a></li><li><a href="/application">应用</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://lyffin1997.github.io/application/node_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/">Node_exporter安装部署</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <h1 id="1-安装部署"><strong>1. 安装部署</strong></h1>
+<h3 id="1-cd-usrlocalprometheus"><strong>1. cd /usr/local/prometheus</strong></h3>
+<p>（先进入你想安装的目录）</p>
+<h3 id="2-下载node_exporter包"><strong>2. 下载node_exporter包</strong></h3>
+<pre><code>wget https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-amd64.tar.gz -P /usr/local/prometheus
+</code></pre><h3 id="3-解压"><strong>3. 解压</strong></h3>
+<pre><code>tar zxvf /usr/local/prometheus/node_exporter-0.18.1.linux-amd64.tar.gz
+</code></pre><h3 id="4-重命名"><strong>4. 重命名</strong></h3>
+<pre><code>mv /usr/local/prometheus/node_exporter-0.18.1.linux-amd64.tar.gz /usr/local/prometheus/node_exporter
+</code></pre><h3 id="5-创建启动服务"><strong>5. 创建启动服务</strong></h3>
+<pre><code>touch /etc/systemd/system/node_exporter.service
+</code></pre><h3 id="6-编辑启动服务文件"><strong>6. 编辑启动服务文件</strong></h3>
+<ul>
+<li>vim /etc/systemd/system/node_exporter.service</li>
+<li>按i（注意切换英文输入）</li>
+<li>将下列代码复制粘贴</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#f92672">[</span>Unit<span style="color:#f92672">]</span>
+Description<span style="color:#f92672">=</span>node_exporter
+Documentation<span style="color:#f92672">=</span>https://prometheus.io/
+After<span style="color:#f92672">=</span>network.target
+ 
+<span style="color:#f92672">[</span>Service<span style="color:#f92672">]</span>
+Type<span style="color:#f92672">=</span>simple
+User<span style="color:#f92672">=</span>root
+ExecStart<span style="color:#f92672">=</span>/usr/local/prometheus/node_exporter/node_exporter
+Restart<span style="color:#f92672">=</span>on-failure
+ 
+<span style="color:#f92672">[</span>Install<span style="color:#f92672">]</span>
+WantedBy<span style="color:#f92672">=</span>multi-user.target
+</code></pre></div><ul>
+<li>按esc</li>
+<li>按 :wq              (注意:也要按)</li>
+</ul>
+<h3 id="7-重新加载系统服务"><strong>7. 重新加载系统服务</strong></h3>
+<pre><code>systemctl daemon-reload
+</code></pre><h3 id="8-开机自启"><strong>8. 开机自启</strong></h3>
+<pre><code>systemctl enable node_exporter
+</code></pre><h3 id="9-启动"><strong>9. 启动</strong></h3>
+<pre><code>systemctl start node_exporter
+</code></pre><h3 id="10-验证"><strong>10. 验证</strong></h3>
+<p>http://10.4.4.173:9100/metrics</p>
+<h1 id="2-promql">2. promQL</h1>
+<h2 id="21-cpu利用率">2.1 <strong>CPU利用率</strong></h2>
+<pre><code>promQL:100 - (avg by(instance) (irate(node_cpu_seconds_total{job=&quot;170node&quot;,mode=&quot;idle&quot;}[5m])) * 100)
+</code></pre><pre><code>(((count(count(node_cpu_seconds_total{instance=&quot;10.4.4.170:9100&quot;,job=&quot;170node&quot;}) by (cpu))) - avg(sum by (mode)(rate(node_cpu_seconds_total{mode='idle',instance=&quot;10.4.4.170:9100&quot;,job=&quot;170node&quot;}[$__rate_interval])))) * 100) / count(count(node_cpu_seconds_total{instance=&quot;10.4.4.170:9100&quot;,job=&quot;170node&quot;}) by (cpu))
+</code></pre><h2 id="22-内存容量">2.2 <strong>内存容量</strong></h2>
+<pre><code>node_memory_MemTotal_bytes{job=&quot;170node&quot;}/(1024*1024*1024)
+</code></pre><h2 id="23-内存使用量">2.3 <strong>内存使用量</strong></h2>
+<pre><code>node_memory_MemTotal_bytes{instance=&quot;$node&quot;,job=&quot;$job&quot;} - node_memory_MemFree_bytes{instance=&quot;$node&quot;,job=&quot;$job&quot;} - (node_memory_Cached_bytes{instance=&quot;$node&quot;,job=&quot;$job&quot;} + node_memory_Buffers_bytes{instance=&quot;$node&quot;,job=&quot;$job&quot;}) 
+</code></pre><h2 id="24-内存利用率">2.4 <strong>内存利用率</strong></h2>
+<pre><code>(node_memory_MemTotal_bytes - (node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes)) / node_memory_MemTotal_bytes * 100
+</code></pre><h2 id="25-磁盘容量">2.5 <strong>磁盘容量</strong></h2>
+<pre><code>node_filesystem_size_bytes{mountpoint=&quot;/&quot;,job=&quot;170node&quot;} / (1024*1024*1024)
+</code></pre><h2 id="26-磁盘使用量">2.6 <strong>磁盘使用量</strong></h2>
+<pre><code>node_filesystem_size_bytes{instance=&quot;$node&quot;,job=&quot;$job&quot;,mountpoint=&quot;/&quot;} - node_filesystem_free_bytes{instance=&quot;$node&quot;,job=&quot;$job&quot;,mountpoint=&quot;/&quot;}
+</code></pre><h2 id="27-磁盘利用率">2.7 <strong>磁盘利用率</strong></h2>
+<pre><code>(node_filesystem_size_bytes{mountpoint=&quot;/&quot;} - node_filesystem_free_bytes{mountpoint=&quot;/&quot;}) / node_filesystem_size_bytes{mountpoint=&quot;/&quot;} * 100
+</code></pre><h2 id="28-磁盘每秒读取">2.8 <strong>磁盘每秒读取</strong></h2>
+<pre><code>irate(node_disk_read_bytes_total{device=\&quot;sda\&quot;,instance=\&quot;10.4.4.170:9100\&quot;,job=\&quot;170node\&quot;}[5m])
+</code></pre><h2 id="29-磁盘每秒写入">2.9 <strong>磁盘每秒写入</strong></h2>
+<pre><code>irate(node_disk_written_bytes_total{device=\&quot;sda\&quot;,instance=\&quot;10.4.4.170:9100\&quot;,job=\&quot;170node\&quot;}[5m])
+</code></pre><h2 id="210-网络上传速率">2.10 <strong>网络上传速率</strong></h2>
+<pre><code>sum by(instance)(irate(node_network_transmit_bytes_total{instance=&quot;10.4.4.170:9100&quot;,job=&quot;170node&quot;}[5m]))
+</code></pre><h2 id="211-网络下载速率">2.11 <strong>网络下载速率</strong></h2>
+<pre><code>sum by(instance)(irate(node_network_receive_bytes_total{instance=&quot;10.4.4.170:9100&quot;,job=&quot;170node&quot;}[5m]))
+</code></pre>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/exporter/">exporter</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/prometheus/">prometheus</a></span>
+        
+    </p>
+
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/categories/%E5%BA%94%E7%94%A8/">应用</a></span>
+        
+    </p>
+
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>

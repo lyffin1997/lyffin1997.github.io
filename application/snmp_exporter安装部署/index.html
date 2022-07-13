@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="1. 开机交换机snmp协议（非华为交换机跳过这一步） ​ //192.168.1.9是snmp_exporter地址
+2. 配置go 环境 安装go1.15.6（tar包或者命令行安装都行）
+ vim /etc/profile
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=/root/go
+source /etc/profile
+go version #显示版本号即安装成功
+  //go环境变量国内代理：
+go env -w GO111MODULE=on
+go env -w GOPROXY=https://goproxy.cn,direct
+ 3. 下载snmp环境 yum install gcc gcc-g&#43;&#43; make net-snmp net-snmp-utils net-snmp-libs net-snmp-devel (此外，git也需安装配置好)
+ //测试snmp
+snmpwalk -v 2c -c public 192.168.1.222 .1 //pubilc是团体名，.1表示查看所有信息，192.168.1.222是设备ip
+ 4. 下载generator代码 go get github.com/prometheus/snmp_exporter/generator 5. 编译  //路径不一定准确，总之找到GOPATH路径下的generator文件夹
+cd ${GOPATH-$HOME/go}/src/github.com/prometheus/snmp_exporter/gener ator go build  6." />
+<meta name="keywords" content=", prometheus, exporter" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://lyffin1997.github.io/application/snmp_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" />
+
+
+    <title>
+        
+            Snmp_exporter安装部署 :: 小黎的技术指北 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.fcdabe1b7dd6b4453b6efda4f04d8b2127bbed1e9f9e44255a144895e5b14ea1.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+
+
+<meta itemprop="name" content="Snmp_exporter安装部署">
+<meta itemprop="description" content="1. 开机交换机snmp协议（非华为交换机跳过这一步） ​ //192.168.1.9是snmp_exporter地址
+2. 配置go 环境 安装go1.15.6（tar包或者命令行安装都行）
+ vim /etc/profile
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=/root/go
+source /etc/profile
+go version #显示版本号即安装成功
+  //go环境变量国内代理：
+go env -w GO111MODULE=on
+go env -w GOPROXY=https://goproxy.cn,direct
+ 3. 下载snmp环境 yum install gcc gcc-g&#43;&#43; make net-snmp net-snmp-utils net-snmp-libs net-snmp-devel (此外，git也需安装配置好)
+ //测试snmp
+snmpwalk -v 2c -c public 192.168.1.222 .1 //pubilc是团体名，.1表示查看所有信息，192.168.1.222是设备ip
+ 4. 下载generator代码 go get github.com/prometheus/snmp_exporter/generator 5. 编译  //路径不一定准确，总之找到GOPATH路径下的generator文件夹
+cd ${GOPATH-$HOME/go}/src/github.com/prometheus/snmp_exporter/gener ator go build  6."><meta itemprop="datePublished" content="2022-07-14T00:23:38&#43;08:00" />
+<meta itemprop="dateModified" content="2022-07-14T00:23:38&#43;08:00" />
+<meta itemprop="wordCount" content="212"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
+<meta itemprop="keywords" content="prometheus,exporter," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://lyffin1997.github.io/"/>
+
+<meta name="twitter:title" content="Snmp_exporter安装部署"/>
+<meta name="twitter:description" content="1. 开机交换机snmp协议（非华为交换机跳过这一步） ​ //192.168.1.9是snmp_exporter地址
+2. 配置go 环境 安装go1.15.6（tar包或者命令行安装都行）
+ vim /etc/profile
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=/root/go
+source /etc/profile
+go version #显示版本号即安装成功
+  //go环境变量国内代理：
+go env -w GO111MODULE=on
+go env -w GOPROXY=https://goproxy.cn,direct
+ 3. 下载snmp环境 yum install gcc gcc-g&#43;&#43; make net-snmp net-snmp-utils net-snmp-libs net-snmp-devel (此外，git也需安装配置好)
+ //测试snmp
+snmpwalk -v 2c -c public 192.168.1.222 .1 //pubilc是团体名，.1表示查看所有信息，192.168.1.222是设备ip
+ 4. 下载generator代码 go get github.com/prometheus/snmp_exporter/generator 5. 编译  //路径不一定准确，总之找到GOPATH路径下的generator文件夹
+cd ${GOPATH-$HOME/go}/src/github.com/prometheus/snmp_exporter/gener ator go build  6."/>
+
+
+
+    <meta property="og:title" content="Snmp_exporter安装部署" />
+<meta property="og:description" content="1. 开机交换机snmp协议（非华为交换机跳过这一步） ​ //192.168.1.9是snmp_exporter地址
+2. 配置go 环境 安装go1.15.6（tar包或者命令行安装都行）
+ vim /etc/profile
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=/root/go
+source /etc/profile
+go version #显示版本号即安装成功
+  //go环境变量国内代理：
+go env -w GO111MODULE=on
+go env -w GOPROXY=https://goproxy.cn,direct
+ 3. 下载snmp环境 yum install gcc gcc-g&#43;&#43; make net-snmp net-snmp-utils net-snmp-libs net-snmp-devel (此外，git也需安装配置好)
+ //测试snmp
+snmpwalk -v 2c -c public 192.168.1.222 .1 //pubilc是团体名，.1表示查看所有信息，192.168.1.222是设备ip
+ 4. 下载generator代码 go get github.com/prometheus/snmp_exporter/generator 5. 编译  //路径不一定准确，总之找到GOPATH路径下的generator文件夹
+cd ${GOPATH-$HOME/go}/src/github.com/prometheus/snmp_exporter/gener ator go build  6." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lyffin1997.github.io/application/snmp_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/" /><meta property="og:image" content="https://lyffin1997.github.io/"/><meta property="article:section" content="application" />
+<meta property="article:published_time" content="2022-07-14T00:23:38&#43;08:00" />
+<meta property="article:modified_time" content="2022-07-14T00:23:38&#43;08:00" /><meta property="og:site_name" content="小黎的技术指北" />
+
+
+
+
+
+    <meta property="article:section" content="应用" />
+
+
+
+    <meta property="article:published_time" content="2022-07-14 00:23:38 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">lyffin</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/java">java</a></li><li><a href="/spring">spring</a></li><li><a href="/middleware">中间件</a></li><li><a href="/application">应用</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="https://lyffin1997.github.io/application/snmp_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/">Snmp_exporter安装部署</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <h1 id="1-开机交换机snmp协议非华为交换机跳过这一步">1. <strong>开机交换机snmp协议（非华为交换机跳过这一步）</strong></h1>
+<p>​                 <img src="/img/snmp_exporter1.png" alt="img"></p>
+<p>//192.168.1.9是snmp_exporter地址</p>
+<h1 id="2-配置go-环境">2. <strong>配置go 环境</strong></h1>
+<p>安装go1.15.6（tar包或者命令行安装都行）</p>
+<blockquote>
+<p>vim /etc/profile</p>
+<p>export GOROOT=/usr/local/go</p>
+<p>export PATH=$PATH:$GOROOT/bin</p>
+<p>export GOPATH=/root/go</p>
+<p>source /etc/profile</p>
+<p>go version #显示版本号即安装成功</p>
+</blockquote>
+<blockquote>
+<p>//go环境变量国内代理：</p>
+<p>go env -w GO111MODULE=on</p>
+<p>go env -w GOPROXY=https://goproxy.cn,direct</p>
+</blockquote>
+<h1 id="3-下载snmp环境">3. <strong>下载snmp环境</strong></h1>
+<pre><code>yum install gcc gcc-g++ make net-snmp net-snmp-utils net-snmp-libs net-snmp-devel
+</code></pre><p>(此外，git也需安装配置好)</p>
+<blockquote>
+<p>//测试snmp</p>
+<pre><code>snmpwalk -v 2c -c public 192.168.1.222 .1
+</code></pre><p>//pubilc是团体名，.1表示查看所有信息，192.168.1.222是设备ip</p>
+</blockquote>
+<h1 id="4-下载generator代码">4. <strong>下载generator代码</strong></h1>
+<pre><code>go get github.com/prometheus/snmp_exporter/generator
+</code></pre><h1 id="5-编译">5. <strong>编译</strong></h1>
+<blockquote>
+<p>//路径不一定准确，总之找到GOPATH路径下的generator文件夹</p>
+<pre><code>cd ${GOPATH-$HOME/go}/src/github.com/prometheus/snmp_exporter/gener
+ator
+</code></pre><pre><code>go build
+</code></pre></blockquote>
+<h1 id="6-使用generator生成snmpyml文件">6. <strong>使用generator生成snmp.yml文件</strong></h1>
+<blockquote>
+<p>//将所需监控交换机厂商提供的mib包放入到${GOPATH-$HOME/go}/src/github.com/prometheus/snmp_exporter/generator/mibs目录中</p>
+</blockquote>
+<blockquote>
+<p>//输入以下命令查看oid名字，最后为交换机厂家提供的mib库名称</p>
+<pre><code>snmptranslate -Tz -m ./mibs/TRPS-9168GT-M12X-BP2-24V_v100.mib      
+</code></pre></blockquote>
+<p><img src="/img/snmp_exporter2.png" alt="img"></p>
+<blockquote>
+<p>//选中对应的oid进行测试，如：</p>
+<pre><code>snmpwalk -v 2c -c public 192.168.1.222 1.3.6.1
+</code></pre></blockquote>
+<blockquote>
+<p>//若无报错，然后要修改generator.yml文件，oid或名称都可以，写法不一样</p>
+<pre><code>vim generator.yml
+</code></pre></blockquote>
+<p>写法1:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">modules</span>:
+  <span style="color:#75715e"># Default IF-MIB interfaces table with ifIndex.</span>
+  <span style="color:#f92672">if_mib</span>:
+    <span style="color:#f92672">walk</span>:
+      - <span style="color:#ae81ff">1.3.6.1</span>
+    <span style="color:#f92672">version</span>: <span style="color:#ae81ff">2</span>
+    <span style="color:#f92672">timeout</span>: <span style="color:#ae81ff">30s</span>
+    <span style="color:#f92672">auth</span>:
+      <span style="color:#f92672">community</span>: <span style="color:#ae81ff">public</span>
+</code></pre></div><p>写法2:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">modules</span>:
+  <span style="color:#75715e"># Default IF-MIB interfaces table with ifIndex.</span>
+  <span style="color:#f92672">if_mib</span>:
+    <span style="color:#f92672">walk</span>: [<span style="color:#ae81ff">internet]</span>
+    <span style="color:#f92672">version</span>: <span style="color:#ae81ff">2</span>
+    <span style="color:#f92672">timeout</span>: <span style="color:#ae81ff">30s</span>
+    <span style="color:#f92672">auth</span>:
+      <span style="color:#f92672">community</span>: <span style="color:#ae81ff">public</span>
+</code></pre></div><blockquote>
+<p>//If_mib:模块名，可自定义</p>
+<p>//Walk:所需监控指标的oid（得自己查），如上图所示</p>
+<p>//version: snmpv2版本</p>
+<p>//Community:团体名（与第一步中的团体名一致）</p>
+<p>//其他配置保持原样就行</p>
+</blockquote>
+<blockquote>
+<p>//指定mib库，注意在generator文件夹下执行该命令</p>
+<pre><code>export MIBDIRS=mibs
+</code></pre><p>//生成snmp.yml文件</p>
+<pre><code>./generator generate
+</code></pre></blockquote>
+<h1 id="7-运行snmp_exporter">7. <strong>运行snmp_exporter</strong></h1>
+<blockquote>
+<p>//将1.6中生成的snmp.yml文件复制并替换下载的snmp_exporter中的snmp.yml</p>
+<p>//snmp_exporter下载地址：https://github.com/prometheus/snmp_exporter</p>
+</blockquote>
+<p>//将生成的snmp配置移到snmp_exporter目录下</p>
+<pre><code>cp snmp.yml /usr/local/snmp_exporter/ 
+</code></pre><p>//指定配置文件运行</p>
+<pre><code>./snmp_exporter --config.file=/usr/local/snmp_exporter/snmp.yml
+</code></pre><h1 id="8-防火墙添加对外暴露端口在部署exporter的机器上">8. <strong>防火墙添加对外暴露端口（在部署exporter的机器上）</strong></h1>
+<blockquote>
+<pre><code>firewall-cmd --zone=public --permanent --add-port=9116/tcp
+</code></pre><pre><code>firewall-cmd --reload 
+</code></pre><pre><code>firewall-cmd --list-port
+</code></pre></blockquote>
+<h1 id="9-验证">9. <strong>验证</strong></h1>
+<blockquote>
+<p>访问192.168.1.9:9116</p>
+<p>//192.168.1.9是部署snmp_exporter的ip地址</p>
+<p>//9116是snmp_exporter默认端口号</p>
+</blockquote>
+<h1 id="10-查询">10. <strong>查询</strong></h1>
+<p>//输入设备所在ip和模块名，模块名是之前配置的generator.yml中的模块名，如：</p>
+<p><img src="/img/snmp_exporter3.png" alt="img"></p>
+<p>//然后获取结果</p>
+<p><img src="/img/snmp_exporter4.png" alt="img"></p>
+<h1 id="11-修改prometheusyml文件注意实际配置文件要把注释都删掉否则prometheus启动会报错">11. <strong>修改prometheus.yml文件（注意，实际配置文件要把注释都删掉，否则prometheus启动会报错）</strong></h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">job_name</span>: <span style="color:#e6db74">&#39;snmp_exporter&#39;</span>
+    <span style="color:#75715e"># 采集超时：10s</span>
+    <span style="color:#f92672">scrape_interval</span>: <span style="color:#ae81ff">10s</span>
+    <span style="color:#f92672">static_configs</span>:
+      - <span style="color:#f92672">targets</span>:
+        - <span style="color:#ae81ff">192.168.1.222</span>  <span style="color:#75715e">#交换机ip</span>
+    <span style="color:#f92672">metrics_path</span>: <span style="color:#ae81ff">/snmp</span>
+    <span style="color:#f92672">params</span>:
+      <span style="color:#f92672">module</span>: [<span style="color:#ae81ff">huawei_mib] </span> <span style="color:#75715e">#修改成2.4步自己设置的mib名称</span>
+    <span style="color:#f92672">relabel_configs</span>:
+      - <span style="color:#f92672">source_labels</span>: [<span style="color:#ae81ff">__address__]</span>
+        <span style="color:#f92672">target_label</span>: <span style="color:#ae81ff">__param_target</span>
+      - <span style="color:#f92672">source_labels</span>: [<span style="color:#ae81ff">__param_target]</span>
+        <span style="color:#f92672">target_label</span>: <span style="color:#ae81ff">instance</span>
+      - <span style="color:#f92672">target_label</span>: <span style="color:#ae81ff">__address__</span>
+        <span style="color:#f92672">replacement</span>: <span style="color:#ae81ff">192.168.0.254</span>:<span style="color:#ae81ff">9116</span>  <span style="color:#75715e"># 安装snmp_exporter主机的ip和端口号</span>
+</code></pre></div><blockquote>
+<p>//192.168.1.222是交换机ip地址</p>
+<p>//[huawei_mib]：是1之前generato中填的module名</p>
+</blockquote>
+<h1 id="12-重启prometheus并验证">12. <strong>重启prometheus并验证</strong></h1>
+<p><img src="/img/snmp_exporter5.png" alt="img"></p>
+<h1 id="13-参考链接">13. <strong>参考链接</strong></h1>
+<p><a href="https://www.freesion.com/article/1025951962/">https://www.freesion.com/article/1025951962/</a></p>
+<p><a href="https://blog.csdn.net/lwlfox/article/details/103203415">https://blog.csdn.net/lwlfox/article/details/103203415</a></p>
+<p><a href="https://mikuac.com/archives/954/">https://mikuac.com/archives/954/</a></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/prometheus/">prometheus</a></span>
+        <span class="tag"><a href="https://lyffin1997.github.io/tags/exporter/">exporter</a></span>
+        
+    </p>
+
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder meta-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+
+        <span class="tag"><a href="https://lyffin1997.github.io/categories/%E5%BA%94%E7%94%A8/">应用</a></span>
+        
+    </p>
+
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>

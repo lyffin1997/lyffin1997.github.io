@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>prometheys on 小黎的技术指北</title>
+    <link>https://lyffin1997.github.io/tags/prometheys/</link>
+    <description>Recent content in prometheys on 小黎的技术指北</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 13 Jul 2022 23:45:04 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/tags/prometheys/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mysqld_exporter安装部署</title>
+      <link>https://lyffin1997.github.io/application/mysqld_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Wed, 13 Jul 2022 23:45:04 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/application/mysqld_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</guid>
+      <description>1. 登录mysql并增加exporter授权  mysql -uroot -p use mysql; set global validate_password_policy=0; create user &amp;lsquo;exporter&amp;rsquo;@&#39;%&#39; identified by &amp;lsquo;12345678&amp;rsquo;; GRANT PROCESS, REPLICATION CLIENT, SELECT ON . TO &amp;lsquo;exporter&amp;rsquo;@&#39;%&#39; WITH MAX_USER_CONNECTIONS 3; flush privileges;  2. 安装mysqld_exporter ​ 也可直接从链接下载tar包复制到目录中替换步骤2，下载链接：https://github.com/prometheus/mysqld_exporter/releases/download/v0.12.1/mysqld_exporter-0.12.1.linux-amd64.tar.gz
+3. 创建mysql配置文件  cd /usr/local/prometheus/mysqld_exporter touch .my.cnf vi .my.cnf 按英文输入法小写“i”键 将以下内容复制粘贴  [client] host=127.0.0.1 port=3306 user=exporter password=12345678  按“Esc”键，然后再输入英文的“:wq”，按enter退出  4. 创建mysqld_exporter配置文件  cd /usr/lib/systemd/system/ touch mysql_exporter.service 输入文件内容如下  [Unit] Description=mysqld_exporter After=network.target [Service] Type=simple User=mysql # exporter对应授权账号,exporter123对应授权密码,localhost对应授权账号密码所在的地址 Environment=DATA_SOURCE_NAME=exporter:12345678@(localhost:3306)/ ExecStart=/usr/local/prometheus/mysqld_exporter/mysqld_exporter --web.</description>
+    </item>
+    
+  </channel>
+</rss>

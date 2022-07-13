@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Applications on 小黎的技术指北</title>
-    <link>https://lyffin1997.github.io/application/</link>
-    <description>Recent content in Applications on 小黎的技术指北</description>
+    <title>prometheus on 小黎的技术指北</title>
+    <link>https://lyffin1997.github.io/tags/prometheus/</link>
+    <description>Recent content in prometheus on 小黎的技术指北</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Thu, 14 Jul 2022 00:23:38 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/application/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Jul 2022 00:23:38 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/tags/prometheus/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Snmp_exporter安装部署</title>
       <link>https://lyffin1997.github.io/application/snmp_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</link>
@@ -57,16 +57,6 @@ increase(jvm_gc_collection_seconds_sum{instance=&amp;quot;$instance&amp;quot;}[5
     </item>
     
     <item>
-      <title>Mysqld_exporter安装部署</title>
-      <link>https://lyffin1997.github.io/application/mysqld_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</link>
-      <pubDate>Wed, 13 Jul 2022 23:45:04 +0800</pubDate>
-      
-      <guid>https://lyffin1997.github.io/application/mysqld_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</guid>
-      <description>1. 登录mysql并增加exporter授权  mysql -uroot -p use mysql; set global validate_password_policy=0; create user &amp;lsquo;exporter&amp;rsquo;@&#39;%&#39; identified by &amp;lsquo;12345678&amp;rsquo;; GRANT PROCESS, REPLICATION CLIENT, SELECT ON . TO &amp;lsquo;exporter&amp;rsquo;@&#39;%&#39; WITH MAX_USER_CONNECTIONS 3; flush privileges;  2. 安装mysqld_exporter ​ 也可直接从链接下载tar包复制到目录中替换步骤2，下载链接：https://github.com/prometheus/mysqld_exporter/releases/download/v0.12.1/mysqld_exporter-0.12.1.linux-amd64.tar.gz
-3. 创建mysql配置文件  cd /usr/local/prometheus/mysqld_exporter touch .my.cnf vi .my.cnf 按英文输入法小写“i”键 将以下内容复制粘贴  [client] host=127.0.0.1 port=3306 user=exporter password=12345678  按“Esc”键，然后再输入英文的“:wq”，按enter退出  4. 创建mysqld_exporter配置文件  cd /usr/lib/systemd/system/ touch mysql_exporter.service 输入文件内容如下  [Unit] Description=mysqld_exporter After=network.target [Service] Type=simple User=mysql # exporter对应授权账号,exporter123对应授权密码,localhost对应授权账号密码所在的地址 Environment=DATA_SOURCE_NAME=exporter:12345678@(localhost:3306)/ ExecStart=/usr/local/prometheus/mysqld_exporter/mysqld_exporter --web.</description>
-    </item>
-    
-    <item>
       <title>Prometheus简介</title>
       <link>https://lyffin1997.github.io/application/prometheus%E7%AE%80%E4%BB%8B/</link>
       <pubDate>Wed, 13 Jul 2022 23:34:27 +0800</pubDate>
@@ -97,42 +87,6 @@ Counter（计数器）、Gauge（仪表盘）、Histogram（直方图）、Summa
       <description>1. 安装部署 1. cd /usr/local/prometheus （先进入你想安装的目录）
 2. 下载node_exporter包 wget https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-amd64.tar.gz -P /usr/local/prometheus 3. 解压 tar zxvf /usr/local/prometheus/node_exporter-0.18.1.linux-amd64.tar.gz 4. 重命名 mv /usr/local/prometheus/node_exporter-0.18.1.linux-amd64.tar.gz /usr/local/prometheus/node_exporter 5. 创建启动服务 touch /etc/systemd/system/node_exporter.service 6. 编辑启动服务文件  vim /etc/systemd/system/node_exporter.service 按i（注意切换英文输入） 将下列代码复制粘贴  [Unit] Description=node_exporter Documentation=https://prometheus.io/ After=network.target [Service] Type=simple User=root ExecStart=/usr/local/prometheus/node_exporter/node_exporter Restart=on-failure [Install] WantedBy=multi-user.target  按esc 按 :wq (注意:也要按)  7. 重新加载系统服务 systemctl daemon-reload 8. 开机自启 systemctl enable node_exporter 9. 启动 systemctl start node_exporter 10. 验证 http://10.4.4.173:9100/metrics
 2. promQL 2.</description>
-    </item>
-    
-    <item>
-      <title>Hugo技巧</title>
-      <link>https://lyffin1997.github.io/application/hugo%E6%8A%80%E5%B7%A7/</link>
-      <pubDate>Wed, 13 Jul 2022 00:10:35 +0800</pubDate>
-      
-      <guid>https://lyffin1997.github.io/application/hugo%E6%8A%80%E5%B7%A7/</guid>
-      <description>  编译hugo页面（myblog下运行，生成public）
-hugo --theme=hello-friend-ng --baseUrl=&amp;quot;https://lyffin1997.github.io/&amp;quot; --buildDrafts
-  运行hugo(myblog下运行)
-hugo server -t hello-friend-ng --buildDrafts
-  </description>
-    </item>
-    
-    <item>
-      <title>Shiro</title>
-      <link>https://lyffin1997.github.io/application/shiro/</link>
-      <pubDate>Tue, 12 Jul 2022 23:09:07 +0800</pubDate>
-      
-      <guid>https://lyffin1997.github.io/application/shiro/</guid>
-      <description>1 什么是shiro   定义：Apache Shiro是一个java的安全框架
-  作用：认证，授权，加密，会话管理，web集成，缓存
-  核心：
-   Subject：用户 SecurityManager：管理所有用户 Realm：连接数据    2 快速开始shiro   依赖   配置文件
-   log4j2.xml    &amp;lt;Configuration name=&amp;#34;ConfigTest&amp;#34; status=&amp;#34;ERROR&amp;#34; monitorInterval=&amp;#34;5&amp;#34;&amp;gt; &amp;lt;!-- ~ Licensed to the Apache Software Foundation (ASF) under one ~ or more contributor license agreements. See the NOTICE file ~ distributed with this work for additional information ~ regarding copyright ownership.</description>
-    </item>
-    
-    <item>
-      <title>配置durid</title>
-      <link>https://lyffin1997.github.io/application/%E9%85%8D%E7%BD%AEdurid/</link>
-      <pubDate>Tue, 12 Jul 2022 22:42:56 +0800</pubDate>
-      
-      <guid>https://lyffin1997.github.io/application/%E9%85%8D%E7%BD%AEdurid/</guid>
-      <description>1. 配置druid数据源  依赖    配置文件
-   因为配置项里用到了log4j，所以还要引入依赖   2. 配置druid监控 ​ ​ ​ ​ 3. 配置druid过滤器 ​ </description>
     </item>
     
   </channel>

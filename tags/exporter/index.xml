@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Applications on 小黎的技术指北</title>
-    <link>https://lyffin1997.github.io/application/</link>
-    <description>Recent content in Applications on 小黎的技术指北</description>
+    <title>exporter on 小黎的技术指北</title>
+    <link>https://lyffin1997.github.io/tags/exporter/</link>
+    <description>Recent content in exporter on 小黎的技术指北</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Thu, 14 Jul 2022 00:23:38 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/application/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Jul 2022 00:23:38 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/tags/exporter/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Snmp_exporter安装部署</title>
       <link>https://lyffin1997.github.io/application/snmp_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</link>
@@ -67,28 +67,6 @@ increase(jvm_gc_collection_seconds_sum{instance=&amp;quot;$instance&amp;quot;}[5
     </item>
     
     <item>
-      <title>Prometheus简介</title>
-      <link>https://lyffin1997.github.io/application/prometheus%E7%AE%80%E4%BB%8B/</link>
-      <pubDate>Wed, 13 Jul 2022 23:34:27 +0800</pubDate>
-      
-      <guid>https://lyffin1997.github.io/application/prometheus%E7%AE%80%E4%BB%8B/</guid>
-      <description>1. 定位  promethues本身并没有监控的功能，它的作用是采用times-series（时间序列）的方式，以一种自定义的格式存储数据在本地硬盘上
- 2. 数据格式 2.1 time-series  Prometheus会将所有采集到的样本数据以时间序列（time-series）的方式保存在内存数据库中,并且定时保存到硬盘上。
-  time-series按照时间戳和值的顺序存放，每个time-series称为一个样本（sample），它由三部分组成：
-   指标(metric)：metric name和描述当前样本特征的labelsets;     时间戳(timestamp)：一个精确到毫秒的时间戳;     样本值(value)： 一个float64的浮点型数据表示当前样本的值。    图中每个点为一个time-series，横坐标为时间戳timestamp，纵坐标为样本值，每个time-series都有一个唯一的描述该样本特征的metric。
- 2.2 指标（metric） 指标由metric name和用于描述样本特征的labelsets组成
-2.2.1 metric name 反映样本名称，如，http_request_total - 表示当前系统接收到的HTTP请求总量。
-2.2.2 Lablesets 该部分是一个{lable}集，标签(label)反映了当前样本的特征维度，通过这些维度Prometheus可以对样本数据进行过滤，聚合等（类似于mysql查询语句）。
-每个lable由lable name和 lable value两部分组成:
- “method”为lable name ”POST”为lable value。  2.2.3 metric类型 大致可分为四种类型：
-Counter（计数器）、Gauge（仪表盘）、Histogram（直方图）、Summary（摘要）。
-2.2.3.1 Counter Counter：只增不减的计数器。
-一般用于监控http请求次数、cpu使用时间等只增不长的指标
-2.2.3.2 Gauge Gauge：可增可减的仪表盘
-常见指标如：node_memory_MemFree（主机当前空闲的内容大小）、node_memory_MemAvailable（可用内存大小）都是Gauge类型的监控指标。</description>
-    </item>
-    
-    <item>
       <title>Node_exporter安装部署</title>
       <link>https://lyffin1997.github.io/application/node_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Wed, 13 Jul 2022 23:14:57 +0800</pubDate>
@@ -97,42 +75,6 @@ Counter（计数器）、Gauge（仪表盘）、Histogram（直方图）、Summa
       <description>1. 安装部署 1. cd /usr/local/prometheus （先进入你想安装的目录）
 2. 下载node_exporter包 wget https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-amd64.tar.gz -P /usr/local/prometheus 3. 解压 tar zxvf /usr/local/prometheus/node_exporter-0.18.1.linux-amd64.tar.gz 4. 重命名 mv /usr/local/prometheus/node_exporter-0.18.1.linux-amd64.tar.gz /usr/local/prometheus/node_exporter 5. 创建启动服务 touch /etc/systemd/system/node_exporter.service 6. 编辑启动服务文件  vim /etc/systemd/system/node_exporter.service 按i（注意切换英文输入） 将下列代码复制粘贴  [Unit] Description=node_exporter Documentation=https://prometheus.io/ After=network.target [Service] Type=simple User=root ExecStart=/usr/local/prometheus/node_exporter/node_exporter Restart=on-failure [Install] WantedBy=multi-user.target  按esc 按 :wq (注意:也要按)  7. 重新加载系统服务 systemctl daemon-reload 8. 开机自启 systemctl enable node_exporter 9. 启动 systemctl start node_exporter 10. 验证 http://10.4.4.173:9100/metrics
 2. promQL 2.</description>
-    </item>
-    
-    <item>
-      <title>Hugo技巧</title>
-      <link>https://lyffin1997.github.io/application/hugo%E6%8A%80%E5%B7%A7/</link>
-      <pubDate>Wed, 13 Jul 2022 00:10:35 +0800</pubDate>
-      
-      <guid>https://lyffin1997.github.io/application/hugo%E6%8A%80%E5%B7%A7/</guid>
-      <description>  编译hugo页面（myblog下运行，生成public）
-hugo --theme=hello-friend-ng --baseUrl=&amp;quot;https://lyffin1997.github.io/&amp;quot; --buildDrafts
-  运行hugo(myblog下运行)
-hugo server -t hello-friend-ng --buildDrafts
-  </description>
-    </item>
-    
-    <item>
-      <title>Shiro</title>
-      <link>https://lyffin1997.github.io/application/shiro/</link>
-      <pubDate>Tue, 12 Jul 2022 23:09:07 +0800</pubDate>
-      
-      <guid>https://lyffin1997.github.io/application/shiro/</guid>
-      <description>1 什么是shiro   定义：Apache Shiro是一个java的安全框架
-  作用：认证，授权，加密，会话管理，web集成，缓存
-  核心：
-   Subject：用户 SecurityManager：管理所有用户 Realm：连接数据    2 快速开始shiro   依赖   配置文件
-   log4j2.xml    &amp;lt;Configuration name=&amp;#34;ConfigTest&amp;#34; status=&amp;#34;ERROR&amp;#34; monitorInterval=&amp;#34;5&amp;#34;&amp;gt; &amp;lt;!-- ~ Licensed to the Apache Software Foundation (ASF) under one ~ or more contributor license agreements. See the NOTICE file ~ distributed with this work for additional information ~ regarding copyright ownership.</description>
-    </item>
-    
-    <item>
-      <title>配置durid</title>
-      <link>https://lyffin1997.github.io/application/%E9%85%8D%E7%BD%AEdurid/</link>
-      <pubDate>Tue, 12 Jul 2022 22:42:56 +0800</pubDate>
-      
-      <guid>https://lyffin1997.github.io/application/%E9%85%8D%E7%BD%AEdurid/</guid>
-      <description>1. 配置druid数据源  依赖    配置文件
-   因为配置项里用到了log4j，所以还要引入依赖   2. 配置druid监控 ​ ​ ​ ​ 3. 配置druid过滤器 ​ </description>
     </item>
     
   </channel>
