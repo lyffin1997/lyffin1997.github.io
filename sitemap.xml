@@ -2,10 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://lyffin1997.github.io/application/</loc>
-    <lastmod>2022-07-14T00:23:38+08:00</lastmod>
-  </url><url>
     <loc>https://lyffin1997.github.io/categories/</loc>
+    <lastmod>2022-07-14T23:10:53+08:00</lastmod>
+  </url><url>
+    <loc>https://lyffin1997.github.io/tags/springboot/</loc>
+    <lastmod>2022-07-14T23:10:53+08:00</lastmod>
+  </url><url>
+    <loc>https://lyffin1997.github.io/spring/springboot%E5%A6%82%E4%BD%95%E6%8E%A5%E7%AE%A1springmvc/</loc>
+    <lastmod>2022-07-14T23:10:53+08:00</lastmod>
+  </url><url>
+    <loc>https://lyffin1997.github.io/spring/</loc>
+    <lastmod>2022-07-14T23:10:53+08:00</lastmod>
+  </url><url>
+    <loc>https://lyffin1997.github.io/tags/</loc>
+    <lastmod>2022-07-14T23:10:53+08:00</lastmod>
+  </url><url>
+    <loc>https://lyffin1997.github.io/tags/web/</loc>
+    <lastmod>2022-07-14T23:10:53+08:00</lastmod>
+  </url><url>
+    <loc>https://lyffin1997.github.io/</loc>
+    <lastmod>2022-07-14T23:10:53+08:00</lastmod>
+  </url><url>
+    <loc>https://lyffin1997.github.io/categories/%E5%BA%94%E7%94%A8/</loc>
+    <lastmod>2022-07-14T23:10:53+08:00</lastmod>
+  </url><url>
+    <loc>https://lyffin1997.github.io/tags/%E6%8B%A6%E6%88%AA%E5%99%A8/</loc>
+    <lastmod>2022-07-14T23:10:53+08:00</lastmod>
+  </url><url>
+    <loc>https://lyffin1997.github.io/application/</loc>
     <lastmod>2022-07-14T00:23:38+08:00</lastmod>
   </url><url>
     <loc>https://lyffin1997.github.io/tags/exporter/</loc>
@@ -15,15 +39,6 @@
     <lastmod>2022-07-14T00:23:38+08:00</lastmod>
   </url><url>
     <loc>https://lyffin1997.github.io/application/snmp_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</loc>
-    <lastmod>2022-07-14T00:23:38+08:00</lastmod>
-  </url><url>
-    <loc>https://lyffin1997.github.io/tags/</loc>
-    <lastmod>2022-07-14T00:23:38+08:00</lastmod>
-  </url><url>
-    <loc>https://lyffin1997.github.io/</loc>
-    <lastmod>2022-07-14T00:23:38+08:00</lastmod>
-  </url><url>
-    <loc>https://lyffin1997.github.io/categories/%E5%BA%94%E7%94%A8/</loc>
     <lastmod>2022-07-14T00:23:38+08:00</lastmod>
   </url><url>
     <loc>https://lyffin1997.github.io/application/tomcat_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</loc>
@@ -53,13 +68,7 @@
     <loc>https://lyffin1997.github.io/application/hugo%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2022-07-13T00:10:35+08:00</lastmod>
   </url><url>
-    <loc>https://lyffin1997.github.io/tags/springboot/</loc>
-    <lastmod>2022-07-13T00:02:48+08:00</lastmod>
-  </url><url>
     <loc>https://lyffin1997.github.io/spring/springboot%E5%AD%A6%E4%B9%A0%E7%AE%80%E4%BB%8B/</loc>
-    <lastmod>2022-07-13T00:02:48+08:00</lastmod>
-  </url><url>
-    <loc>https://lyffin1997.github.io/spring/</loc>
     <lastmod>2022-07-13T00:02:48+08:00</lastmod>
   </url><url>
     <loc>https://lyffin1997.github.io/tags/%E6%A1%86%E6%9E%B6/</loc>
@@ -82,12 +91,6 @@
   </url><url>
     <loc>https://lyffin1997.github.io/spring/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D-%E7%8B%82%E7%A5%9E%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2022-07-12T23:42:32+08:00</lastmod>
-  </url><url>
-    <loc>https://lyffin1997.github.io/spring/springboot-web/</loc>
-    <lastmod>2022-07-12T23:23:57+08:00</lastmod>
-  </url><url>
-    <loc>https://lyffin1997.github.io/tags/web%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2022-07-12T23:23:57+08:00</lastmod>
   </url><url>
     <loc>https://lyffin1997.github.io/tags/spring/</loc>
     <lastmod>2022-07-12T23:14:27+08:00</lastmod>

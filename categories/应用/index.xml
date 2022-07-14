@@ -7,7 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Thu, 14 Jul 2022 00:23:38 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/categories/%E5%BA%94%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Jul 2022 23:10:53 +0800</lastBuildDate><atom:link href="https://lyffin1997.github.io/categories/%E5%BA%94%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Springboot如何接管springmvc</title>
+      <link>https://lyffin1997.github.io/spring/springboot%E5%A6%82%E4%BD%95%E6%8E%A5%E7%AE%A1springmvc/</link>
+      <pubDate>Thu, 14 Jul 2022 23:10:53 +0800</pubDate>
+      
+      <guid>https://lyffin1997.github.io/spring/springboot%E5%A6%82%E4%BD%95%E6%8E%A5%E7%AE%A1springmvc/</guid>
+      <description>1. 依赖 pom.xml
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!--这里代码示例使用Thymeleaf模板引擎--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-thymeleaf&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.projectlombok&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;lombok&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 2. 代码示例 主要是通过实现WebMvcConfigurer.java接口来进行个性化定制，下面进行个别方法的重写展示：
+  创建配置文件
+在启动类同级目录下创建config文件夹，在里面创建配置文件：./config/MyMvcConfig.java
+  2.1 重写视图解析器 可以在MyViewResolver中自定义一些功能
+@Configuration public class MyMvcConfig implements WebMvcConfigurer { @Bean public MyViewResolver myViewResolver() { return new MyViewResolver(); } //自定义视图解析器  public static class MyViewResolver implements ViewResolver { @Override public View resolveViewName(String viewName, Locale locale) throws Exception { return null; } } } 2.2 重写视图控制器   实现视图跳转</description>
+    </item>
+    
     <item>
       <title>Snmp_exporter安装部署</title>
       <link>https://lyffin1997.github.io/application/snmp_exporter%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2/</link>
@@ -88,17 +102,6 @@ hugo --theme=hello-friend-ng --baseUrl=&amp;quot;https://lyffin1997.github.io/&a
   运行hugo(myblog下运行)
 hugo server -t hello-friend-ng --buildDrafts
   </description>
-    </item>
-    
-    <item>
-      <title>Springboot Web</title>
-      <link>https://lyffin1997.github.io/spring/springboot-web/</link>
-      <pubDate>Tue, 12 Jul 2022 23:23:57 +0800</pubDate>
-      
-      <guid>https://lyffin1997.github.io/spring/springboot-web/</guid>
-      <description>思考：springboot到底替我们配置了什么？能不能进行修改？能修改哪些东西？能不能扩展
-    xxxAutoConfiguration：向容器中自动配置组件 xxxProperties：自动配置类，装配配置文件中自定义的一些属性    1. 静态资源 WebMvcAutoConfiguration.java
-public void addResourceHandlers(ResourceHandlerRegistry registry) { if (!this.resourceProperties.isAddMappings()) { logger.debug(&amp;#34;Default resource handling disabled&amp;#34;); } else { this.addResourceHandler(registry, &amp;#34;/webjars/**&amp;#34;, &amp;#34;classpath:/META-INF/resources/webjars/&amp;#34;); this.addResourceHandler(registry, this.mvcProperties.getStaticPathPattern(), (registration) -&amp;gt; { registration.addResourceLocations(this.resourceProperties.getStaticLocations()); if (this.servletContext != null) { ServletContextResource resource = new ServletContextResource(this.servletContext, &amp;#34;/&amp;#34;); registration.addResourceLocations(new Resource[]{resource}); } }); } }  静态资源路径：  从webjars/**下 classpath:/META-INF/resources/webjars/路径中所有目标获取静态资源 从/**下 classpath:/META-INF/resources/&amp;#34;, &amp;#34;classpath:/resources/&amp;#34;, &amp;#34;classpath:/static/&amp;#34;, &amp;#34;classpath:/public/路径中所有目标获取静态资源 优先级：resources&amp;gt;static(默认)&amp;gt;public 自定义：在yml文件中编写，此时上面两种方式无效 spring: mvc: static-path-pattern: 获取方式：localhost:8080/webjars/jquery/3.</description>
     </item>
     
     <item>
