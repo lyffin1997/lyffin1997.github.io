@@ -5,8 +5,18 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="">
-<meta name="description" content="1. 配置druid数据源  依赖    配置文件
-   因为配置项里用到了log4j，所以还要引入依赖   2. 配置druid监控 ​ ​ ​ ​ 3. 配置druid过滤器 ​ " />
+<meta name="description" content="1. druid简介   Druid是一个数据库连接池。
+  作用
+ 替换DBCP和C3P0。Druid提供了一个高效、功能强大、可扩展性好的数据库连接池。
+  可以监控数据库访问性能，Druid内置提供了一个功能强大的StatFilter插件，能够详细统计SQL的执行性能，这对于线上分析数据库访问性能有帮助。
+  数据库密码加密。直接把数据库密码写在配置文件中，这是不好的行为，容易导致安全问题。DruidDruiver和DruidDataSource都支持PasswordCallback。
+  SQL执行日志，Druid提供了不同的LogFilter，能够支持Common-Logging、Log4j和JdkLog，你可以按需要选择相应的LogFilter，监控你应用的数据库访问情况。
+  扩展JDBC，如果你要对JDBC层有编程的需求，可以通过Druid提供的Filter机制，很方便编写JDBC层的扩展插件。
+   2. 配置druid数据源   依赖
+因为配置项里用到了log4j，所以还要引入log4j依赖
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;druid&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2.9&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency &amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency &amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-jdbc&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;mysql&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;mysql-connector-java&amp;lt;/artifactId&amp;gt; &amp;lt;scope&amp;gt;runtime&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;log4j&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;log4j&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2.12&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;   配置文件
+如果启动报错将driver-class-name换成com.mysql.cj.jdbc.Driver
+spring: datasource: username: root password: 123456 url: jdbc:mysql://localhost:3306/lyffin_test?serverTimezone=UTC&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8 driver-class-name: com.mysql.cj.jdbc.Driver type: com." />
 <meta name="keywords" content=", 数据源" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
@@ -40,23 +50,53 @@
 
 
 <meta itemprop="name" content="配置durid">
-<meta itemprop="description" content="1. 配置druid数据源  依赖    配置文件
-   因为配置项里用到了log4j，所以还要引入依赖   2. 配置druid监控 ​ ​ ​ ​ 3. 配置druid过滤器 ​ "><meta itemprop="datePublished" content="2022-07-12T22:42:56&#43;08:00" />
+<meta itemprop="description" content="1. druid简介   Druid是一个数据库连接池。
+  作用
+ 替换DBCP和C3P0。Druid提供了一个高效、功能强大、可扩展性好的数据库连接池。
+  可以监控数据库访问性能，Druid内置提供了一个功能强大的StatFilter插件，能够详细统计SQL的执行性能，这对于线上分析数据库访问性能有帮助。
+  数据库密码加密。直接把数据库密码写在配置文件中，这是不好的行为，容易导致安全问题。DruidDruiver和DruidDataSource都支持PasswordCallback。
+  SQL执行日志，Druid提供了不同的LogFilter，能够支持Common-Logging、Log4j和JdkLog，你可以按需要选择相应的LogFilter，监控你应用的数据库访问情况。
+  扩展JDBC，如果你要对JDBC层有编程的需求，可以通过Druid提供的Filter机制，很方便编写JDBC层的扩展插件。
+   2. 配置druid数据源   依赖
+因为配置项里用到了log4j，所以还要引入log4j依赖
+&lt;dependency&gt; &lt;groupId&gt;com.alibaba&lt;/groupId&gt; &lt;artifactId&gt;druid&lt;/artifactId&gt; &lt;version&gt;1.2.9&lt;/version&gt; &lt;/dependency&gt; &lt;dependency &gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency &gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;mysql&lt;/groupId&gt; &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt; &lt;scope&gt;runtime&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;log4j&lt;/groupId&gt; &lt;artifactId&gt;log4j&lt;/artifactId&gt; &lt;version&gt;1.2.12&lt;/version&gt; &lt;/dependency&gt;   配置文件
+如果启动报错将driver-class-name换成com.mysql.cj.jdbc.Driver
+spring: datasource: username: root password: 123456 url: jdbc:mysql://localhost:3306/lyffin_test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf-8 driver-class-name: com.mysql.cj.jdbc.Driver type: com."><meta itemprop="datePublished" content="2022-07-12T22:42:56&#43;08:00" />
 <meta itemprop="dateModified" content="2022-07-12T22:42:56&#43;08:00" />
-<meta itemprop="wordCount" content="14"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
+<meta itemprop="wordCount" content="220"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
 <meta itemprop="keywords" content="数据源," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://lyffin1997.github.io/"/>
 
 <meta name="twitter:title" content="配置durid"/>
-<meta name="twitter:description" content="1. 配置druid数据源  依赖    配置文件
-   因为配置项里用到了log4j，所以还要引入依赖   2. 配置druid监控 ​ ​ ​ ​ 3. 配置druid过滤器 ​ "/>
+<meta name="twitter:description" content="1. druid简介   Druid是一个数据库连接池。
+  作用
+ 替换DBCP和C3P0。Druid提供了一个高效、功能强大、可扩展性好的数据库连接池。
+  可以监控数据库访问性能，Druid内置提供了一个功能强大的StatFilter插件，能够详细统计SQL的执行性能，这对于线上分析数据库访问性能有帮助。
+  数据库密码加密。直接把数据库密码写在配置文件中，这是不好的行为，容易导致安全问题。DruidDruiver和DruidDataSource都支持PasswordCallback。
+  SQL执行日志，Druid提供了不同的LogFilter，能够支持Common-Logging、Log4j和JdkLog，你可以按需要选择相应的LogFilter，监控你应用的数据库访问情况。
+  扩展JDBC，如果你要对JDBC层有编程的需求，可以通过Druid提供的Filter机制，很方便编写JDBC层的扩展插件。
+   2. 配置druid数据源   依赖
+因为配置项里用到了log4j，所以还要引入log4j依赖
+&lt;dependency&gt; &lt;groupId&gt;com.alibaba&lt;/groupId&gt; &lt;artifactId&gt;druid&lt;/artifactId&gt; &lt;version&gt;1.2.9&lt;/version&gt; &lt;/dependency&gt; &lt;dependency &gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency &gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;mysql&lt;/groupId&gt; &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt; &lt;scope&gt;runtime&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;log4j&lt;/groupId&gt; &lt;artifactId&gt;log4j&lt;/artifactId&gt; &lt;version&gt;1.2.12&lt;/version&gt; &lt;/dependency&gt;   配置文件
+如果启动报错将driver-class-name换成com.mysql.cj.jdbc.Driver
+spring: datasource: username: root password: 123456 url: jdbc:mysql://localhost:3306/lyffin_test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf-8 driver-class-name: com.mysql.cj.jdbc.Driver type: com."/>
 
 
 
     <meta property="og:title" content="配置durid" />
-<meta property="og:description" content="1. 配置druid数据源  依赖    配置文件
-   因为配置项里用到了log4j，所以还要引入依赖   2. 配置druid监控 ​ ​ ​ ​ 3. 配置druid过滤器 ​ " />
+<meta property="og:description" content="1. druid简介   Druid是一个数据库连接池。
+  作用
+ 替换DBCP和C3P0。Druid提供了一个高效、功能强大、可扩展性好的数据库连接池。
+  可以监控数据库访问性能，Druid内置提供了一个功能强大的StatFilter插件，能够详细统计SQL的执行性能，这对于线上分析数据库访问性能有帮助。
+  数据库密码加密。直接把数据库密码写在配置文件中，这是不好的行为，容易导致安全问题。DruidDruiver和DruidDataSource都支持PasswordCallback。
+  SQL执行日志，Druid提供了不同的LogFilter，能够支持Common-Logging、Log4j和JdkLog，你可以按需要选择相应的LogFilter，监控你应用的数据库访问情况。
+  扩展JDBC，如果你要对JDBC层有编程的需求，可以通过Druid提供的Filter机制，很方便编写JDBC层的扩展插件。
+   2. 配置druid数据源   依赖
+因为配置项里用到了log4j，所以还要引入log4j依赖
+&lt;dependency&gt; &lt;groupId&gt;com.alibaba&lt;/groupId&gt; &lt;artifactId&gt;druid&lt;/artifactId&gt; &lt;version&gt;1.2.9&lt;/version&gt; &lt;/dependency&gt; &lt;dependency &gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency &gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;mysql&lt;/groupId&gt; &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt; &lt;scope&gt;runtime&lt;/scope&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;log4j&lt;/groupId&gt; &lt;artifactId&gt;log4j&lt;/artifactId&gt; &lt;version&gt;1.2.12&lt;/version&gt; &lt;/dependency&gt;   配置文件
+如果启动报错将driver-class-name换成com.mysql.cj.jdbc.Driver
+spring: datasource: username: root password: 123456 url: jdbc:mysql://localhost:3306/lyffin_test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf-8 driver-class-name: com.mysql.cj.jdbc.Driver type: com." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lyffin1997.github.io/application/%E9%85%8D%E7%BD%AEdurid/" /><meta property="og:image" content="https://lyffin1997.github.io/"/><meta property="article:section" content="application" />
 <meta property="article:published_time" content="2022-07-12T22:42:56&#43;08:00" />
@@ -141,28 +181,185 @@
             
 
             <div class="post-content">
-                <h2 id="1-配置druid数据源"><strong>1. 配置druid数据源</strong></h2>
-<ul>
-<li>依赖</li>
-</ul>
-<p><img src="/img/durid1.png" alt="img"></p>
+                <h2 id="1-druid简介">1. druid简介</h2>
 <ul>
 <li>
-<p>配置文件</p>
-<p><img src="/img/durid2.png" alt="img"></p>
+<p>Druid是一个数据库连接池。</p>
+</li>
+<li>
+<p>作用</p>
+<blockquote>
+<p>替换DBCP和C3P0。Druid提供了一个高效、功能强大、可扩展性好的数据库连接池。</p>
+</blockquote>
+<blockquote>
+<p>可以监控数据库访问性能，Druid内置提供了一个功能强大的StatFilter插件，能够详细统计SQL的执行性能，这对于线上分析数据库访问性能有帮助。</p>
+</blockquote>
+<blockquote>
+<p>数据库密码加密。直接把数据库密码写在配置文件中，这是不好的行为，容易导致安全问题。DruidDruiver和DruidDataSource都支持PasswordCallback。</p>
+</blockquote>
+<blockquote>
+<p>SQL执行日志，Druid提供了不同的LogFilter，能够支持Common-Logging、Log4j和JdkLog，你可以按需要选择相应的LogFilter，监控你应用的数据库访问情况。</p>
+</blockquote>
+<blockquote>
+<p>扩展JDBC，如果你要对JDBC层有编程的需求，可以通过Druid提供的Filter机制，很方便编写JDBC层的扩展插件。</p>
+</blockquote>
 </li>
 </ul>
-<p><img src="/img/durid3.png" alt="img"></p>
+<h2 id="2-配置druid数据源"><strong>2. 配置druid数据源</strong></h2>
 <ul>
-<li>因为配置项里用到了log4j，所以还要引入依赖           <img src="/img/durid4.png" alt="img"></li>
+<li>
+<p>依赖</p>
+<p>因为配置项里用到了log4j，所以还要引入log4j依赖</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;dependency&gt;</span>
+      <span style="color:#f92672">&lt;groupId&gt;</span>com.alibaba<span style="color:#f92672">&lt;/groupId&gt;</span>
+      <span style="color:#f92672">&lt;artifactId&gt;</span>druid<span style="color:#f92672">&lt;/artifactId&gt;</span>
+      <span style="color:#f92672">&lt;version&gt;</span>1.2.9<span style="color:#f92672">&lt;/version&gt;</span>
+<span style="color:#f92672">&lt;/dependency&gt;</span>
+<span style="color:#f92672">&lt;dependency</span> <span style="color:#f92672">&gt;</span>
+      <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.boot<span style="color:#f92672">&lt;/groupId&gt;</span>
+      <span style="color:#f92672">&lt;artifactId&gt;</span>spring-boot-starter-web<span style="color:#f92672">&lt;/artifactId&gt;</span>
+<span style="color:#f92672">&lt;/dependency&gt;</span>
+<span style="color:#f92672">&lt;dependency</span> <span style="color:#f92672">&gt;</span>
+      <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.boot<span style="color:#f92672">&lt;/groupId&gt;</span>
+      <span style="color:#f92672">&lt;artifactId&gt;</span>spring-boot-starter-jdbc<span style="color:#f92672">&lt;/artifactId&gt;</span>
+<span style="color:#f92672">&lt;/dependency&gt;</span>
+<span style="color:#f92672">&lt;dependency&gt;</span>
+      <span style="color:#f92672">&lt;groupId&gt;</span>mysql<span style="color:#f92672">&lt;/groupId&gt;</span>
+      <span style="color:#f92672">&lt;artifactId&gt;</span>mysql-connector-java<span style="color:#f92672">&lt;/artifactId&gt;</span>
+      <span style="color:#f92672">&lt;scope&gt;</span>runtime<span style="color:#f92672">&lt;/scope&gt;</span>
+<span style="color:#f92672">&lt;/dependency&gt;</span>
+<span style="color:#f92672">&lt;dependency&gt;</span>
+      <span style="color:#f92672">&lt;groupId&gt;</span>log4j<span style="color:#f92672">&lt;/groupId&gt;</span>
+      <span style="color:#f92672">&lt;artifactId&gt;</span>log4j<span style="color:#f92672">&lt;/artifactId&gt;</span>
+      <span style="color:#f92672">&lt;version&gt;</span>1.2.12<span style="color:#f92672">&lt;/version&gt;</span>
+<span style="color:#f92672">&lt;/dependency&gt;</span>
+
+</code></pre></div></li>
+<li>
+<p>配置文件</p>
+<p><strong>如果启动报错将<code>driver-class-name</code>换成<code>com.mysql.cj.jdbc.Driver</code></strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">spring</span>:
+  <span style="color:#f92672">datasource</span>:
+    <span style="color:#f92672">username</span>: <span style="color:#ae81ff">root</span>
+    <span style="color:#f92672">password</span>: <span style="color:#ae81ff">123456</span>
+    <span style="color:#f92672">url</span>: <span style="color:#ae81ff">jdbc:mysql://localhost:3306/lyffin_test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf-8</span>
+    <span style="color:#f92672">driver-class-name</span>: <span style="color:#ae81ff">com.mysql.cj.jdbc.Driver</span>
+    <span style="color:#f92672">type</span>: <span style="color:#ae81ff">com.alibaba.druid.pool.DruidDataSource</span>
+
+    <span style="color:#75715e">#springboot默认不注入这些属性，需要自己绑定</span>
+    <span style="color:#75715e">#druid数据源专有配置</span>
+    <span style="color:#f92672">initialSize</span>: <span style="color:#ae81ff">5</span>
+    <span style="color:#f92672">minIdle</span>: <span style="color:#ae81ff">5</span>
+    <span style="color:#f92672">maxActive</span>: <span style="color:#ae81ff">20</span>
+    <span style="color:#f92672">maxWait</span>: <span style="color:#ae81ff">60000</span>
+    <span style="color:#f92672">timeBetweenEvictionRunsMillis</span>: <span style="color:#ae81ff">60000</span>
+    <span style="color:#f92672">minEvictableIdleTimeMillis</span>: <span style="color:#ae81ff">300000</span>
+    <span style="color:#f92672">validationQuery</span>: <span style="color:#ae81ff">SELECT 1 FROM DUAL</span>
+    <span style="color:#f92672">testWhileIdle</span>: <span style="color:#66d9ef">true</span>
+    <span style="color:#f92672">testOnBorrow</span>: <span style="color:#66d9ef">false</span>
+    <span style="color:#f92672">testOnReturn</span>: <span style="color:#66d9ef">false</span>
+    <span style="color:#f92672">poolPreparedStatements</span>: <span style="color:#66d9ef">true</span>
+
+    <span style="color:#75715e">#配置监控统计拦截的filters，stat：监控统计、log4j：日志记录、wall：防御sql注入</span>
+    <span style="color:#75715e">#如果允许报错，java.lang.ClassNotFoundException: org.apache.Log4j.Properity</span>
+    <span style="color:#75715e">#则导入log4j 依赖就行</span>
+    <span style="color:#f92672">filters</span>: <span style="color:#ae81ff">stat,wall,log4j</span>
+    <span style="color:#f92672">maxPoolPreparedStatementPerConnectionSize</span>: <span style="color:#ae81ff">20</span>
+    <span style="color:#f92672">useGlobalDataSourceStat</span>: <span style="color:#66d9ef">true</span>
+    <span style="color:#f92672">connectionoProperties</span>: <span style="color:#ae81ff">druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500    </span>
+</code></pre></div></li>
 </ul>
-<h2 id="2-配置druid监控"><strong>2. 配置druid监控</strong></h2>
-<p>​                 <img src="/img/durid5.png" alt="img"></p>
-<p>​                 <img src="/img/durid6.png" alt="img"></p>
-<p>​                 <img src="/img/durid7.png" alt="img"></p>
-<p>​                 <img src="/img/durid8.png" alt="img"></p>
-<h2 id="3-配置druid过滤器"><strong>3. 配置druid过滤器</strong></h2>
-<p>​                 <img src="/img/durid9.png" alt="img"></p>
+<h2 id="3-配置druid后台监控页面"><strong>3. 配置druid后台监控页面</strong></h2>
+<ul>
+<li>
+<p>创建文件</p>
+<p>老规矩，config文件夹下创建<code>DruidConfig.java</code>文件</p>
+<p><img src="/img/durid4.png" alt="image-20220716002739569"></p>
+</li>
+<li>
+<p>绑定配置文件数据</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Configuration</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DruidConfig</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#a6e22e">@ConfigurationProperties</span><span style="color:#f92672">(</span>prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;spring.datasource&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@Bean</span>
+    <span style="color:#66d9ef">public</span> DataSource <span style="color:#a6e22e">druidDataSource</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> DruidDataSource<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>
+<p>配置后台监控页面</p>
+<ul>
+<li><code>new ServletRegistrationBean()</code>的第二个参数填写访问后台监控页面的路径：<code>/druid/*</code></li>
+<li><code>bean.setInitParameters()</code>设置初始化参数
+<ul>
+<li>如下所示设置账号密码，其中<strong>账号密码的key必须是固定的<code>loginUsername</code>和<code>loginPassword</code></strong></li>
+<li>key为<code>allow</code>时表示设置谁能访问，<code>&quot;&quot;</code>表示任何人，<code>localhost</code>表示只能本机访问，或者也可以设置具体的人</li>
+<li>若想禁止某个人访问，则key为这个人设置个名字（任意名字），value为禁止的ip</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Configuration</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DruidConfig</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#a6e22e">@ConfigurationProperties</span><span style="color:#f92672">(</span>prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;spring.datasource&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@Bean</span>
+    <span style="color:#66d9ef">public</span> DataSource <span style="color:#a6e22e">druidDataSource</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> DruidDataSource<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">//后台监控
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Bean</span>
+    <span style="color:#66d9ef">public</span> ServletRegistrationBean <span style="color:#a6e22e">statViewServlet</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        ServletRegistrationBean<span style="color:#f92672">&lt;</span>StatViewServlet<span style="color:#f92672">&gt;</span> bean <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ServletRegistrationBean<span style="color:#f92672">&lt;&gt;(</span><span style="color:#66d9ef">new</span> StatViewServlet<span style="color:#f92672">(),</span> <span style="color:#e6db74">&#34;/druid/*&#34;</span><span style="color:#f92672">);</span>
+        HashMap<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> String<span style="color:#f92672">&gt;</span> initParameters <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;();</span>
+        initParameters<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;loginUsername&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;admin&#34;</span><span style="color:#f92672">);</span>
+        initParameters<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;loginPassword&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;123456&#34;</span><span style="color:#f92672">);</span>
+        initParameters<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;allow&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#75715e">//initParameters.put(&#34;lyffin&#34;, &#34;192.168.1.1&#34;);
+</span><span style="color:#75715e"></span>        bean<span style="color:#f92672">.</span><span style="color:#a6e22e">setInitParameters</span><span style="color:#f92672">(</span>initParameters<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">return</span> bean<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+<li>
+<p>使用监控页面</p>
+<p>访问localhost:8080/druid</p>
+<p>例如SQL监控页面能够看到你执行的sql语句</p>
+<p><img src="/img/druid5.png" alt="image-20220716011916846"></p>
+<p><img src="/img/druid6.png" alt="image-20220716012049261"></p>
+</li>
+</ul>
+<h2 id="4-配置druid过滤器"><strong>4. 配置druid过滤器</strong></h2>
+<ul>
+<li>
+<p>同监控一样，<code>bean.setInitParameters()</code>设置参数</p>
+<ul>
+<li>当key为<code>exclusions</code>时，表示value中的内容不进行过滤</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@Configuration</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DruidConfig</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#a6e22e">@ConfigurationProperties</span><span style="color:#f92672">(</span>prefix <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;spring.datasource&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#a6e22e">@Bean</span>
+    <span style="color:#66d9ef">public</span> DataSource <span style="color:#a6e22e">druidDataSource</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> DruidDataSource<span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#75715e">//配置过滤器
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Bean</span>
+    <span style="color:#66d9ef">public</span> FilterRegistrationBean <span style="color:#a6e22e">webStatFilter</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        FilterRegistrationBean bean <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FilterRegistrationBean<span style="color:#f92672">();</span>
+        bean<span style="color:#f92672">.</span><span style="color:#a6e22e">setFilter</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> WebStatFilter<span style="color:#f92672">());</span>
+        HashMap<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">,</span> String<span style="color:#f92672">&gt;</span> initParameters <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> HashMap<span style="color:#f92672">&lt;&gt;();</span>
+        initParameters<span style="color:#f92672">.</span><span style="color:#a6e22e">put</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;exclusions&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;*.js,*.css,/druid/*&#34;</span><span style="color:#f92672">);</span>
+        bean<span style="color:#f92672">.</span><span style="color:#a6e22e">setInitParameters</span><span style="color:#f92672">(</span>initParameters<span style="color:#f92672">)</span> <span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">return</span> bean<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div></li>
+</ul>
 
             </div>
         </article>

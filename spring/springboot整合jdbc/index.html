@@ -59,7 +59,7 @@
   DataSourceProperties.java
    ConfigurationProperties:给当前实体类赋值      连接成功后会自动生成dataSource的bean并注入到容器中"><meta itemprop="datePublished" content="2022-07-12T22:15:34&#43;08:00" />
 <meta itemprop="dateModified" content="2022-07-12T22:15:34&#43;08:00" />
-<meta itemprop="wordCount" content="32"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
+<meta itemprop="wordCount" content="44"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
 <meta itemprop="keywords" content="springboot,框架," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://lyffin1997.github.io/"/>
@@ -251,7 +251,12 @@
 </ul>
 <p>获取数据源的方式并进行自定义操作：dataSource.getConnection等</p>
 <p>​                 <img src="/img/jdbc6.png" alt=""></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">contextLoads</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> SQLException <span style="color:#f92672">{</span>
+        Connection connection <span style="color:#f92672">=</span> dataSource<span style="color:#f92672">.</span><span style="color:#a6e22e">getConnection</span><span style="color:#f92672">();</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>connection<span style="color:#f92672">);</span>
+        connection<span style="color:#f92672">.</span><span style="color:#a6e22e">close</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div>
             </div>
         </article>
 

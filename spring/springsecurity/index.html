@@ -7,9 +7,8 @@
 <meta name="author" content="">
 <meta name="description" content="1. 什么是SpringSecurity  Spring Security是针对spring项目的安全框架，也是springboot底层安全模块默认的技术选型，它可以实现强大的Web安全控制，仅需要引入spring-boot-starter-security
  主要功能：认证（Authentication）和授权（Authorization）
-2. 代码实例 2.1 依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-security&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; //themeleaf依赖用于配合教程展示，核心依赖为上面的starter &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.thymeleaf&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;thymeleaf-spring5&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.thymeleaf.extras&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;thymeleaf-extras-java8time&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 2.2 配置文件 //取消页面缓存 spring.thymeleaf.cache=false 2.3 编码   导入themeleaf模板
-  编写业务代码
-  ​  编写路由  @Controller public class RouterController { @RequestMapping({&amp;#34;/&amp;#34;,&amp;#34;/index&amp;#34;}) public String index() { return &amp;#34;index&amp;#34;; } @RequestMapping(&amp;#34;/toLogin&amp;#34;) public String toLogin() { return &amp;#34;views/login&amp;#34;; } @RequestMapping(&amp;#34;/level1/{id}&amp;#34;) public String level1(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level1/&amp;#34;&#43;id; } @RequestMapping(&amp;#34;/level2/{id}&amp;#34;) public String level2(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level2/&amp;#34;&#43;id; } @RequestMapping(&amp;#34;/level3/{id}&amp;#34;) public String level3(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level3/&amp;#34;&#43;id; } }  编写springsecurity配置文件  //开启websecurity功能 @EnableWebSecurity public class SecurityConfig extends WebSecurityConfigurerAdapter { //http安全策略  //授权  @Override protected void configure(HttpSecurity http) throws Exception { //首页所有人可访问，功能页只能有对应权限的人访问  http." />
+2. 依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-security&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; //themeleaf依赖用于配合教程展示，核心依赖为上面的starter &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.thymeleaf&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;thymeleaf-spring5&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.thymeleaf.extras&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;thymeleaf-extras-java8time&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 3. 配置文件 //取消页面缓存 spring.thymeleaf.cache=false 4. 导入模板 导入themeleaf模板
+5. 用户授权  创建文件  ​  编写路由  @Controller public class RouterController { @RequestMapping({&amp;#34;/&amp;#34;,&amp;#34;/index&amp;#34;}) public String index() { return &amp;#34;index&amp;#34;; } @RequestMapping(&amp;#34;/toLogin&amp;#34;) public String toLogin() { return &amp;#34;views/login&amp;#34;; } @RequestMapping(&amp;#34;/level1/{id}&amp;#34;) public String level1(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level1/&amp;#34;&#43;id; } @RequestMapping(&amp;#34;/level2/{id}&amp;#34;) public String level2(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level2/&amp;#34;&#43;id; } @RequestMapping(&amp;#34;/level3/{id}&amp;#34;) public String level3(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level3/&amp;#34;&#43;id; } }   授权" />
 <meta name="keywords" content=", spring, 框架, springboot" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
@@ -18,7 +17,7 @@
 
     <title>
         
-            Springsecurity :: 小黎的技术指北 
+            SpringSecurity :: 小黎的技术指北 
         
     </title>
 
@@ -42,33 +41,30 @@
     <meta name="msapplication-TileColor" content="">
 
 
-<meta itemprop="name" content="Springsecurity">
+<meta itemprop="name" content="SpringSecurity">
 <meta itemprop="description" content="1. 什么是SpringSecurity  Spring Security是针对spring项目的安全框架，也是springboot底层安全模块默认的技术选型，它可以实现强大的Web安全控制，仅需要引入spring-boot-starter-security
  主要功能：认证（Authentication）和授权（Authorization）
-2. 代码实例 2.1 依赖 &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt; &lt;/dependency&gt; //themeleaf依赖用于配合教程展示，核心依赖为上面的starter &lt;dependency&gt; &lt;groupId&gt;org.thymeleaf&lt;/groupId&gt; &lt;artifactId&gt;thymeleaf-spring5&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt; &lt;artifactId&gt;thymeleaf-extras-java8time&lt;/artifactId&gt; &lt;/dependency&gt; 2.2 配置文件 //取消页面缓存 spring.thymeleaf.cache=false 2.3 编码   导入themeleaf模板
-  编写业务代码
-  ​  编写路由  @Controller public class RouterController { @RequestMapping({&#34;/&#34;,&#34;/index&#34;}) public String index() { return &#34;index&#34;; } @RequestMapping(&#34;/toLogin&#34;) public String toLogin() { return &#34;views/login&#34;; } @RequestMapping(&#34;/level1/{id}&#34;) public String level1(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level1/&#34;&#43;id; } @RequestMapping(&#34;/level2/{id}&#34;) public String level2(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level2/&#34;&#43;id; } @RequestMapping(&#34;/level3/{id}&#34;) public String level3(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level3/&#34;&#43;id; } }  编写springsecurity配置文件  //开启websecurity功能 @EnableWebSecurity public class SecurityConfig extends WebSecurityConfigurerAdapter { //http安全策略  //授权  @Override protected void configure(HttpSecurity http) throws Exception { //首页所有人可访问，功能页只能有对应权限的人访问  http."><meta itemprop="datePublished" content="2022-07-12T23:14:27&#43;08:00" />
+2. 依赖 &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt; &lt;/dependency&gt; //themeleaf依赖用于配合教程展示，核心依赖为上面的starter &lt;dependency&gt; &lt;groupId&gt;org.thymeleaf&lt;/groupId&gt; &lt;artifactId&gt;thymeleaf-spring5&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt; &lt;artifactId&gt;thymeleaf-extras-java8time&lt;/artifactId&gt; &lt;/dependency&gt; 3. 配置文件 //取消页面缓存 spring.thymeleaf.cache=false 4. 导入模板 导入themeleaf模板
+5. 用户授权  创建文件  ​  编写路由  @Controller public class RouterController { @RequestMapping({&#34;/&#34;,&#34;/index&#34;}) public String index() { return &#34;index&#34;; } @RequestMapping(&#34;/toLogin&#34;) public String toLogin() { return &#34;views/login&#34;; } @RequestMapping(&#34;/level1/{id}&#34;) public String level1(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level1/&#34;&#43;id; } @RequestMapping(&#34;/level2/{id}&#34;) public String level2(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level2/&#34;&#43;id; } @RequestMapping(&#34;/level3/{id}&#34;) public String level3(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level3/&#34;&#43;id; } }   授权"><meta itemprop="datePublished" content="2022-07-12T23:14:27&#43;08:00" />
 <meta itemprop="dateModified" content="2022-07-12T23:14:27&#43;08:00" />
-<meta itemprop="wordCount" content="138"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
+<meta itemprop="wordCount" content="194"><meta itemprop="image" content="https://lyffin1997.github.io/"/>
 <meta itemprop="keywords" content="spring,框架,springboot," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://lyffin1997.github.io/"/>
 
-<meta name="twitter:title" content="Springsecurity"/>
+<meta name="twitter:title" content="SpringSecurity"/>
 <meta name="twitter:description" content="1. 什么是SpringSecurity  Spring Security是针对spring项目的安全框架，也是springboot底层安全模块默认的技术选型，它可以实现强大的Web安全控制，仅需要引入spring-boot-starter-security
  主要功能：认证（Authentication）和授权（Authorization）
-2. 代码实例 2.1 依赖 &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt; &lt;/dependency&gt; //themeleaf依赖用于配合教程展示，核心依赖为上面的starter &lt;dependency&gt; &lt;groupId&gt;org.thymeleaf&lt;/groupId&gt; &lt;artifactId&gt;thymeleaf-spring5&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt; &lt;artifactId&gt;thymeleaf-extras-java8time&lt;/artifactId&gt; &lt;/dependency&gt; 2.2 配置文件 //取消页面缓存 spring.thymeleaf.cache=false 2.3 编码   导入themeleaf模板
-  编写业务代码
-  ​  编写路由  @Controller public class RouterController { @RequestMapping({&#34;/&#34;,&#34;/index&#34;}) public String index() { return &#34;index&#34;; } @RequestMapping(&#34;/toLogin&#34;) public String toLogin() { return &#34;views/login&#34;; } @RequestMapping(&#34;/level1/{id}&#34;) public String level1(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level1/&#34;&#43;id; } @RequestMapping(&#34;/level2/{id}&#34;) public String level2(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level2/&#34;&#43;id; } @RequestMapping(&#34;/level3/{id}&#34;) public String level3(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level3/&#34;&#43;id; } }  编写springsecurity配置文件  //开启websecurity功能 @EnableWebSecurity public class SecurityConfig extends WebSecurityConfigurerAdapter { //http安全策略  //授权  @Override protected void configure(HttpSecurity http) throws Exception { //首页所有人可访问，功能页只能有对应权限的人访问  http."/>
+2. 依赖 &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt; &lt;/dependency&gt; //themeleaf依赖用于配合教程展示，核心依赖为上面的starter &lt;dependency&gt; &lt;groupId&gt;org.thymeleaf&lt;/groupId&gt; &lt;artifactId&gt;thymeleaf-spring5&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt; &lt;artifactId&gt;thymeleaf-extras-java8time&lt;/artifactId&gt; &lt;/dependency&gt; 3. 配置文件 //取消页面缓存 spring.thymeleaf.cache=false 4. 导入模板 导入themeleaf模板
+5. 用户授权  创建文件  ​  编写路由  @Controller public class RouterController { @RequestMapping({&#34;/&#34;,&#34;/index&#34;}) public String index() { return &#34;index&#34;; } @RequestMapping(&#34;/toLogin&#34;) public String toLogin() { return &#34;views/login&#34;; } @RequestMapping(&#34;/level1/{id}&#34;) public String level1(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level1/&#34;&#43;id; } @RequestMapping(&#34;/level2/{id}&#34;) public String level2(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level2/&#34;&#43;id; } @RequestMapping(&#34;/level3/{id}&#34;) public String level3(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level3/&#34;&#43;id; } }   授权"/>
 
 
 
-    <meta property="og:title" content="Springsecurity" />
+    <meta property="og:title" content="SpringSecurity" />
 <meta property="og:description" content="1. 什么是SpringSecurity  Spring Security是针对spring项目的安全框架，也是springboot底层安全模块默认的技术选型，它可以实现强大的Web安全控制，仅需要引入spring-boot-starter-security
  主要功能：认证（Authentication）和授权（Authorization）
-2. 代码实例 2.1 依赖 &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt; &lt;/dependency&gt; //themeleaf依赖用于配合教程展示，核心依赖为上面的starter &lt;dependency&gt; &lt;groupId&gt;org.thymeleaf&lt;/groupId&gt; &lt;artifactId&gt;thymeleaf-spring5&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt; &lt;artifactId&gt;thymeleaf-extras-java8time&lt;/artifactId&gt; &lt;/dependency&gt; 2.2 配置文件 //取消页面缓存 spring.thymeleaf.cache=false 2.3 编码   导入themeleaf模板
-  编写业务代码
-  ​  编写路由  @Controller public class RouterController { @RequestMapping({&#34;/&#34;,&#34;/index&#34;}) public String index() { return &#34;index&#34;; } @RequestMapping(&#34;/toLogin&#34;) public String toLogin() { return &#34;views/login&#34;; } @RequestMapping(&#34;/level1/{id}&#34;) public String level1(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level1/&#34;&#43;id; } @RequestMapping(&#34;/level2/{id}&#34;) public String level2(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level2/&#34;&#43;id; } @RequestMapping(&#34;/level3/{id}&#34;) public String level3(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level3/&#34;&#43;id; } }  编写springsecurity配置文件  //开启websecurity功能 @EnableWebSecurity public class SecurityConfig extends WebSecurityConfigurerAdapter { //http安全策略  //授权  @Override protected void configure(HttpSecurity http) throws Exception { //首页所有人可访问，功能页只能有对应权限的人访问  http." />
+2. 依赖 &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt; &lt;/dependency&gt; //themeleaf依赖用于配合教程展示，核心依赖为上面的starter &lt;dependency&gt; &lt;groupId&gt;org.thymeleaf&lt;/groupId&gt; &lt;artifactId&gt;thymeleaf-spring5&lt;/artifactId&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt; &lt;artifactId&gt;thymeleaf-extras-java8time&lt;/artifactId&gt; &lt;/dependency&gt; 3. 配置文件 //取消页面缓存 spring.thymeleaf.cache=false 4. 导入模板 导入themeleaf模板
+5. 用户授权  创建文件  ​  编写路由  @Controller public class RouterController { @RequestMapping({&#34;/&#34;,&#34;/index&#34;}) public String index() { return &#34;index&#34;; } @RequestMapping(&#34;/toLogin&#34;) public String toLogin() { return &#34;views/login&#34;; } @RequestMapping(&#34;/level1/{id}&#34;) public String level1(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level1/&#34;&#43;id; } @RequestMapping(&#34;/level2/{id}&#34;) public String level2(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level2/&#34;&#43;id; } @RequestMapping(&#34;/level3/{id}&#34;) public String level3(@PathVariable(&#34;id&#34;) int id) { return &#34;views/level3/&#34;&#43;id; } }   授权" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://lyffin1997.github.io/spring/springsecurity/" /><meta property="og:image" content="https://lyffin1997.github.io/"/><meta property="article:section" content="spring" />
 <meta property="article:published_time" content="2022-07-12T23:14:27&#43;08:00" />
@@ -148,7 +144,7 @@
         </div>
 
         <article>
-            <h2 class="post-title"><a href="https://lyffin1997.github.io/spring/springsecurity/">Springsecurity</a></h2>
+            <h2 class="post-title"><a href="https://lyffin1997.github.io/spring/springsecurity/">SpringSecurity</a></h2>
 
             
             
@@ -160,8 +156,7 @@
 <p>Spring Security是针对spring项目的安全框架，也是springboot底层安全模块默认的技术选型，它可以实现强大的Web安全控制，仅需要引入spring-boot-starter-security</p>
 </blockquote>
 <p><strong>主要功能：认证（Authentication）和授权（Authorization）</strong></p>
-<h2 id="2-代码实例"><strong>2. 代码实例</strong></h2>
-<h3 id="21-依赖"><strong>2.1 依赖</strong></h3>
+<h2 id="2-依赖"><strong>2. 依赖</strong></h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;dependency&gt;</span>
     <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.boot<span style="color:#f92672">&lt;/groupId&gt;</span>
     <span style="color:#f92672">&lt;artifactId&gt;</span>spring-boot-starter-security<span style="color:#f92672">&lt;/artifactId&gt;</span>
@@ -175,18 +170,15 @@
     <span style="color:#f92672">&lt;groupId&gt;</span>org.thymeleaf.extras<span style="color:#f92672">&lt;/groupId&gt;</span>
     <span style="color:#f92672">&lt;artifactId&gt;</span>thymeleaf-extras-java8time<span style="color:#f92672">&lt;/artifactId&gt;</span>
 <span style="color:#f92672">&lt;/dependency&gt;</span>
-</code></pre></div><h3 id="22-配置文件"><strong>2.2 配置文件</strong></h3>
+</code></pre></div><h2 id="3-配置文件"><strong>3. 配置文件</strong></h2>
 <pre><code class="language-properties" data-lang="properties">//取消页面缓存
 spring.thymeleaf.cache=false
-</code></pre><h3 id="23-编码"><strong>2.3 编码</strong></h3>
-<ul>
-<li>
+</code></pre><h2 id="4-导入模板"><strong>4. 导入模板</strong></h2>
 <p>导入themeleaf模板</p>
 <p><img src="/img/springsecurity1.png" alt="img"></p>
-</li>
-<li>
-<p>编写业务代码</p>
-</li>
+<h2 id="5-用户授权">5. 用户授权</h2>
+<ul>
+<li>创建文件</li>
 </ul>
 <p>​                 <img src="/img/springsecurity2.png" alt="img"></p>
 <ul>
@@ -226,48 +218,97 @@ spring.thymeleaf.cache=false
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><ul>
-<li>编写springsecurity配置文件</li>
-</ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//开启websecurity功能
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">@EnableWebSecurity</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SecurityConfig</span> <span style="color:#66d9ef">extends</span> WebSecurityConfigurerAdapter <span style="color:#f92672">{</span>
-
-
-    <span style="color:#75715e">//http安全策略
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">//授权
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configure</span><span style="color:#f92672">(</span>HttpSecurity http<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
-        <span style="color:#75715e">//首页所有人可访问，功能页只能有对应权限的人访问
-</span><span style="color:#75715e"></span>        http<span style="color:#f92672">.</span><span style="color:#a6e22e">authorizeRequests</span><span style="color:#f92672">().</span><span style="color:#a6e22e">antMatchers</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">permitAll</span><span style="color:#f92672">()</span>
-                                                 <span style="color:#f92672">.</span><span style="color:#a6e22e">antMatchers</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/level1/**&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">hasRole</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;vip1&#34;</span><span style="color:#f92672">)</span>
-                                   <span style="color:#f92672">.</span><span style="color:#a6e22e">antMatchers</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/level2/**&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">hasRole</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;vip2&#34;</span><span style="color:#f92672">)</span>
-                                <span style="color:#f92672">.</span><span style="color:#a6e22e">antMatchers</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/level3/**&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">hasRole</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;vip3&#34;</span><span style="color:#f92672">);</span>
-        <span style="color:#75715e">//若无权限返回登录页面
-</span><span style="color:#75715e"></span>         http<span style="color:#f92672">.</span><span style="color:#a6e22e">formLogin</span><span style="color:#f92672">().</span><span style="color:#a6e22e">loginPage</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/toLogin&#34;</span><span style="color:#f92672">);</span>
-        <span style="color:#75715e">//注销.并跳回首页
-</span><span style="color:#75715e"></span>        http<span style="color:#f92672">.</span><span style="color:#a6e22e">logout</span><span style="color:#f92672">().</span><span style="color:#a6e22e">logoutSuccessUrl</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/&#34;</span><span style="color:#f92672">);</span>
-        <span style="color:#75715e">//关闭csrf功能（防攻击的）
-</span><span style="color:#75715e"></span>        http<span style="color:#f92672">.</span><span style="color:#a6e22e">csrf</span><span style="color:#f92672">().</span><span style="color:#a6e22e">disable</span><span style="color:#f92672">();</span>
-        <span style="color:#75715e">//开启记住我
-</span><span style="color:#75715e"></span>        http<span style="color:#f92672">.</span><span style="color:#a6e22e">rememberMe</span><span style="color:#f92672">();</span>
-    <span style="color:#f92672">}</span>
-    <span style="color:#75715e">//认证
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">//spring security5.0+中新增了很多加密方式（密码必须加密）
-</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">@Override</span>
-    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configure</span><span style="color:#f92672">(</span>AuthenticationManagerBuilder auth<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
-    auth<span style="color:#f92672">.</span><span style="color:#a6e22e">inMemoryAuthentication</span><span style="color:#f92672">().</span><span style="color:#a6e22e">passwordEncoder</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span>     BCryptPasswordEncoder<span style="color:#f92672">())</span>
-            <span style="color:#f92672">.</span><span style="color:#a6e22e">withUser</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;lyffin&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">password</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> BCryptPasswordEncoder<span style="color:#f92672">().</span><span style="color:#a6e22e">encode</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;123456&#34;</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">roles</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;vip1&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;vip2&#34;</span><span style="color:#f92672">)</span>
-            <span style="color:#f92672">.</span><span style="color:#a6e22e">and</span><span style="color:#f92672">()</span>
-            <span style="color:#f92672">.</span><span style="color:#a6e22e">withUser</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;lifeng&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">password</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> BCryptPasswordEncoder<span style="color:#f92672">().</span><span style="color:#a6e22e">encode</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;123456&#34;</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">roles</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;vip3&#34;</span><span style="color:#f92672">);</span>
-    <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><ul>
 <li>
-<p>数据库认证方式</p>
-<p><img src="/img/springsecurity3.png" alt="img"></p>
+<p>授权</p>
+<blockquote>
+<p><code>antMatchers(&quot;/&quot;).permitAll()</code>表示”/“路径所有人能访问</p>
+</blockquote>
+<blockquote>
+<p><code>antMatchers(&quot;/level1/**&quot;).hasRole(&quot;vip1&quot;)</code>表示指定路径只有&quot;vip1&quot;能访问</p>
+</blockquote>
+<blockquote>
+<p><code>http.formLogin()</code>无权限会返回登录页面，自动转发请求到<code>/login</code>（<strong>与路由中的<code>/toLogin</code>不同，该登录页面为springsecurity自带的登录页</strong>）</p>
+</blockquote>
+<blockquote>
+<p>若想无权限返回自己的登录页面可用<code>http.formLogin().loginPage(&quot;/toLogin&quot;)</code>指定url（**这里的<code>/toLogin</code>是请求地址，因为<code>/toLogin</code>路由返回的是自己的index.htm文件，所以可以实现返回自己的登录页面）</p>
+</blockquote>
+<blockquote>
+<p>无权限返回自己指定的<code>/toLogin</code>登录页后，前端提交账户密码的表单依旧要指向上面路由中的&quot;/toLogin&quot;，否则会报404，但是可以通过<code>http.formLogin().loginPage(&quot;/toLogin&quot;).loginProcessingUrl(&quot;/login&quot;)</code>将登陆认证过程中的地址强行改为<code>/login</code>，然后表单提交地址就可以写<code>/login</code>了</p>
+</blockquote>
 </li>
 </ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@EnableWebSecurity</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SecurityConfig</span> <span style="color:#66d9ef">extends</span> WebSecurityConfigurerAdapter <span style="color:#f92672">{</span>
 
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configure</span><span style="color:#f92672">(</span>HttpSecurity http<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+      http<span style="color:#f92672">.</span><span style="color:#a6e22e">authorizeRequests</span><span style="color:#f92672">().</span><span style="color:#a6e22e">antMatchers</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">permitAll</span><span style="color:#f92672">()</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">antMatchers</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/level1/**&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">hasRole</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;vip1&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">antMatchers</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/level2/**&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">hasRole</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;vip2&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">antMatchers</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;/level3/**&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">hasRole</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;vip3&#34;</span><span style="color:#f92672">);</span>
+      http<span style="color:#f92672">.</span><span style="color:#a6e22e">formLogin</span><span style="color:#f92672">()</span><span style="color:#960050;background-color:#1e0010">；</span>
+    <span style="color:#f92672">}</span>       
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="6-用户认证">6. 用户认证</h2>
+<blockquote>
+<p>下面代码示例增加账户、密码、功能角色，前端输入账户密码与之进行匹配达到登录认证效果</p>
+</blockquote>
+<blockquote>
+<p><code>passwordEncoder(new BCryptPasswordEncoder())</code>为给密码加密，其中<code>new BCryptPasswordEncoder()</code>为加密方式</p>
+</blockquote>
+<blockquote>
+<p><strong>此种方式下，前端账户密码表单中，账户标签的name必须为&quot;username&quot;，密码标签的name必须为&quot;password&quot;</strong></p>
+</blockquote>
+<blockquote>
+<p>若前端表单账户密码标签的name不想为默认值，可以在上述授权方法中使用<code>http.formLogin().loginPage(&quot;/toLogin&quot;).usernameParameter(&quot;user&quot;).passwordParameter(&quot;pwd&quot;)</code>来自定义name</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@EnableWebSecurity</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SecurityConfig</span> <span style="color:#66d9ef">extends</span> WebSecurityConfigurerAdapter <span style="color:#f92672">{</span>
+ 
+  	<span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configure</span><span style="color:#f92672">(</span>AuthenticationManagerBuilder auth<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+        auth<span style="color:#f92672">.</span><span style="color:#a6e22e">inMemoryAuthentication</span><span style="color:#f92672">().</span><span style="color:#a6e22e">passwordEncoder</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> BCryptPasswordEncoder<span style="color:#f92672">())</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">withUser</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;lyffin&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">password</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> BCryptPasswordEncoder<span style="color:#f92672">().</span><span style="color:#a6e22e">encode</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;123456&#34;</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">roles</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;vip1&#34;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#34;vip2&#34;</span><span style="color:#f92672">)</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">and</span><span style="color:#f92672">()</span>
+                <span style="color:#f92672">.</span><span style="color:#a6e22e">withUser</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;lifeng&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">password</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> BCryptPasswordEncoder<span style="color:#f92672">().</span><span style="color:#a6e22e">encode</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;123456&#34;</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">roles</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;vip3&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>                                              
+</code></pre></div><p>如何从数据库中读认证的账户密码</p>
+<p><img src="/img/springsecurity3.png" alt="img"></p>
+<h2 id="7-用户注销">7. 用户注销</h2>
+<blockquote>
+<p><code>http.logout()</code>注销，这里需要将前端“注销”按钮的请求执行<code>/logout</code>，并自动返回到登录页（<strong>这里的登录页默认也是springsecurity自带的页面<code>/login</code></strong>）</p>
+</blockquote>
+<blockquote>
+<p>若不想注销返回默认的<code>/logout</code>页面，可以使用<code>http.logout().logoutSuccessUrl(&quot;/&quot;);</code>指定返回页面</p>
+</blockquote>
+<blockquote>
+<p><code>http.logout().deleteCookies(&quot;remove&quot;).invalidateHttpSession(true)</code>移除所有cookies和清空所有session</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@EnableWebSecurity</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SecurityConfig</span> <span style="color:#66d9ef">extends</span> WebSecurityConfigurerAdapter <span style="color:#f92672">{</span>
+
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configure</span><span style="color:#f92672">(</span>HttpSecurity http<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+      http<span style="color:#f92672">.</span><span style="color:#a6e22e">logout</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span> 
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="8-开启remember-me-功能">8. 开启remember me 功能</h2>
+<blockquote>
+<p>默认记住账户密码，默认保存两周</p>
+</blockquote>
+<blockquote>
+<p>若想自定义remenberme功能，可在前端写<code>&lt;input type=&quot;checkbox&quot; name=&quot;remember&quot;&gt;</code>标签用来控制，但是需要<code>http.rememberMe().rememberMeParameter(&quot;remember&quot;)</code>方法来配合，参数中的字符串需要和input标签的name一样。</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#a6e22e">@EnableWebSecurity</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SecurityConfig</span> <span style="color:#66d9ef">extends</span> WebSecurityConfigurerAdapter <span style="color:#f92672">{</span>
+
+    <span style="color:#a6e22e">@Override</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">configure</span><span style="color:#f92672">(</span>HttpSecurity http<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+      http<span style="color:#f92672">.</span><span style="color:#a6e22e">rememberMe</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span> 
+<span style="color:#f92672">}</span>
+</code></pre></div>
             </div>
         </article>
 

@@ -14,8 +14,18 @@
       <pubDate>Tue, 12 Jul 2022 22:42:56 +0800</pubDate>
       
       <guid>https://lyffin1997.github.io/application/%E9%85%8D%E7%BD%AEdurid/</guid>
-      <description>1. 配置druid数据源  依赖    配置文件
-   因为配置项里用到了log4j，所以还要引入依赖   2. 配置druid监控 ​ ​ ​ ​ 3. 配置druid过滤器 ​ </description>
+      <description>1. druid简介   Druid是一个数据库连接池。
+  作用
+ 替换DBCP和C3P0。Druid提供了一个高效、功能强大、可扩展性好的数据库连接池。
+  可以监控数据库访问性能，Druid内置提供了一个功能强大的StatFilter插件，能够详细统计SQL的执行性能，这对于线上分析数据库访问性能有帮助。
+  数据库密码加密。直接把数据库密码写在配置文件中，这是不好的行为，容易导致安全问题。DruidDruiver和DruidDataSource都支持PasswordCallback。
+  SQL执行日志，Druid提供了不同的LogFilter，能够支持Common-Logging、Log4j和JdkLog，你可以按需要选择相应的LogFilter，监控你应用的数据库访问情况。
+  扩展JDBC，如果你要对JDBC层有编程的需求，可以通过Druid提供的Filter机制，很方便编写JDBC层的扩展插件。
+   2. 配置druid数据源   依赖
+因为配置项里用到了log4j，所以还要引入log4j依赖
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;druid&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2.9&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency &amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency &amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-jdbc&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;mysql&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;mysql-connector-java&amp;lt;/artifactId&amp;gt; &amp;lt;scope&amp;gt;runtime&amp;lt;/scope&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;log4j&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;log4j&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2.12&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;   配置文件
+如果启动报错将driver-class-name换成com.mysql.cj.jdbc.Driver
+spring: datasource: username: root password: 123456 url: jdbc:mysql://localhost:3306/lyffin_test?serverTimezone=UTC&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8 driver-class-name: com.mysql.cj.jdbc.Driver type: com.</description>
     </item>
     
   </channel>

@@ -32,16 +32,15 @@
     </item>
     
     <item>
-      <title>Springsecurity</title>
+      <title>SpringSecurity</title>
       <link>https://lyffin1997.github.io/spring/springsecurity/</link>
       <pubDate>Tue, 12 Jul 2022 23:14:27 +0800</pubDate>
       
       <guid>https://lyffin1997.github.io/spring/springsecurity/</guid>
       <description>1. 什么是SpringSecurity  Spring Security是针对spring项目的安全框架，也是springboot底层安全模块默认的技术选型，它可以实现强大的Web安全控制，仅需要引入spring-boot-starter-security
  主要功能：认证（Authentication）和授权（Authorization）
-2. 代码实例 2.1 依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-security&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; //themeleaf依赖用于配合教程展示，核心依赖为上面的starter &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.thymeleaf&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;thymeleaf-spring5&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.thymeleaf.extras&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;thymeleaf-extras-java8time&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 2.2 配置文件 //取消页面缓存 spring.thymeleaf.cache=false 2.3 编码   导入themeleaf模板
-  编写业务代码
-  ​  编写路由  @Controller public class RouterController { @RequestMapping({&amp;#34;/&amp;#34;,&amp;#34;/index&amp;#34;}) public String index() { return &amp;#34;index&amp;#34;; } @RequestMapping(&amp;#34;/toLogin&amp;#34;) public String toLogin() { return &amp;#34;views/login&amp;#34;; } @RequestMapping(&amp;#34;/level1/{id}&amp;#34;) public String level1(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level1/&amp;#34;+id; } @RequestMapping(&amp;#34;/level2/{id}&amp;#34;) public String level2(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level2/&amp;#34;+id; } @RequestMapping(&amp;#34;/level3/{id}&amp;#34;) public String level3(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level3/&amp;#34;+id; } }  编写springsecurity配置文件  //开启websecurity功能 @EnableWebSecurity public class SecurityConfig extends WebSecurityConfigurerAdapter { //http安全策略  //授权  @Override protected void configure(HttpSecurity http) throws Exception { //首页所有人可访问，功能页只能有对应权限的人访问  http.</description>
+2. 依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-security&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; //themeleaf依赖用于配合教程展示，核心依赖为上面的starter &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.thymeleaf&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;thymeleaf-spring5&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.thymeleaf.extras&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;thymeleaf-extras-java8time&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 3. 配置文件 //取消页面缓存 spring.thymeleaf.cache=false 4. 导入模板 导入themeleaf模板
+5. 用户授权  创建文件  ​  编写路由  @Controller public class RouterController { @RequestMapping({&amp;#34;/&amp;#34;,&amp;#34;/index&amp;#34;}) public String index() { return &amp;#34;index&amp;#34;; } @RequestMapping(&amp;#34;/toLogin&amp;#34;) public String toLogin() { return &amp;#34;views/login&amp;#34;; } @RequestMapping(&amp;#34;/level1/{id}&amp;#34;) public String level1(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level1/&amp;#34;+id; } @RequestMapping(&amp;#34;/level2/{id}&amp;#34;) public String level2(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level2/&amp;#34;+id; } @RequestMapping(&amp;#34;/level3/{id}&amp;#34;) public String level3(@PathVariable(&amp;#34;id&amp;#34;) int id) { return &amp;#34;views/level3/&amp;#34;+id; } }   授权</description>
     </item>
     
     <item>
